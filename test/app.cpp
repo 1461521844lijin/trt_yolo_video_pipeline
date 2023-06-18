@@ -15,7 +15,8 @@ int main()
     std::string model_path = "/root/trt_projects/infer-main/workspace/yolov8n.transd.engine";
     std::string model_path_seg = "/root/trt_projects/infer-main/workspace/yolov8n-seg.b1.transd.engine";
     int max_batch_size = 16;
-    std::string stream_url = "rtsp://admin:eccom123@192.168.163.4:554/cam/realmonitor?channel=1&subtype=0";
+    std::string stream_url = "rtsp://*********";
+    std::string output_url = "rtmp://*********";
 
     std::shared_ptr<cpm::Instance<yolo::BoxArray, yolo::Image, yolo::Infer>> trt_instance;
     trt_instance = std::make_shared<cpm::Instance<yolo::BoxArray, yolo::Image, yolo::Infer>>();
@@ -35,7 +36,7 @@ int main()
 
     ffmpeg_output_node->set_frommat(2560, 1440, AV_PIX_FMT_BGR24);
     ffmpeg_output_node->set_tomat(1920, 1080, AV_PIX_FMT_YUV420P);
-    ffmpeg_output_node->Open("rtmp://192.168.161.152:9435/trt/test", false);
+    ffmpeg_output_node->Open(output_url, false);
 
     trt_draw_node->Start();
     ffmpeg_output_node->Start();

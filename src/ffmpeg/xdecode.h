@@ -3,7 +3,7 @@
 
 
 struct AVBufferRef;
-class XCODEC_API XDecode :public XCodec
+class  XDecode :public XCodec
 {
 public:
 	bool Send(const AVPacket* pkt);  //发送解码

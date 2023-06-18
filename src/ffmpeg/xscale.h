@@ -15,7 +15,6 @@ public:
 
 	void InitScale(int srcw, int srch, int fromfromat, int dstw, int dsth, int toformat);
 
-
 	void Scale(AVFrame* frame, cv::Mat& image);
 
 	std::shared_ptr<AVFrame> Scale(cv::Mat& image);

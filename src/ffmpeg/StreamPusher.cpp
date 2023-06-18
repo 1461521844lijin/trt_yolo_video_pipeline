@@ -6,34 +6,28 @@ extern "C"
 #include "libavformat/avformat.h"
 }
 
-namespace FFmpeg
-{
+namespace FFmpeg {
 
-    void StreamPusher::worker()
-    {
-#define ASSERT(X, STR) \
-    if (X == nullptr)  \
-    {                  \
-        continue;      \
+    void StreamPusher::worker() {
+#define ASSERT(X, STR)                               \
+    if (X == nullptr)                                \
+    {                                                \
+        std::cout << STR << std::endl;               \
+        continue;                                    \
     }
 
         std::shared_ptr<Data::Input_Data> data;
-        while (m_run)
-        {
-            for (auto &input : m_input_buffers)
-            {
-                if (input.second->Pop(data))
-                {
+        while (m_run) {
+            for (auto &input: m_input_buffers) {
+                if (input.second->Pop(data)) {
                     std::shared_ptr<Data::Decode_Data> data_ptr =
-                        std::dynamic_pointer_cast<Data::Decode_Data>(data);
+                            std::dynamic_pointer_cast<Data::Decode_Data>(data);
                     auto frame = m_scale.Scale(data_ptr->original_image);
                     ASSERT(frame, "scale frame is null");
                     auto pkt = m_encode.Encode(frame.get());
                     ASSERT(pkt, "encode pkt is null");
                     m_mux.Write(pkt);
-                }
-                else
-                {
+                } else {
                     if (!m_run)
                         break;
                     std::unique_lock<std::mutex> lk(m_base_mutex);
@@ -43,21 +37,16 @@ namespace FFmpeg
         }
     }
 
-    void StreamPusher::Open(const std::string url, bool useHwEncode)
-    {
-        if (from_width == 0 || to_width == 0)
-        {
+    void StreamPusher::Open(const std::string url, bool useHwEncode) {
+        if (from_width == 0 || to_width == 0) {
             // LOG(ERROR) << "from_width or to_width is 0";
             return;
         }
         m_scale.InitScale(from_width, from_height, from_format, to_width, to_height, to_format);
         AVCodecContext *codecconetxt = nullptr;
-        if (!useHwEncode)
-        {
+        if (!useHwEncode) {
             codecconetxt = m_encode.Create(AV_CODEC_ID_H264, true);
-        }
-        else
-        {
+        } else {
             codecconetxt = m_encode.CreateHwEncode("h264_nvenc", to_width, to_height);
         }
 
@@ -66,9 +55,8 @@ namespace FFmpeg
         m_encode.SetOpt("tune", "zerolatency");
 
         auto re = m_encode.Open();
-        if (re < 0)
-        {
-            // LOG(ERROR) << "open encode failed";
+        if (re < 0) {
+            throw std::runtime_error("open encoder failed");
             return;
         }
 
@@ -77,15 +65,13 @@ namespace FFmpeg
         m_mux.WriteHead();
     }
 
-    void StreamPusher::set_frommat(int width, int height, int format)
-    {
+    void StreamPusher::set_frommat(int width, int height, int format) {
         from_width = width;
         from_height = height;
         from_format = format;
     }
 
-    void StreamPusher::set_tomat(int width, int height, int format)
-    {
+    void StreamPusher::set_tomat(int width, int height, int format) {
         to_width = width;
         to_height = height;
         to_format = format;

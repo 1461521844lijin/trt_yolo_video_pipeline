@@ -5,7 +5,7 @@
 
 
 
-class XCODEC_API XEncode :public XCodec
+class  XEncode :public XCodec
 {
 public:
 
@@ -14,7 +14,6 @@ public:
 	/// @para frame 空间由用户维护
 	/// @return 失败范围nullptr 返回的AVPacket用户需要通过av_packet_free 清理
 	AVPacket* Encode( AVFrame* frame);
-
 
 	//////////////////////////////////////////////////////////////
 	//返回所有编码缓存中AVPacket

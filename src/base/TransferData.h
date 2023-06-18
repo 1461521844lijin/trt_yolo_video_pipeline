@@ -13,28 +13,20 @@ public:
 
 };
 
-
-
 class Decode_Data : public Input_Data {
 public:
     Decode_Data() = default;
 
-    Decode_Data(int ow, int oh, int sw, int sh)
+    Decode_Data(int ow, int oh)
         : original_w(ow),
-          original_h(oh),
-          scale_w(sw),
-          scale_h(sh)
+          original_h(oh)
 
     {
         original_image = cv::Mat(original_h, original_w, CV_8UC3);
-        scale_image    = cv::Mat(scale_h, scale_w, CV_8UC3);
     }
 
     cv::Mat     original_image;
-    cv::Mat     scale_image;
-    int         original_w, original_h, scale_w, scale_h;
-    std::string stream_id;
-
+    int         original_w, original_h;
     std::shared_future<yolo::BoxArray> boxarray_fu;
 };
 

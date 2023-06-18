@@ -5,7 +5,7 @@
 
 
 
-class XCODEC_API XMux :public XFormat
+class  XMux :public XFormat
 {
 public:
 	//////////////////////////////////////////////////

@@ -17,7 +17,7 @@ struct XRational
 	int num; ///< Numerator
 	int den; ///< Denominator
 };
-class XCODEC_API XFormat
+class  XFormat
 {
 public:
 	/// <summary>

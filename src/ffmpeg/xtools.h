@@ -1,16 +1,5 @@
 ﻿#pragma once
 
-//兼容Linux  _WIN32 windows 32为和64位
-#ifdef _WIN32
-#ifdef XCODEC_EXPORTS
-#define XCODEC_API __declspec(dllexport)
-#else
-#define XCODEC_API __declspec(dllimport)
-#endif
-#else
-#define XCODEC_API
-#endif
-
 #include <thread>
 #include <iostream>
 #include <mutex>
@@ -25,8 +14,6 @@ struct AVCodecParameters;
 struct AVRational;
 struct AVFrame;
 struct AVCodecContext;
-
-
 
 
 //日志级别 DEBUG INFO ERROR FATAL
@@ -47,25 +34,20 @@ enum XLogLevel
 #define LOGERROR(s) XLOG(s,XLOG_TPYE_ERROR)
 #define LOGFATAL(s) XLOG(s,XLOG_TYPE_FATAL)
 
-
-XCODEC_API void MSleep(unsigned int ms);
+void MSleep(unsigned int ms);
 
 //获取当前时间戳 毫秒
-XCODEC_API long long NowMs();
+ long long NowMs();
 
-XCODEC_API void XFreeFrame(AVFrame** frame);
+ void XFreeFrame(AVFrame** frame);
 
-XCODEC_API void PrintErr(int err);
+ void PrintErr(int err);
 
-
-class XTools
-{
-};
 
 
 
 //音视频参数
-class XCODEC_API XPara
+class  XPara
 {
 public:
 	AVCodecParameters* para = nullptr;  //音视频参数
@@ -78,30 +60,3 @@ private:
 	//私有是禁止创建栈中对象
 	XPara();
 };
-
-
-/// <summary>
-/// 线程安全avpacket list
-/// </summary>
-class XCODEC_API XAVPacketList
-{
-public:
-	AVPacket* Pop();
-	void Push(AVPacket* pkt);
-private:
-	std::list<AVPacket*> pkts_;
-	int max_packets_ = 100;//最大列表数量，超出清理
-	std::mutex mux_;
-};
-
-class XCODEC_API XAVFrameList
-{
-public:
-	AVFrame* Pop();
-	void Push(AVFrame* pkt);
-private:
-	std::list<AVFrame*> frames_;
-	int max_frames_ = 100;//最大列表数量，超出清理
-	std::mutex mux_;
-};
-

@@ -3,7 +3,7 @@
 
 
 
-class XCODEC_API XDemux :public XFormat
+class  XDemux :public XFormat
 {
 public:
 	/// <summary>
