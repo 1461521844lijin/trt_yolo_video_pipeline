@@ -1,0 +1,2 @@
+# trt_yolov8_infer_example
+基于手写AI的infer模块，使用ffmpeg拉流解码送入trt_yolov8进行目标检测，渲染后推流输出画面，支持cuda硬件编解码
