@@ -38,7 +38,7 @@
     // 推流输出节点
     auto ffmpeg_output_node = std::make_shared<FFmpeg::StreamPusher>("ffmpeg_output_node");
 ~~~
-将trt实例放入trt_node中，这里的trt_node就是充当一个消费者节点和trt实例的桥梁，保证我们多路时的数据在指定的线程中运行的
+将trt实例放入trt_node中，这里的trt_node就是充当一个生产者节点和trt实例（消费者）的桥梁，保证我们多路时的数据在指定的线程中运行的
 ~~~c++
     trt_node->set_trt_instance(trt_instance);
 ~~~
