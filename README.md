@@ -34,7 +34,7 @@
     // trt推理节点
     auto trt_node = std::make_shared<trt::TrtNode>("trt_node");
     // 结果渲染节点
-    auto trt_draw_node = std::make_shared<trt::ImageDrawSegNode>("trt_draw_node");
+    auto trt_draw_node = std::make_shared<trt::ImageDrawNode>("trt_draw_node");
     // 推流输出节点
     auto ffmpeg_output_node = std::make_shared<FFmpeg::StreamPusher>("ffmpeg_output_node");
 ~~~
