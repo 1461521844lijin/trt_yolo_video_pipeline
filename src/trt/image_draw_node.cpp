@@ -97,6 +97,11 @@ namespace trt
                         cv::rectangle(decode_data->original_image, cv::Point(obj.left - 3, obj.top - 33),
                                       cv::Point(obj.left + width, obj.top), cv::Scalar(b, g, r), -1);
                         cv::putText(decode_data->original_image, caption, cv::Point(obj.left, obj.top - 5), 0, 1, cv::Scalar::all(0), 2, 16);
+                        // 判断是否越界
+                        if (obj.left < 0 || obj.right < 0 || obj.top < 0 || obj.bottom < 0)
+                            continue;
+                        if (obj.left > decode_data->original_image.cols || obj.right > decode_data->original_image.cols || obj.top > decode_data->original_image.rows || obj.bottom > decode_data->original_image.rows)
+                            continue;
                         if (obj.seg)
                         {
                             cv::Mat mask(obj.seg->height, obj.seg->width, CV_8U, obj.seg->data);
