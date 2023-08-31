@@ -58,7 +58,7 @@ namespace FFmpeg {
         while (m_run) {
             auto re = m_demux.Read(pkt.get());
             if (re == 0) {
-                if (pkt->stream_index != m_demux->video_index()) {
+                if (pkt->stream_index != m_demux.video_index()) {
                     continue;  // 忽略音频包
                 }
                 m_decode.Send(pkt.get());
