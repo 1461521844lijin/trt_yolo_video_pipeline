@@ -30,7 +30,7 @@ namespace FFmpeg {
 
         // 打开本地文件时，需要将视频容器中的参数copy到解码器中
         // 如果打开在线摄像头则不需要这句
-        avcodec_parameters_to_context(c, ic->streams[m_demux->video_index()]->codecpar);
+        avcodec_parameters_to_context(c, ic->streams[m_demux.video_index()]->codecpar);
 
         m_decode.set_c(c);
 
