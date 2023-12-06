@@ -5,9 +5,7 @@
 
 namespace FFmpeg {
 
-    FFmpegInputNode::~FFmpegInputNode() {
-        m_run = false;
-    }
+    FFmpegInputNode::~FFmpegInputNode() {}
 
 
     FFmpegInputNode::FFmpegInputNode(string ffmpeg_name, string stream_id)

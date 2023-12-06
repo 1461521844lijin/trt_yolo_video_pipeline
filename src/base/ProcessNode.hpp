@@ -64,20 +64,19 @@ private:
     int                                      max_number = 25;
 };
 
-
 class Node {
-public:
-    typedef std::shared_ptr<Node>                         ptr;
+  public:
+    typedef std::shared_ptr<Node> ptr;
     typedef SList<std::shared_ptr<Data::Input_Data>>::ptr QUEUE;
     Node();
     Node(const std::string &name) : m_name(name) {}
-    virtual ~Node(){};
+    virtual ~Node() { Stop(); };
 
-public:
+  public:
     virtual void Start();
     virtual void Stop();
-    std::string  getName();
-    void         setName(const std::string &name);
+    std::string getName();
+    void setName(const std::string &name);
 
     virtual void add_input(const std::string &tag, QUEUE queue);
     virtual void add_output(const std::string &tag, QUEUE queue);
