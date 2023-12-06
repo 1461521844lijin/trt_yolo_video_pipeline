@@ -41,7 +41,7 @@ public:
     /// <param name="stream_id">流ID</param>
     FFmpegInputNode(string ffmpeg_name, string stream_id);
 
-    virtual ~FFmpegInputNode();
+    ~FFmpegInputNode();
 
     bool Set_HW_decode(bool &flag);  // 设置是否使用硬件解码
 

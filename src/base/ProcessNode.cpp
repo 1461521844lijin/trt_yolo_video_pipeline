@@ -1,4 +1,5 @@
 #include "ProcessNode.hpp"
+#include <iostream>
 
 namespace Base {
 
@@ -19,10 +20,14 @@ void Node::Start() {
 }
 
 void Node::Stop() {
+    if (!m_run) {
+        return;
+    }
     m_run = false;
     m_base_cond->notify_all();
     if (m_worker.joinable())
         m_worker.join();
+    std::cout << getName() + " 节点退出" << std::endl;
 }
 
 void Node::add_input(const std::string &tag, QUEUE queue) {
