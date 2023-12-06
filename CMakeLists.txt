@@ -55,8 +55,8 @@ cuda_add_library(trt_yolov8_cuda_lib ${TRT_YOLOV8_SERVER_CU_SRC})
 add_library(trt_yolov8_cpp_lib SHARED ${TRT_YOLOV8_SERVER_CPP_SRC})
 
 add_executable(trt_yolov8_server test/main.cpp)
-target_link_libraries(trt_yolov8_server ${local_libs} trt_yolov8_cuda_lib trt_yolov8_cpp_lib)
+target_link_libraries(trt_yolov8_server trt_yolov8_cuda_lib trt_yolov8_cpp_lib ${local_libs})
 
 
 add_executable(test_yolov8 test/app.cpp )
-target_link_libraries(test_yolov8 ${local_libs} trt_yolov8_cuda_lib trt_yolov8_cpp_lib)
+target_link_libraries(test_yolov8 trt_yolov8_cuda_lib trt_yolov8_cpp_lib ${local_libs})
