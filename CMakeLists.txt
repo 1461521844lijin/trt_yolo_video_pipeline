@@ -54,9 +54,9 @@ file(GLOB_RECURSE TRT_YOLOV8_SERVER_CU_SRC src/*.cu)
 cuda_add_library(trt_yolov8_cuda_lib ${TRT_YOLOV8_SERVER_CU_SRC})
 add_library(trt_yolov8_cpp_lib SHARED ${TRT_YOLOV8_SERVER_CPP_SRC})
 
+
 add_executable(trt_yolov8_server test/test_infer_demo.cpp)
 target_link_libraries(trt_yolov8_server trt_yolov8_cpp_lib trt_yolov8_cuda_lib ${local_libs})
-
 
 add_executable(test_yolov8 test/test_example.cpp)
 target_link_libraries(test_yolov8 trt_yolov8_cpp_lib trt_yolov8_cuda_lib ${local_libs})
