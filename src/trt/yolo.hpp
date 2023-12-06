@@ -62,7 +62,7 @@ class Infer {
 };
 
 std::shared_ptr<Infer> load(const std::string &engine_file, Type type,
-                            float confidence_threshold = 0.25f, float nms_threshold = 0.5f);
+                            float confidence_threshold = 0.25f, float nms_threshold = 0.5f, int device_id = 0);
 
 const char *type_name(Type type);
 std::tuple<uint8_t, uint8_t, uint8_t> hsv2bgr(float h, float s, float v);
