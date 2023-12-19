@@ -5,12 +5,11 @@
 #ifndef TRT_YOLOV8_THREADSAVEQUEUE_H
 #define TRT_YOLOV8_THREADSAVEQUEUE_H
 
+#include "graph/core/object/BaseData.h"
+#include <condition_variable>
 #include <list>
 #include <memory>
 #include <mutex>
-#include <condition_variable>
-#include "graph/object/BaseData.h"
-
 
 namespace GraphCore {
 

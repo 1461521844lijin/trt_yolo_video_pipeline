@@ -5,16 +5,21 @@
 #ifndef VIDEOPIPELINE_PROCESSNODE_H
 #define VIDEOPIPELINE_PROCESSNODE_H
 
-
+#include "graph/core/common/IEventCallback.h"
+#include "graph/core/common/StatusCode.h"
+#include "graph/core/common/ThreadSaveQueue.h"
 #include <condition_variable>
 #include <functional>
 #include <iostream>
 #include <map>
-#include "graph/common/IEventCallback.h"
-#include "graph/common/ThreadSaveQueue.h"
-#include "graph/common/StatusCode.h"
 
 namespace GraphCore {
+
+enum NODE_TYPE {
+    SRC_NODE,  // 输入节点
+    MID_NODE,  // 中间节点
+    DES_NODE,  // 输出节点
+};
 
 class Node : public IEventCallBack {
 public:
@@ -23,7 +28,7 @@ public:
 
     Node() = delete;
 
-    explicit Node(std::string name) : m_name(std::move(name)) {}
+    explicit Node(std::string name, NODE_TYPE type);
 
     virtual ~Node();
 
@@ -39,6 +44,8 @@ public:
     void Stop();
 
     std::string getName();
+
+    NODE_TYPE getType();
 
     void setName(const std::string &name);
 
@@ -88,6 +95,7 @@ protected:
 protected:
     std::string                              m_name;
     std::thread                              m_worker;
+    NODE_TYPE                                m_type;
     bool                                     m_run = false;
     std::mutex                               m_base_mutex;
     std::shared_ptr<std::condition_variable> m_base_cond =
@@ -96,7 +104,6 @@ protected:
     std::map<std::string, QUEUE> m_input_buffers;
     std::map<std::string, QUEUE> m_output_buffers;
 };
-
 
 /**
  * @brief 将两个节点连接起来

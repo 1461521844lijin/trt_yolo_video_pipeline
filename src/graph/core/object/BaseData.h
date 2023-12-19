@@ -42,6 +42,6 @@ public:
     std::string                           data_name;    // 数据名称/数据来源
 };
 
-}  // namespace Data
+}  // namespace GraphCore
 
 #endif  // TRT_YOLOV8_SERVER_BASEDATA_H

@@ -6,7 +6,6 @@
 
 namespace GraphCore {
 
-
 std::string Node::getName() {
     return m_name;
 }
@@ -15,14 +14,19 @@ void Node::setName(const std::string &name) {
     m_name = name;
 }
 
+Node::~Node() {
+    Stop();
+}
+Node::Node(std::string name, NODE_TYPE type) : m_name(std::move(name)), m_type(type) {}
+
 void Node::Start() {
     if (!m_run) {
         m_run = true;
         if (before_start_cb) {
-            before_start_cb(getName(), StatusCode::OK, "节点开始线程启动" );
+            before_start_cb(getName(), StatusCode::OK, "节点开始线程启动");
         }
         m_worker = std::thread(&Node::worker, this);
-        //todo 这里需要等待线程启动完成才能同步执行
+        // todo 这里需要等待线程启动完成才能同步执行
         if (after_start_cb) {
             after_start_cb(getName(), StatusCode::OK, "节点线程启动完成");
         }
@@ -96,7 +100,7 @@ void Node::get_input_data(std::vector<BaseData::ptr> &datas, int max_size) {
     datas.clear();
     for (auto &item : m_input_buffers) {
         BaseData::ptr data;
-        int                 count = 0;
+        int           count = 0;
         while (item.second->Pop(data)) {
             datas.push_back(data);
             count++;
@@ -137,8 +141,8 @@ void Node::add_datas(const std::vector<BaseData::ptr> &datas) {
         add_data(data);
     }
 }
-Node::~Node() {
-    Stop();
+NODE_TYPE Node::getType() {
+    return MID_NODE;
 }
 
 }  // namespace GraphCore

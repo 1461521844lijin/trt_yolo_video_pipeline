@@ -1,8 +1,11 @@
 find_package(OpenCV REQUIRED)
 find_package(Threads REQUIRED)
+find_package(oatpp 1.3.0 REQUIRED)
 
 include_directories(/usr/local/include)
 include_directories(/usr/local/include/opencv4)
+include_directories(/usr/local/include/oatpp-1.3.0/oatpp)
+
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 
@@ -15,6 +18,7 @@ file(GLOB_RECURSE FFmpeg_LIBS
 
 set( local_libs
         pthread
+        oatpp::oatpp
         ${FFmpeg_LIBS}
         ${OpenCV_LIBS}
 )
