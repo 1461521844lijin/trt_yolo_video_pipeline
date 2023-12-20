@@ -5,7 +5,7 @@
 #ifndef TRT_YOLOV8_THREADSAVEQUEUE_H
 #define TRT_YOLOV8_THREADSAVEQUEUE_H
 
-#include "graph/core/object/BaseData.h"
+#include "graph/core/common/BaseData.h"
 #include <condition_variable>
 #include <list>
 #include <memory>
@@ -28,13 +28,13 @@ public:
     typedef std::shared_ptr<ThreadSaveQueue> ptr;
 
 public:
-    bool Push(const GraphCore::BaseData::ptr &data) {
+    bool Push(const Data::BaseData::ptr &data) {
         std::unique_lock<std::mutex> lock(m_mutex);
         if (m_list.size() > max_number) {
             switch (m_buffer_strategy) {
                 case BufferOverStrategy::DROP_EARLY: {
                     // 缓存队列满了，丢弃最早的帧，保证实时性，但不丢弃其他信息数据
-                    if (m_list.front()->get_data_type() == GraphCore::DataType::FRAME) {
+                    if (m_list.front()->get_data_type() == Data::DataType::FRAME) {
                         m_list.pop_front();
                         m_list.push_back(data);
                         m_work_cond->notify_one();
@@ -43,7 +43,7 @@ public:
                     break;
                 }
                 case BufferOverStrategy::DROP_LATE: {
-                    if (m_list.front()->get_data_type() == GraphCore::DataType::FRAME) {
+                    if (m_list.front()->get_data_type() == Data::DataType::FRAME) {
                         m_list.pop_back();
                         m_list.push_back(data);
                         m_work_cond->notify_one();
@@ -72,7 +72,7 @@ public:
         return true;
     }
 
-    bool Pop(GraphCore::BaseData::ptr &data) {
+    bool Pop(Data::BaseData::ptr &data) {
         std::unique_lock<std::mutex> lock(m_mutex);
         if (m_list.empty()) {
             return false;
@@ -85,7 +85,7 @@ public:
         return true;
     }
 
-    void push_front(const GraphCore::BaseData::ptr &data) {
+    void push_front(const Data::BaseData::ptr &data) {
         std::unique_lock<std::mutex> lock(m_mutex);
         m_list.push_front(data);
         m_work_cond->notify_one();
@@ -120,7 +120,7 @@ private:
     std::mutex m_mutex;
     std::shared_ptr<std::condition_variable> m_work_cond;  // 用于唤醒工作线程的条件变量
     std::condition_variable        m_self_cond;            // 用于唤醒自身的条件变量
-    std::list<GraphCore::BaseData::ptr> m_list;                 // 缓冲队列
+    std::list<Data::BaseData::ptr> m_list;                 // 缓冲队列
     int                            max_number = 25;        // 默认最大缓冲帧数
     BufferOverStrategy m_buffer_strategy = BufferOverStrategy::DROP_EARLY;  // 缓冲队列满时的策略
 };

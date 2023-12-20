@@ -5,6 +5,7 @@
 #ifndef VIDEOPIPELINE_PROCESSNODE_H
 #define VIDEOPIPELINE_PROCESSNODE_H
 
+#include "graph/core/common/IDataHooker.h"
 #include "graph/core/common/IEventCallback.h"
 #include "graph/core/common/StatusCode.h"
 #include "graph/core/common/ThreadSaveQueue.h"
@@ -21,7 +22,7 @@ enum NODE_TYPE {
     DES_NODE,  // 输出节点
 };
 
-class Node : public IEventCallBack {
+class Node : public IEventCallBack, public IDataHooker {
 public:
     typedef std::shared_ptr<Node> ptr;
     typedef ThreadSaveQueue::ptr  QUEUE;
@@ -67,9 +68,11 @@ public:
      * @brief 向节点的输入队列中添加数据，主要是用来输入控制和配置信息
      * @param data
      */
-    void add_data(const BaseData::ptr &data);
+    void add_data(const Data::BaseData::ptr &data);
 
-    void add_datas(const std::vector<BaseData::ptr> &datas);
+    void add_datas(const std::vector<Data::BaseData::ptr> &datas);
+
+    void set_get_data_max_num(int num);
 
 protected:
     virtual void worker();
@@ -77,26 +80,26 @@ protected:
     /**
      * @brief 从输入队列中获取数据，如果队列为空则阻塞等待
      * @param datas
-     * @param max_size
      */
-    virtual void get_input_data(std::vector<BaseData::ptr> &datas, int max_size = 1);
+    virtual void get_input_datas(std::vector<Data::BaseData::ptr> &datas);
 
-    virtual void send_output_data(const BaseData::ptr &data);
+    virtual void send_output_data(const Data::BaseData::ptr &data);
 
-    void send_output_datas(const std::vector<BaseData::ptr> &datas);
+    void send_output_datas(const std::vector<Data::BaseData::ptr> &datas);
 
     /**
      * @brief 处理数据业务接口
      * @param data 所有数据的继承基类
      * @return
      */
-    virtual BaseData::ptr handle_data(BaseData::ptr data);
+    virtual Data::BaseData::ptr handle_data(Data::BaseData::ptr data);
 
 protected:
     std::string                              m_name;
     std::thread                              m_worker;
     NODE_TYPE                                m_type;
-    bool                                     m_run = false;
+    bool                                     m_run              = false;
+    int                                      m_get_data_max_num = 1;
     std::mutex                               m_base_mutex;
     std::shared_ptr<std::condition_variable> m_base_cond =
         std::make_shared<std::condition_variable>();

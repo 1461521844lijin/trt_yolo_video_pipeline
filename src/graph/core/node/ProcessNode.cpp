@@ -80,12 +80,21 @@ void Node::del_output(const std::string &tag) {
 }
 
 void Node::worker() {
-    std::vector<BaseData::ptr> datas;
+    std::vector<Data::BaseData::ptr> datas;
     while (m_run) {
-        get_input_data(datas);
+        get_input_datas(datas);
         if (!datas.empty()) {
+            if (batch_data_handler_hooker) {
+                auto res = batch_data_handler_hooker(datas);
+                send_output_datas(res);
+                continue;
+            }
             for (auto &data : datas) {
-                data = handle_data(data);
+                if (data_handler_hooker) {
+                    data = data_handler_hooker(data);
+                } else {
+                    data = handle_data(data);
+                }
                 send_output_data(data);
             }
         } else {
@@ -96,22 +105,22 @@ void Node::worker() {
     }
 }
 
-void Node::get_input_data(std::vector<BaseData::ptr> &datas, int max_size) {
+void Node::get_input_datas(std::vector<Data::BaseData::ptr> &datas) {
     datas.clear();
     for (auto &item : m_input_buffers) {
-        BaseData::ptr data;
-        int           count = 0;
+        Data::BaseData::ptr data;
+        int                 count = 0;
         while (item.second->Pop(data)) {
             datas.push_back(data);
             count++;
-            if (count >= max_size) {
+            if (count >= m_get_data_max_num) {
                 break;
             }
         }
     }
 }
 
-void Node::send_output_data(const BaseData::ptr &data) {
+void Node::send_output_data(const Data::BaseData::ptr &data) {
     if (!data) {
         return;
     }
@@ -123,26 +132,30 @@ void Node::send_output_data(const BaseData::ptr &data) {
         }
     }
 }
-void Node::send_output_datas(const std::vector<BaseData::ptr> &datas) {
+void Node::send_output_datas(const std::vector<Data::BaseData::ptr> &datas) {
     for (auto &data : datas) {
         send_output_data(data);
     }
 }
 
-BaseData::ptr Node::handle_data(BaseData::ptr data) {
+Data::BaseData::ptr Node::handle_data(Data::BaseData::ptr data) {
     return data;
 }
 
-void Node::add_data(const BaseData::ptr &data) {
+void Node::add_data(const Data::BaseData::ptr &data) {
     m_input_buffers.begin()->second->push_front(data);
 }
-void Node::add_datas(const std::vector<BaseData::ptr> &datas) {
+void Node::add_datas(const std::vector<Data::BaseData::ptr> &datas) {
     for (auto &data : datas) {
         add_data(data);
     }
 }
 NODE_TYPE Node::getType() {
     return MID_NODE;
+}
+void Node::set_get_data_max_num(int num) {
+    std::unique_lock<std::mutex> lk(m_base_mutex);
+    m_get_data_max_num = num;
 }
 
 }  // namespace GraphCore

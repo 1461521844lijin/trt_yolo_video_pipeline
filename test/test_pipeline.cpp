@@ -8,16 +8,18 @@
 
 #include "pipeline/Yolov8Pipeline.h"
 
+#include <any>
+#include <iostream>
+
 int main() {
+    std::string model_path     = "****";
+    std::string model_path_seg = "*******";
+    int         max_batch_size = 16;
+    std::string stream_url     = "rtmp://**";
+    std::string output_url     = "rtmp://**";
 
-  std::string model_path = "****";
-  std::string model_path_seg = "*******";
-  int max_batch_size = 16;
-  std::string stream_url = "rtmp://**";
-  std::string output_url = "rtmp://**";
-
-  // 并发推流的数量
-  // 本地测试时用的是从流媒体服务器分发的视频流
+    // 并发推流的数量
+    // 本地测试时用的是从流媒体服务器分发的视频流
   // 因此输入流是相同视频流拉取出来的一个不同连接，如果是相机最多拉取4~6路
   // 输出流通过后缀下标区分
   int push_stream_nums = 6;
