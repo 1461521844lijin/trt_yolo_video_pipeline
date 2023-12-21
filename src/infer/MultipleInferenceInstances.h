@@ -26,7 +26,7 @@ public:
         }
     }
 
-    Data::BaseData::ptr commit(const Data::BaseData::ptr data) override {
+    Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override {
         return m_infer_list[get_infer_index()]->commit(data);
     }
 

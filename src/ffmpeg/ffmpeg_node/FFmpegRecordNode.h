@@ -7,7 +7,7 @@
 
 #include "ffmpeg/record/RecordTask.h"
 #include "graph/core/node/ProcessNode.h"
-namespace FFmpeg {
+namespace Node {
 
 class FFmpegRecordNode : public GraphCore::Node {
 public:
@@ -19,9 +19,8 @@ public:
 private:
 protected:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
-
 };
 
-}  // namespace FFmpeg
+}  // namespace Node
 
 #endif  // VIDEOPIPELINE_RECORDNODE_H

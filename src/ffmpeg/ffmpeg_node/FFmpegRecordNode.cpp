@@ -8,7 +8,7 @@
 #include "ffmpeg/record/Mp4RecordControlData.h"
 #include "ffmpeg/record/Mp4RecordTask.h"
 
-namespace FFmpeg {
+namespace Node {
 Data::BaseData::ptr FFmpegRecordNode::handle_data(Data::BaseData::ptr data) {
     for (auto task = m_record_task_list.begin(); task != m_record_task_list.end();) {
         if ((*task)->get_record_status() == record::RecordStatus::COMPLETED) {
@@ -48,4 +48,4 @@ FFmpegRecordNode::FFmpegRecordNode(const std::string &name)
 FFmpegRecordNode::~FFmpegRecordNode() {
     m_record_task_list.clear();
 }
-}  // namespace FFmpeg
+}  // namespace Node

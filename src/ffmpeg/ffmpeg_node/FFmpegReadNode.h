@@ -11,7 +11,7 @@
 #include "ffmpeg/core/Demuxer.h"
 #include "ffmpeg/core/Scaler.h"
 
-namespace FFmpeg {
+namespace Node {
 class FFmpegReadNode : public GraphCore::Node {
 public:
     typedef std::shared_ptr<FFmpegReadNode> ptr;
@@ -58,5 +58,5 @@ private:
     std::shared_ptr<FFmpeg::Demuxer> m_demux;    // 解封装
     std::shared_ptr<FFmpeg::Decoder> m_decoder;  // 解码
 };
-}  // namespace FFmpeg
+}  // namespace Node
 #endif  // VIDEOPIPELINE_FFMPEGREADNODE_H

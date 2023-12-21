@@ -9,7 +9,7 @@
 #include "ffmpeg/record/Mp4RecordControlData.h"
 #include "ffmpeg/record/Mp4RecordTask.h"
 
-namespace FFmpeg {
+namespace Node {
 
 FFmpegPusherRecorderNode::~FFmpegPusherRecorderNode() {
     m_record_task_list.clear();
@@ -94,4 +94,4 @@ Data::BaseData::ptr FFmpegPusherRecorderNode::handle_data(Data::BaseData::ptr da
     return data;
 }
 
-}  // namespace FFmpeg
+}  // namespace Node

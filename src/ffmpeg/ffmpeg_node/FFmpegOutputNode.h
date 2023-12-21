@@ -9,7 +9,7 @@
 #include "ffmpeg/core/Enmuxer.h"
 #include "ffmpeg/core/Scaler.h"
 #include "graph/core/node/ProcessNode.h"
-namespace FFmpeg {
+namespace Node {
 
 class FFmpegOutputNode : public GraphCore::Node {
 public:
@@ -74,15 +74,15 @@ protected:
     AVCodecID m_codec_id = AV_CODEC_ID_H264;
 
 protected:
-    std::string              m_open_source;  // 读取的文件路径或流地址
-    std::shared_ptr<Enmuxer> m_enmux;
-    std::shared_ptr<Encoder> m_encoder;
-    std::shared_ptr<Scaler>  m_scaler;
+    std::string                      m_open_source;  // 读取的文件路径或流地址
+    std::shared_ptr<FFmpeg::Enmuxer> m_enmux;
+    std::shared_ptr<FFmpeg::Encoder> m_encoder;
+    std::shared_ptr<FFmpeg::Scaler>  m_scaler;
 
     av_frame m_yuv_frame = alloc_av_frame();
     int      pts         = 0;
 };
 
-}  // namespace FFmpeg
+}  // namespace Node
 
 #endif  // VIDEOPIPELINE_FFMPEGOUTPUTNODE_H

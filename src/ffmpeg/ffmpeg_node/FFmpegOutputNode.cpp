@@ -6,7 +6,7 @@
 
 #include <utility>
 
-namespace FFmpeg {
+namespace Node {
 
 FFmpegOutputNode::FFmpegOutputNode(std::string name,
                                    std::string open_source,
@@ -36,20 +36,20 @@ FFmpegOutputNode::FFmpegOutputNode(std::string name,
             return -1;
         }
         if (!m_scaler) {
-            m_scaler =
-                Scaler::createShare(m_from_width, m_from_height, (AVPixelFormat)m_from_format,
-                                    m_to_width, m_to_height, (AVPixelFormat)m_to_format);
+            m_scaler = FFmpeg::Scaler::createShare(m_from_width, m_from_height,
+                                                   (AVPixelFormat)m_from_format, m_to_width,
+                                                   m_to_height, (AVPixelFormat)m_to_format);
         }
         if (!m_encoder) {
-            m_encoder =
-                Encoder::createShared(m_codec_id, m_to_width, m_to_height, m_fps, m_bitrate);
+            m_encoder = FFmpeg::Encoder::createShared(m_codec_id, m_to_width, m_to_height, m_fps,
+                                                      m_bitrate);
             if (!m_encoder->open(m_use_hw)) {
                 std::cout << "encoder open failed" << std::endl;
                 return -1;
             }
         }
         if (!m_enmux) {
-            m_enmux = Enmuxer::createShared(m_encoder, m_open_source);
+            m_enmux = FFmpeg::Enmuxer::createShared(m_encoder, m_open_source);
             if (!m_enmux->open()) {
                 std::cout << "mux open failed" << std::endl;
                 return -1;
@@ -101,4 +101,4 @@ FFmpegOutputNode::ptr FFmpegOutputNode::CreateShared(std::string        name,
                                               from_format, to_width, to_height, to_format, fps,
                                               bitrate, use_hw);
 }
-}  // namespace FFmpeg
+}  // namespace Node
