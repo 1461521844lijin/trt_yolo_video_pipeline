@@ -41,7 +41,7 @@ public:
                      int         bitrate = 1024 * 1024 * 2,
                      bool        use_hw  = false);
 
-    ~FFmpegOutputNode() override;
+    virtual ~FFmpegOutputNode();
 
     static FFmpegOutputNode::ptr CreateShared(std::string        name,
                                               const std::string &open_source,
@@ -59,7 +59,7 @@ public:
 private:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
 
-private:
+protected:
     int  m_from_width  = 0;
     int  m_from_height = 0;
     int  m_from_format = 0;
@@ -71,9 +71,9 @@ private:
     bool m_use_hw      = false;
 
     // 编码格式
-    AVCodecID m_codec_id;
+    AVCodecID m_codec_id = AV_CODEC_ID_H264;
 
-private:
+protected:
     std::string              m_open_source;  // 读取的文件路径或流地址
     std::shared_ptr<Enmuxer> m_enmux;
     std::shared_ptr<Encoder> m_encoder;

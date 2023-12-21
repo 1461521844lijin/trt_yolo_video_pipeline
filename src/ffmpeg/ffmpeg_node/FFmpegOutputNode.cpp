@@ -41,7 +41,8 @@ FFmpegOutputNode::FFmpegOutputNode(std::string name,
                                     m_to_width, m_to_height, (AVPixelFormat)m_to_format);
         }
         if (!m_encoder) {
-            m_encoder = Encoder::createShared(m_to_width, m_to_height, m_fps, m_bitrate);
+            m_encoder =
+                Encoder::createShared(m_codec_id, m_to_width, m_to_height, m_fps, m_bitrate);
             if (!m_encoder->open(m_use_hw)) {
                 std::cout << "encoder open failed" << std::endl;
                 return -1;

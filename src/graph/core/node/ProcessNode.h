@@ -26,6 +26,8 @@ class Node : public IEventCallBack, public IDataHooker {
 public:
     typedef std::shared_ptr<Node> ptr;
     typedef ThreadSaveQueue::ptr  QUEUE;
+    // 工作流之外的额外输入回调
+    typedef std::function<void(Data::BaseData::ptr)> ExtraInputCallBack;
 
     Node() = delete;
 
@@ -74,6 +76,11 @@ public:
 
     void set_get_data_max_num(int num);
 
+public:
+    void set_extra_input_callback(ExtraInputCallBack callback);
+
+    void add_extra_data(const Data::BaseData::ptr &data);
+
 protected:
     virtual void worker();
 
@@ -93,6 +100,9 @@ protected:
      * @return
      */
     virtual Data::BaseData::ptr handle_data(Data::BaseData::ptr data);
+
+protected:
+    ExtraInputCallBack m_extra_input_callback = nullptr;
 
 protected:
     std::string                              m_name;

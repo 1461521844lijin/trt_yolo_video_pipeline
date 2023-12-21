@@ -4,6 +4,8 @@
 
 #include "ProcessNode.h"
 
+#include <utility>
+
 namespace GraphCore {
 
 std::string Node::getName() {
@@ -152,12 +154,26 @@ void Node::add_datas(const std::vector<Data::BaseData::ptr> &datas) {
         add_data(data);
     }
 }
+
 NODE_TYPE Node::getType() {
     return MID_NODE;
 }
+
 void Node::set_get_data_max_num(int num) {
     std::unique_lock<std::mutex> lk(m_base_mutex);
     m_get_data_max_num = num;
+}
+
+void Node::set_extra_input_callback(Node::ExtraInputCallBack callback) {
+    std::unique_lock<std::mutex> lk(m_base_mutex);
+    m_extra_input_callback = std::move(callback);
+}
+
+void Node::add_extra_data(const Data::BaseData::ptr &data) {
+    std::unique_lock<std::mutex> lk(m_base_mutex);
+    if (m_extra_input_callback) {
+        m_extra_input_callback(data);
+    }
 }
 
 }  // namespace GraphCore
