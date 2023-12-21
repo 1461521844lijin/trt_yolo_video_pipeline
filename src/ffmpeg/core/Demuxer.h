@@ -2,10 +2,10 @@
 #include "SafeAVFormat.h"
 
 namespace FFmpeg {
-class Demux {
+class Demuxer {
 public:
-    Demux() = default;
-    ~Demux();
+    Demuxer() = default;
+    ~Demuxer();
 
     bool open(const std::string &url);
     void close();
@@ -14,8 +14,8 @@ public:
 
     void seek(int64_t timestamp);
 
-    inline static std::shared_ptr<Demux> createShare() {
-        return std::make_shared<Demux>();
+    inline static std::shared_ptr<Demuxer> createShare() {
+        return std::make_shared<Demuxer>();
     }
 
     inline AVFormatContext *get_format_ctx() {

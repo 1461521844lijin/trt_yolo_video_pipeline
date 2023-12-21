@@ -23,7 +23,9 @@ void Node::Start() {
     if (!m_run) {
         m_run = true;
         if (before_start_cb) {
-            before_start_cb(getName(), StatusCode::OK, "节点开始线程启动");
+            if (before_start_cb(getName(), StatusCode::OK, "节点开始线程启动") != 0) {
+                throw std::runtime_error("节点初始化失败");
+            }
         }
         m_worker = std::thread(&Node::worker, this);
         // todo 这里需要等待线程启动完成才能同步执行

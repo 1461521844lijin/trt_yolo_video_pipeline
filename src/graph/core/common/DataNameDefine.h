@@ -6,19 +6,28 @@
 #ifndef VIDEOPIPELINE_DATANAMEDEFINE_H
 #define VIDEOPIPELINE_DATANAMEDEFINE_H
 
+#include "ffmpeg/core/SafeAVFormat.h"
+#include <opencv2/opencv.hpp>
+#include <string>
+
+#define DataDefine(name, type)                                                                     \
+    static const std::string name = #name;                                                         \
+    typedef type             name##_TYPE;
+
 // 数据表存放定义
 
 // 数据存储格式
-#define MAT_IMAGE "mat_image"  // cv::Mat格式图像;
-#define AV_FRAME "av_frame"    // ffmpeg格式帧数据
+DataDefine(MAT_IMAGE, cv::Mat);
+DataDefine(AV_PACKET, std::shared_ptr<AVPacket>);
+DataDefine(AV_FRAME, std::shared_ptr<AVFrame>);
 
 // 数据来源
 
 // 数据处理结果
 
 // 数据信息
-#define FRAME_INDEX "frame_index"    // 帧序号，int
-#define FRAME_WIDTH "frame_width"    // 帧宽度，int
-#define FRAME_HEIGHT "frame_height"  // 帧高度，int
+DataDefine(FRAME_INDEX, int);   // 帧序号，int
+DataDefine(FRAME_WIDTH, int);   // 帧宽度，int
+DataDefine(FRAME_HEIGHT, int);  // 帧高度，int
 
-#endif                               // VIDEOPIPELINE_DATANAMEDEFINE_H
+#endif                          // VIDEOPIPELINE_DATANAMEDEFINE_H

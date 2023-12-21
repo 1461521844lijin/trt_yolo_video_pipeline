@@ -13,6 +13,8 @@
 #include <any>
 #include <unordered_map>
 
+#include "DataNameDefine.h"
+
 namespace Data {
 
 enum DataType {
@@ -66,6 +68,6 @@ private:
     std::unordered_map<std::string, std::any> data_map;
 };
 
-}  // namespace GraphCore
+}  // namespace Data
 
 #endif  // TRT_YOLOV8_SERVER_BASEDATA_H

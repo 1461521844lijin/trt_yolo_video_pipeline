@@ -1,7 +1,7 @@
-#include "Enmux.h"
+#include "Enmuxer.h"
 #include "utils/FileOperate.h"
 namespace FFmpeg {
-Enmux::Enmux(std::shared_ptr<Encoder> encoder, std::string out_url) {
+Enmuxer::Enmuxer(std::shared_ptr<Encoder> encoder, std::string out_url) {
     m_encoder = encoder;
     m_out_url = out_url;
     if (out_url.find("mp4") != std::string::npos) {
@@ -17,12 +17,12 @@ Enmux::Enmux(std::shared_ptr<Encoder> encoder, std::string out_url) {
     }
 }
 
-Enmux::~Enmux() {
+Enmuxer::~Enmuxer() {
     m_format_ctx = nullptr;
     close();
 }
 
-bool Enmux::open() {
+bool Enmuxer::open() {
     if (m_format_name == "mp4")
         utils::FileOperate::rm(m_out_url);
     ASSERT_FFMPEG(avformat_alloc_output_context2(&m_format_ctx, nullptr, m_format_name.c_str(),
@@ -35,7 +35,7 @@ bool Enmux::open() {
     return true;
 }
 
-bool Enmux::write_packet(av_packet &packet) {
+bool Enmuxer::write_packet(av_packet &packet) {
     std::unique_lock<std::mutex> lock(m_mutex);
     packet->dts      = packet->pts;
     packet->duration = 1;
@@ -50,7 +50,7 @@ bool Enmux::write_packet(av_packet &packet) {
     return true;
 }
 
-void Enmux::close() {
+void Enmuxer::close() {
     std::unique_lock<std::mutex> lock(m_mutex);
     if (m_format_ctx) {
         write_trailer();
@@ -60,7 +60,7 @@ void Enmux::close() {
     }
 }
 
-void Enmux::write_trailer() {
+void Enmuxer::write_trailer() {
     if (m_format_name == "mp4" || m_format_name == "jpg")
         av_write_trailer(m_format_ctx);
 }

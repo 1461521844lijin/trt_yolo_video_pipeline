@@ -2,7 +2,7 @@
 #include "NvidiaTools.h"
 
 namespace FFmpeg {
-Decoder::Decoder(std::shared_ptr<Demux> demux) {
+Decoder::Decoder(std::shared_ptr<Demuxer> demux) {
     m_demux     = demux;
     m_codec_ctx = nullptr;
 }

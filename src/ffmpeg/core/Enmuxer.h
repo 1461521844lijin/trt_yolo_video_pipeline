@@ -5,11 +5,11 @@
 #include <mutex>
 
 namespace FFmpeg {
-class Enmux {
+class Enmuxer {
 public:
-    Enmux(std::shared_ptr<Encoder> encoder, std::string out_url);
+    Enmuxer(std::shared_ptr<Encoder> encoder, std::string out_url);
 
-    ~Enmux();
+    ~Enmuxer();
 
     bool open();
 
@@ -25,9 +25,9 @@ public:
      * @param out_url 输出文件路径
      * @return
      */
-    static std::shared_ptr<Enmux> createShared(std::shared_ptr<Encoder> encoder,
-                                               std::string              out_url) {
-        return std::make_shared<Enmux>(encoder, out_url);
+    static std::shared_ptr<Enmuxer> createShared(std::shared_ptr<Encoder> encoder,
+                                                 std::string              out_url) {
+        return std::make_shared<Enmuxer>(encoder, out_url);
     }
 
     inline AVFormatContext *get_format_ctx() {

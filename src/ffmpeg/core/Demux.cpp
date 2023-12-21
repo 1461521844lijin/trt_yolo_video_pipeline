@@ -1,10 +1,10 @@
-#include "Demux.h"
+#include "Demuxer.h"
 #include <chrono>
 #include <thread>
 
 namespace FFmpeg {
 
-bool Demux::open(const std::string &url) {
+bool Demuxer::open(const std::string &url) {
     if (url.find("mp4") != std::string::npos) {
         m_suffix = "mp4";
     }
@@ -37,7 +37,7 @@ bool Demux::open(const std::string &url) {
     return true;
 }
 
-int Demux::read_packet(av_packet &packet) {
+int Demuxer::read_packet(av_packet &packet) {
     if (m_suffix == "mp4")
         std::this_thread::sleep_for(std::chrono::milliseconds(30));
     if (!m_format_ctx)
@@ -45,7 +45,7 @@ int Demux::read_packet(av_packet &packet) {
     return av_read_frame(m_format_ctx, packet.get());
 }
 
-void Demux::close() {
+void Demuxer::close() {
     if (opt) {
         av_dict_free(&opt);
     }
@@ -55,11 +55,11 @@ void Demux::close() {
     }
 }
 
-Demux::~Demux() {
+Demuxer::~Demuxer() {
     close();
 }
 
-void Demux::seek(int64_t timestamp) {
+void Demuxer::seek(int64_t timestamp) {
     if (!m_format_ctx)
         return;
     av_seek_frame(m_format_ctx, m_video_stream_index, timestamp, AVSEEK_FLAG_BACKWARD);
