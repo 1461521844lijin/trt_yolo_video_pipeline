@@ -29,12 +29,12 @@ protected:
     virtual void post_process(std::vector<Data::BaseData::ptr> &batch_data) {}
     virtual void infer_process(std::vector<Data::BaseData::ptr> &batch_data) {}
 
-private:
+protected:
     GraphCore::Node::ptr m_pre_node;
     GraphCore::Node::ptr m_post_node;
     GraphCore::Node::ptr m_infer_node;
 
-private:
+protected:
     std::string m_infer_name;
     std::string m_model_path;
     int         m_device_id      = 0;
