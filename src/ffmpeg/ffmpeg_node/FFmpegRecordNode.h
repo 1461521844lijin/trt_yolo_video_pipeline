@@ -20,7 +20,6 @@ private:
 protected:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
 
-    Data::BaseData::ptr handle_control_data(Data::ControlData::ptr data) override;
 };
 
 }  // namespace FFmpeg

@@ -54,11 +54,11 @@ public:
         data_map[name] = value;
     }
 
-    // 通过name获取任意类型的数据
+    // 通过name获取任意类型的数据, 返回该类型数据的引用
     template <typename T>
     T Get(const std::string &name) {
         try {
-            std::any_cast<T>(data_map[name]);
+            return std::any_cast<T>(data_map[name]);
         } catch (const std::bad_any_cast &e) {
             throw std::runtime_error("类型转换错误，请检查数据类型: " + std::string(e.what()));
         }

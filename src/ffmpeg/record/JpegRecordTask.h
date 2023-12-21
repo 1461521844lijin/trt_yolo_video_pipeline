@@ -6,7 +6,6 @@
 #define VIDEOPIPELINE_JPEGRECORDTASK_H
 
 #include "RecordTask.h"
-#include "ffmpeg/ImageSaver.h"
 
 namespace record {
 
