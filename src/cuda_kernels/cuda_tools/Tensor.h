@@ -17,7 +17,7 @@ typedef CUstream_st CUStreamRaw;
 
 #define CURRENT_DEVICE_ID -1
 
-namespace cuda {
+namespace CUDA {
 
 typedef struct {
     unsigned short _;

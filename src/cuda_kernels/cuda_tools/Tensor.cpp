@@ -9,7 +9,7 @@
 #include <cuda_fp16.h>
 #include <cuda_runtime.h>
 
-namespace cuda {
+namespace CUDA {
 
 using namespace cv;
 using namespace std;
