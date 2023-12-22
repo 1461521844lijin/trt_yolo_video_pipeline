@@ -116,7 +116,7 @@ public:
         return m_nms_threshold;
     }
 
-private:
+protected:
     int                      m_class_nums;            // 检测器类别数
     std::vector<std::string> m_class_names;           // 检测器类别名称
     float                    m_confidence_threshold;  // 置信度阈值

@@ -5,8 +5,7 @@
 #ifndef TRT_YOLOV8_SERVER_PIPELINE_H
 #define TRT_YOLOV8_SERVER_PIPELINE_H
 
-#include "../base/ProcessNode.hpp"
-#include "../base/TransferData.h"
+#include "graph/core/node/ProcessNode.h"
 #include <atomic>
 #include <future>
 #include <memory>
@@ -21,43 +20,43 @@ namespace pipeline {
  */
 class Pipeline {
 public:
-  typedef std::shared_ptr<Pipeline> ptr;
-  //    typedef std::function<void(Data::BaseData::ptr)> DataInputFunc;
+    typedef std::shared_ptr<Pipeline> ptr;
+
+public:
+    Pipeline() = delete;
+
+    explicit Pipeline(std::string task_name) : m_task_name(std::move(task_name)) {}
+
+    virtual ~Pipeline();
+
+    std::string get_name() const {
+        return m_task_name;
+    }
+
+public:
+    /**
+     * @brief 启动所有的节点线程
+     */
+    void Start();
+
+    /**
+     * @brief 停止所有的节点线程
+     */
+    void Stop();
+
+    /**
+     * @brief 初始化内部节点和连接关系
+     * @return 是否初始化成功
+     */
+    virtual bool Init() = 0;
 
 protected:
-  std::mutex m_mutex;
-  std::atomic<bool> m_initialized{false};
-  std::string m_task_name;
-  std::vector<Base::Node::ptr> m_nodes;
-
-public:
-  Pipeline() = delete;
-
-  explicit Pipeline(std::string task_name)
-      : m_task_name(std::move(task_name)) {}
-
-  virtual ~Pipeline();
-
-  std::string get_name() const { return m_task_name; }
-
-public:
-  /**
-   * @brief 启动所有的节点线程
-   */
-  void Start();
-
-  /**
-   * @brief 停止所有的节点线程
-   */
-  void Stop();
-
-  /**
-   * @brief 初始化内部节点和连接关系
-   * @return 是否初始化成功
-   */
-  virtual bool Init() = 0;
+    std::mutex                        m_mutex;
+    std::atomic<bool>                 m_initialized{false};
+    std::string                       m_task_name;
+    std::vector<GraphCore::Node::ptr> m_nodes;
 };
 
-} // namespace pipeline
+}  // namespace pipeline
 
-#endif // TRT_YOLOV8_SERVER_PIPELINE_H
+#endif  // TRT_YOLOV8_SERVER_PIPELINE_H

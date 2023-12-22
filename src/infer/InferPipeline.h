@@ -24,14 +24,15 @@ public:
                            int         max_batch_size = 16);
     virtual ~InferPipeline();
 
+public:
+    Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override;
+
 protected:
     virtual void pre_process(std::vector<Data::BaseData::ptr> &batch_data) {}
     virtual void post_process(std::vector<Data::BaseData::ptr> &batch_data) {}
     virtual void infer_process(std::vector<Data::BaseData::ptr> &batch_data) {}
 
 protected:
-    GraphCore::Node::ptr m_pre_node;
-    GraphCore::Node::ptr m_post_node;
     GraphCore::Node::ptr m_infer_node;
 
 protected:

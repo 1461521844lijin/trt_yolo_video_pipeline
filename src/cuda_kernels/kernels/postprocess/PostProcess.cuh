@@ -5,6 +5,7 @@
 #ifndef VIDEOPIPELINE_POSTPROCESS_CUH
 #define VIDEOPIPELINE_POSTPROCESS_CUH
 
+#include <driver_types.h>
 namespace CUDA {
 
 /**
