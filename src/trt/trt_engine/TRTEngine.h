@@ -46,10 +46,21 @@ public:
 public:
     bool construct(const void *data, size_t size);
 
+    /**
+     * @brief load trt engine from file
+     * @param file    trt engine file path
+     * @param device_id     gpu device id
+     * @return
+     */
     bool load(const std::string &file, int device_id = 0);
 
     void setup();
 
+    /**
+     * @brief get binding index by name
+     * @param name
+     * @return
+     */
     virtual int index(const std::string &name);
 
     virtual bool forward(const std::vector<void *> &bindings,

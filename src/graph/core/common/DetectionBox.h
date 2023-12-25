@@ -8,14 +8,15 @@
 #include "opencv2/opencv.hpp"
 
 struct DetectBox {
-    float   left        = -1;
-    float   top         = -1;
-    float   right       = -1;
-    float   bottom      = -1;
-    float   confidence  = -1;
-    int     class_label = -1;
-    int     track_id    = -1;
-    cv::Mat mask{};
+    float       left        = -1;
+    float       top         = -1;
+    float       right       = -1;
+    float       bottom      = -1;
+    float       confidence  = -1;
+    int         class_label = -1;
+    int         track_id    = -1;
+    std::string class_name{};
+    cv::Mat     mask{};
 
     DetectBox() = default;
 

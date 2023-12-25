@@ -12,7 +12,7 @@
 
 namespace TRT {
 
-#define INFO(...) TRT::__log_func(__FILE__, __LINE__, __VA_ARGS__)
+#define INFO(...) __log_func(__FILE__, __LINE__, __VA_ARGS__)
 void __log_func(const char *file, int line, const char *fmt, ...);
 class __native_nvinfer_logger : public nvinfer1::ILogger {
 public:

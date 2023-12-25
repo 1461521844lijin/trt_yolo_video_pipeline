@@ -21,16 +21,22 @@ Yolov5DetectionInfer::Yolov5DetectionInfer(std::string infer_name,
     load_class_names(label_path);
     set_confidence_threshold(score_threshold);
     set_nms_threshold(nms_threshold);
-    m_trt_engine       = TRT::TRTEngine::CreateShared(m_model_path, m_device_id);
-    m_has_dynamic_dim  = m_trt_engine->has_dynamic_dim();
-    m_input_shapes     = m_trt_engine->run_dims(0);
-    m_output_shapes    = m_trt_engine->run_dims(1);
-    m_tensor_allocator = std::make_shared<MonopolyAllocator<CUDA::Tensor>>(m_max_batch_size * 2);
+    m_trt_engine = TRT::TRTEngine::CreateShared(m_model_path, m_device_id);
+    m_trt_engine->print();
+    m_has_dynamic_dim = m_trt_engine->has_dynamic_dim();
+    m_input_shapes    = m_trt_engine->static_dims(0);
+    m_output_shapes   = m_trt_engine->static_dims(1);
+    m_input_tensor    = std::make_shared<CUDA::Tensor>();
+    m_input_tensor->set_workspace(std::make_shared<CUDA::MixMemory>());
+    m_output_tensor       = std::make_shared<CUDA::Tensor>();
+    m_affin_matrix_tensor = std::make_shared<CUDA::Tensor>();
+    m_tensor_allocator    = std::make_shared<MonopolyAllocator<CUDA::Tensor>>(m_max_batch_size * 2);
 }
 void Yolov5DetectionInfer::pre_process(std::vector<Data::BaseData::ptr> &batch_data) {
     int batch_size = batch_data.size();
     m_input_tensor->resize(batch_size, 3, m_input_shapes[2], m_input_shapes[3]);
-    m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2], m_output_shapes[3]);
+    m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
+    m_trt_engine->set_run_dims(0, m_input_tensor->dims());
     for (int i = 0; i < batch_size; ++i) {
         auto &image = batch_data[i]->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
         image_to_tensor(image, m_input_tensor, i);
@@ -56,9 +62,8 @@ void Yolov5DetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_
         auto   affine_matrix      = m_affin_matrix_tensor->gpu<float>();
         checkCudaRuntime(cudaMemsetAsync(output_array_ptr, 0, sizeof(int), m_stream));
         CUDA::yolov5_decode_kernel_invoker(image_based_output, m_output_tensor->size(1),
-                                           m_output_tensor->size(2), m_confidence_threshold,
-                                           affine_matrix, output_array_ptr, MAX_IMAGE_BBOX,
-                                           m_stream);
+                                           m_class_nums, m_confidence_threshold, affine_matrix,
+                                           output_array_ptr, MAX_IMAGE_BBOX, m_stream);
         CUDA::nms_kernel_invoker(output_array_ptr, m_nms_threshold, MAX_IMAGE_BBOX, m_stream);
     }
 
@@ -73,7 +78,9 @@ void Yolov5DetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_
             int    keepflag = pbox[6];
             if (keepflag == 1) {
                 // x y w h conf label
-                boxArray.emplace_back(pbox[0], pbox[1], pbox[2], pbox[3], pbox[4], label);
+                DetectBox box  = {pbox[0], pbox[1], pbox[2], pbox[3], pbox[4], label};
+                box.class_name = m_class_names[label];
+                boxArray.emplace_back(box);
             }
         }
         batch_data[ibatch]->Get<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE)->set_value(boxArray);
@@ -84,7 +91,7 @@ void Yolov5DetectionInfer::image_to_tensor(const cv::Mat                 &image,
                                            std::shared_ptr<CUDA::Tensor> &tensor,
                                            int                            ibatch) {
     CUDA::Norm normalize;
-
+    cudaSetDevice(m_device_id);
     normalize = CUDA::Norm::alpha_beta(1 / 255.0f, 0.0f, CUDA::ChannelType::Invert);
     cv::Size input_size(tensor->size(3), tensor->size(2));
 
@@ -107,7 +114,7 @@ void Yolov5DetectionInfer::image_to_tensor(const cv::Mat                 &image,
         cudaMemcpyAsync(image_device, image_host, size_image, cudaMemcpyHostToDevice, stream));
     checkCudaRuntime(cudaMemcpyAsync(affine_matrix_device, affine_matrix_host,
                                      sizeof(m_affin_matrix.d2i), cudaMemcpyHostToDevice, stream));
-
+    m_affin_matrix_tensor->resize(sizeof(m_affin_matrix.d2i));
     checkCudaRuntime(cudaMemcpyAsync(m_affin_matrix_tensor->gpu(), affine_matrix_device,
                                      sizeof(m_affin_matrix.d2i), cudaMemcpyDeviceToDevice));
 
@@ -117,4 +124,13 @@ void Yolov5DetectionInfer::image_to_tensor(const cv::Mat                 &image,
                                                      affine_matrix_device, 114, normalize, stream);
     tensor->synchronize();
 }
+// Data::BaseData::ptr Yolov5DetectionInfer::commit(const Data::BaseData::ptr &data) {
+//     std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
+//         std::make_shared<std::promise<DetectBoxArray>>();
+//     std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
+//     data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
+//     data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
+//     InferPipeline::commit(data);
+//     return data;
+// }
 }  // namespace infer

@@ -65,6 +65,8 @@ Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
         std::tie(b, g, r) = random_color(obj.class_label);
         cv::rectangle(image, cv::Point(obj.left, obj.top), cv::Point(obj.right, obj.bottom),
                       cv::Scalar(b, g, r), 2);
+        cv::putText(image, obj.class_name, cv::Point(obj.left, obj.top - 5),
+                    cv::FONT_HERSHEY_COMPLEX, 0.5, cv::Scalar(b, g, r), 1);
     }
     return data;
 }

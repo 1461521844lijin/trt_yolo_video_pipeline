@@ -25,7 +25,7 @@ public:
                          int         device_id,
                          std::string model_path,
                          std::string label_path,
-                         float       score_threshold = 0.5,
+                         float       score_threshold = 0.25,
                          float       nms_threshold   = 0.5,
                          int         max_batch_size  = 16);
 

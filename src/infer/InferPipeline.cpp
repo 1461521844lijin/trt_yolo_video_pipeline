@@ -36,7 +36,13 @@ InferPipeline::~InferPipeline() {
     m_infer_node->Stop();
 }
 Data::BaseData::ptr InferPipeline::commit(const Data::BaseData::ptr &data) {
+    std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
+        std::make_shared<std::promise<DetectBoxArray>>();
+    std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
+    data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
+    data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
     m_infer_node->add_data(data);
+    return data;
 }
 
 }  // namespace infer
