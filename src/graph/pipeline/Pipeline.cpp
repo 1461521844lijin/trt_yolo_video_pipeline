@@ -27,11 +27,5 @@ Pipeline::~Pipeline() {
     Stop();
 }
 
-bool Pipeline::init_from_config(const oatpp::Object<Dto::PipelineDto> &config_dto) {
-    m_config_dto = config_dto;
-    // todo
-
-    return true;
-}
 
 }  // namespace pipeline

@@ -24,7 +24,6 @@ set(local_libs
         )
 
 file(GLOB_RECURSE CPP_SRC
-        ${CMAKE_SOURCE_DIR}/src/config/*.cpp
         ${CMAKE_SOURCE_DIR}/src/ffmpeg/*.cpp
         ${CMAKE_SOURCE_DIR}/src/graph/*.cpp
         ${CMAKE_SOURCE_DIR}/src/infer/*.cpp
