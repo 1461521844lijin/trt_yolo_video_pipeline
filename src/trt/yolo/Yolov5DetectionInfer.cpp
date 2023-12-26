@@ -17,7 +17,7 @@ Yolov5DetectionInfer::Yolov5DetectionInfer(std::string infer_name,
                                            float       score_threshold,
                                            float       nms_threshold,
                                            int         max_batch_size)
-    : InferPipeline(std::move(infer_name), std::move(model_path), device_id, max_batch_size) {
+    : InferInstance(std::move(infer_name), std::move(model_path), device_id, max_batch_size) {
     load_class_names(label_path);
     set_confidence_threshold(score_threshold);
     set_nms_threshold(nms_threshold);
@@ -124,13 +124,15 @@ void Yolov5DetectionInfer::image_to_tensor(const cv::Mat                 &image,
                                                      affine_matrix_device, 114, normalize, stream);
     tensor->synchronize();
 }
-// Data::BaseData::ptr Yolov5DetectionInfer::commit(const Data::BaseData::ptr &data) {
-//     std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
-//         std::make_shared<std::promise<DetectBoxArray>>();
-//     std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
-//     data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
-//     data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
-//     InferPipeline::commit(data);
-//     return data;
-// }
+
+Data::BaseData::ptr Yolov5DetectionInfer::commit(const Data::BaseData::ptr &data) {
+    std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
+        std::make_shared<std::promise<DetectBoxArray>>();
+    std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
+    data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
+    data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
+    m_infer_node->add_data(data);
+    return data;
+}
+
 }  // namespace infer

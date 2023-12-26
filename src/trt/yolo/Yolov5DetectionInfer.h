@@ -12,12 +12,12 @@
 #include "cuda_kernels/kernels/preprocess/PreProcess.cuh"
 #include "graph/core/common/DetectionBox.h"
 #include "graph/core/common/IDetectionInfo.h"
-#include "infer/InferPipeline.h"
+#include "infer/InferInstance.h"
 #include "trt/trt_engine/TRTEngine.h"
 
 namespace infer {
 
-class Yolov5DetectionInfer : public InferPipeline, public IDetectInfo {
+class Yolov5DetectionInfer : public InferInstance, public IDetectInfo {
 public:
     typedef std::shared_ptr<Yolov5DetectionInfer> ptr;
 
@@ -28,6 +28,9 @@ public:
                          float       score_threshold = 0.25,
                          float       nms_threshold   = 0.5,
                          int         max_batch_size  = 16);
+
+public:
+    Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override;
 
 private:
     void pre_process(std::vector<Data::BaseData::ptr> &batch_data) override;

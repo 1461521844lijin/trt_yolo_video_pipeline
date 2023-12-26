@@ -37,11 +37,16 @@ bool Yolov5DetectPipeline::Init() {
     }
     auto ffmpeg_input_node =
         std::make_shared<Node::FFmpegReadNode>("ffmpeg_input_node", m_input_url);
+    ASSERT_INIT(ffmpeg_input_node->Init());
     auto trt_node      = std::make_shared<Node::InferNode>("trt_node");
     auto trt_draw_node = std::make_shared<Node::ImageDrawNode>("trt_draw_node");
+
+    auto [input_w, input_h, fps, bitrate] = ffmpeg_input_node->get_video_info();
     auto ffmpeg_output_node =
-        std::make_shared<Node::FFmpegOutputNode>("ffmpeg_output_node", m_output_url, 1920, 1080,
-                                                 AV_PIX_FMT_BGR24, 1920, 1080, AV_PIX_FMT_YUV420P);
+        std::make_shared<Node::FFmpegOutputNode>("ffmpeg_output_node", m_output_url, input_w,
+                                                 input_h, AV_PIX_FMT_BGR24, m_output_width,
+                                                 m_output_height, AV_PIX_FMT_YUV420P, fps, bitrate);
+    ASSERT_INIT(ffmpeg_output_node->Init());
 
     trt_node->set_trt_instance(m_trt_instance);
 
@@ -49,10 +54,10 @@ bool Yolov5DetectPipeline::Init() {
     GraphCore::LinkNode(trt_node, trt_draw_node);
     GraphCore::LinkNode(trt_draw_node, ffmpeg_output_node);
 
-    m_nodes.push_back(ffmpeg_input_node);
-    m_nodes.push_back(trt_node);
-    m_nodes.push_back(trt_draw_node);
-    m_nodes.push_back(ffmpeg_output_node);
+    m_nodes["ffmpeg_input_node"]  = ffmpeg_input_node;
+    m_nodes["trt_node"]           = trt_node;
+    m_nodes["trt_draw_node"]      = trt_draw_node;
+    m_nodes["ffmpeg_output_node"] = ffmpeg_output_node;
 
     m_initialized = true;
     return true;

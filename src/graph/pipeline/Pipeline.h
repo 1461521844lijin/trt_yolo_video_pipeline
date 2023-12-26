@@ -5,10 +5,17 @@
 #ifndef TRT_YOLOV8_SERVER_PIPELINE_H
 #define TRT_YOLOV8_SERVER_PIPELINE_H
 
+#include "config/dtos/PIpelineDto.h"
 #include "graph/core/node/ProcessNode.h"
 #include <atomic>
 #include <future>
 #include <memory>
+#include <unordered_map>
+
+#define ASSERT_INIT(__SUCCESS__)                                                                   \
+    if (!__SUCCESS__) {                                                                            \
+        return __SUCCESS__;                                                                        \
+    }
 
 namespace pipeline {
 
@@ -23,9 +30,16 @@ public:
     typedef std::shared_ptr<Pipeline> ptr;
 
 public:
-    Pipeline() = delete;
+    Pipeline() = default;
 
     explicit Pipeline(std::string task_name) : m_task_name(std::move(task_name)) {}
+
+    /**
+     * @brief 从配置文件中初始化流水线
+     * @param config_dto 配置文件
+     * @return 是否初始化成功
+     */
+    bool init_from_config(const oatpp::Object<Dto::PipelineDto> &config_dto);
 
     virtual ~Pipeline();
 
@@ -50,11 +64,13 @@ public:
      */
     virtual bool Init() = 0;
 
+private:
 protected:
-    std::mutex                        m_mutex;
-    std::atomic<bool>                 m_initialized{false};
-    std::string                       m_task_name;
-    std::vector<GraphCore::Node::ptr> m_nodes;
+    std::mutex                                            m_mutex;
+    std::atomic<bool>                                     m_initialized{false};
+    std::string                                           m_task_name;
+    std::unordered_map<std::string, GraphCore::Node::ptr> m_nodes;
+    oatpp::Object<Dto::PipelineDto>                       m_config_dto;
 };
 
 }  // namespace pipeline

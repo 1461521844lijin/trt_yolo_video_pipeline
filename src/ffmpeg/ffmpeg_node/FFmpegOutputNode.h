@@ -56,6 +56,8 @@ public:
                                               bool               use_hw  = false);
 
 public:
+    bool Init() override;
+
 private:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
 

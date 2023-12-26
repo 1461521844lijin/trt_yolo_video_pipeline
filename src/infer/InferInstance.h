@@ -13,20 +13,18 @@
 
 namespace infer {
 
-class InferPipeline : public Infer {
+class InferInstance : public Infer {
 public:
-    using ptr       = std::shared_ptr<InferPipeline>;
-    InferPipeline() = delete;
+    using ptr       = std::shared_ptr<InferInstance>;
+    InferInstance() = delete;
 
-    explicit InferPipeline(std::string infer_name,
+    explicit InferInstance(std::string infer_name,
                            std::string model_path,
                            int         device_id      = 0,
                            int         max_batch_size = 16);
-    virtual ~InferPipeline();
+    virtual ~InferInstance();
 
 public:
-    Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override;
-
 protected:
     virtual void pre_process(std::vector<Data::BaseData::ptr> &batch_data) {}
     virtual void post_process(std::vector<Data::BaseData::ptr> &batch_data) {}

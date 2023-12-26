@@ -5,23 +5,33 @@
 #include "Pipeline.h"
 
 namespace pipeline {
+
 void Pipeline::Start() {
-  if (!m_initialized) {
-    if (!Init()) {
-      throw std::runtime_error("Pipeline init failed");
+    if (!m_initialized) {
+        if (!Init()) {
+            throw std::runtime_error("Pipeline init failed");
+        }
     }
-  }
-  for (auto &node : m_nodes) {
-    node->Start();
-  }
+    for (auto &node : m_nodes) {
+        node.second->Start();
+    }
 }
 
 void Pipeline::Stop() {
-  for (auto &node : m_nodes) {
-    node->Stop();
-  }
+    for (auto &node : m_nodes) {
+        node.second->Stop();
+    }
 }
 
-Pipeline::~Pipeline() { Stop(); }
+Pipeline::~Pipeline() {
+    Stop();
+}
 
-} // namespace pipeline
+bool Pipeline::init_from_config(const oatpp::Object<Dto::PipelineDto> &config_dto) {
+    m_config_dto = config_dto;
+    // todo
+
+    return true;
+}
+
+}  // namespace pipeline

@@ -14,39 +14,7 @@ FFmpegReadNode::FFmpegReadNode(const std::string &name,
     : GraphCore::Node(name, GraphCore::NODE_TYPE::SRC_NODE),
       m_open_source(std::move(open_source)),
       m_use_hw(use_hw),
-      m_cycle(cycle) {
-    auto init_cb = [this](const std::string &name, int code, const std::string &msg) {
-        if (!m_demux) {
-            m_demux = FFmpeg::Demuxer::createShare();
-        }
-        if (!(m_demux->open(m_open_source))) {
-            std::cout << "open url " << m_open_source << "failed" << std::endl;
-            return -1;
-        }
-        if (!m_scaler) {
-            m_scaler = FFmpeg::Scaler::createShare(
-                m_demux->get_video_codec_parameters()->width,
-                m_demux->get_video_codec_parameters()->height,
-                (AVPixelFormat)m_demux->get_video_codec_parameters()->format,
-                m_demux->get_video_codec_parameters()->width,
-                m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
-        }
-        if (!m_decoder) {
-            m_decoder = FFmpeg::Decoder::createShare(m_demux);
-        }
-        if (!(m_decoder->open(m_use_hw))) {
-            return -1;
-        }
-        m_width  = m_demux->get_video_codec_parameters()->width;
-        m_height = m_demux->get_video_codec_parameters()->height;
-        m_fps    = m_demux->get_video_stream()->avg_frame_rate.num /
-                m_demux->get_video_stream()->avg_frame_rate.den;
-        m_bitrate = m_demux->get_video_codec_parameters()->bit_rate;
-        return 0;
-    };
-
-    set_before_start_cb(init_cb);
-}
+      m_cycle(cycle) {}
 
 void FFmpegReadNode::worker() {
     int frame_index = 0;
@@ -105,6 +73,35 @@ FFmpegReadNode::~FFmpegReadNode() {
     m_demux.reset();
     m_decoder.reset();
     m_scaler.reset();
+}
+bool FFmpegReadNode::Init() {
+    if (!m_demux) {
+        m_demux = FFmpeg::Demuxer::createShare();
+    }
+    if (!(m_demux->open(m_open_source))) {
+        std::cout << "open url " << m_open_source << "failed" << std::endl;
+        return false;
+    }
+    if (!m_scaler) {
+        m_scaler = FFmpeg::Scaler::createShare(
+            m_demux->get_video_codec_parameters()->width,
+            m_demux->get_video_codec_parameters()->height,
+            (AVPixelFormat)m_demux->get_video_codec_parameters()->format,
+            m_demux->get_video_codec_parameters()->width,
+            m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
+    }
+    if (!m_decoder) {
+        m_decoder = FFmpeg::Decoder::createShare(m_demux);
+    }
+    if (!(m_decoder->open(m_use_hw))) {
+        return false;
+    }
+    m_width  = m_demux->get_video_codec_parameters()->width;
+    m_height = m_demux->get_video_codec_parameters()->height;
+    m_fps    = m_demux->get_video_stream()->avg_frame_rate.num /
+            m_demux->get_video_stream()->avg_frame_rate.den;
+    m_bitrate = m_demux->get_video_codec_parameters()->bit_rate;
+    return true;
 }
 
 }  // namespace Node

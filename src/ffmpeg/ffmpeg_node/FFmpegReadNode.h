@@ -35,6 +35,8 @@ public:
                                             bool               use_hw = false,
                                             bool               cycle  = false);
 
+    bool Init() override;
+
 public:
     // 接收宽、高、帧率、码率数据返回
     std::tuple<int, int, int, int64_t> get_video_info() const;
