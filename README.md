@@ -1,6 +1,6 @@
 # TRT-VideoPipeline
 
-## 多路视频分析处理库
+## 多路视频分析处理案例
 
 功能：
 
@@ -46,7 +46,9 @@ int main() {
     std::string output_stream_url = "输出流路径";
     std::string model_path        = "TRTengine模型文件路径";
     std::string label_path        = "检测分类类别文件路径";
-    int         max_batch_size    = 16;  // 最大batch数
+    int         max_batch_size    = 16;    // 最大batch数
+    int         config_threshold  = 0.25;  // 检测阈值
+    int         nms_threshold     = 0.5;   // nms阈值
 
     // 模型实例数量列表，列表为模型实例数，每个元素代表该模型实例在哪张显卡上的下标
     std::vector<int> device_list{0, 0, 1, 1};
@@ -55,7 +57,8 @@ int main() {
     // 创建多卡多实例推理对象
     auto trt_instance =
         std::make_shared<infer::MultipleInferenceInstances<infer::YoloDetectionInfer>>(
-            "trt_instance", device_list, model_path, label_path, type);
+            "trt_instance", device_list, model_path, label_path, type, config_threshold,
+            nms_threshold, max_batch_size);
     if (!trt_instance->init()) {
         std::cout << "init failed" << std::endl;
         return -1;
@@ -64,7 +67,7 @@ int main() {
     // 创建处理pipeline
     auto pipeline = std::make_shared<pipeline::YoloDetectPipeline>(
         "test_pipeline", input_stream_url, output_stream_url, trt_instance);
-    
+
     // 启动流水线
     pipeline->Start();
 
@@ -74,9 +77,12 @@ int main() {
 
 不到30行代码即可实现一个yolo目标检测分析demo，拉流-》模型推理-》渲染-》编码-》推流的完整工作流。且模型前处理、推流、后处理均在gpu上，简单且高效。
 
+## 参考
+
 该项目是基于原来对于手写AI的infer项目的简单修改而来，核心实现思路可以查看Old_README.md文档，新版本对其进行了更完善的修改和封装。
 
 同时项目中的有向无环图的流水线处理结构参考了video_pipe_c项目的设计思路，自己在开发过程中进行了调整。
 
+## 存在的问题
 
-
+测试是yolov8-seg的分割后处理还存在问题，没跑通

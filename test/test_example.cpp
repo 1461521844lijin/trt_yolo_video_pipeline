@@ -1,58 +1,36 @@
-#include "ffmpeg/record/Mp4RecordControlData.h"
 #include "infer/MultipleInferenceInstances.h"
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 
 int main() {
-    std::string input_stream_url =
-        "rtmp://192.168.161.149:11935/gate/f0389185-0fc2-49cf-d13d-38342b00fd95";
-    std::string input_local_file  = "/tmp/tmp.wz9qvcR2y8/resource/test_video/car_test.mp4";
-    std::string output_stream_url = "rtmp://192.168.161.149/yolov5/test";
+    std::string input_stream_url  = "输入流路径";
+    std::string output_stream_url = "输出流路径";
+    std::string model_path        = "TRTengine模型文件路径";
+    std::string label_path        = "检测分类类别文件路径";
+    int         max_batch_size    = 16;    // 最大batch数
+    int         config_threshold  = 0.25;  // 检测阈值
+    int         nms_threshold     = 0.5;   // nms阈值
 
-    std::string model_path = "/root/trt_projects/infer-main/workspace/yolov5m.fp32.16bacth.engine";
-    std::string v8_model_path =
-        "/root/trt_projects/infer-main/workspace/yolov8n.32batch.fp16.engine";
-    std::string v8seg_model_path =
-        "/root/trt_projects/infer-main/workspace/yolov8n-seg.b1.transd.engine";
-    std::string      label_path     = "/tmp/tmp.wz9qvcR2y8/resource/labels/coco.labels";
-    int              max_batch_size = 16;
-    std::vector<int> device_list{0};
-    auto             type = infer::YoloType::V8;
+    // 模型实例数量列表，列表为模型实例数，每个元素代表该模型实例在哪张显卡上的下标
+    std::vector<int> device_list{0, 0, 1, 1};
+    auto             type = infer::YoloType::V8;  // 模型类型
 
+    // 创建多卡多实例推理对象
     auto trt_instance =
         std::make_shared<infer::MultipleInferenceInstances<infer::YoloDetectionInfer>>(
-            "yolov5", device_list, v8_model_path, label_path, type);
+            "trt_instance", device_list, model_path, label_path, type, config_threshold,
+            nms_threshold, max_batch_size);
     if (!trt_instance->init()) {
         std::cout << "init failed" << std::endl;
         return -1;
     }
-    std::vector<pipeline::YoloDetectPipeline::ptr> pipelines;
-    for (int i = 0; i < 1; i++) {
-        auto pipeline = std::make_shared<pipeline::YoloDetectPipeline>(
-            "test_pipeline_" + std::to_string(i), input_stream_url,
-            output_stream_url + std::to_string(i), trt_instance);
-        pipelines.push_back(pipeline);
-    }
-    for (auto &pipeline : pipelines) {
-        pipeline->Start();
-    }
 
-    //    getchar();
+    // 创建处理pipeline
+    auto pipeline = std::make_shared<pipeline::YoloDetectPipeline>(
+        "test_pipeline", input_stream_url, output_stream_url, trt_instance);
 
-    // 录制一个20s的视频
-    //    record::RecordConfig config;
-    //    config.save_path   = "/tmp/tmp.wz9qvcR2y8/resource/test_video/";
-    //    config.src_width   = 1280;
-    //    config.src_height  = 720;
-    //    config.dst_width   = 1280;
-    //    config.dst_height  = 720;
-    //    config.file_name   = "test2.mp4";
-    //    config.record_type = record::RecordType::VIDEO_RECORD;
-    //    config.duration    = 20;
-    //    Data::Mp4RecordControlData::ptr control_data =
-    //        std::make_shared<Data::Mp4RecordControlData>(config);
-    //    pipelines[0]->add_record_task(control_data);
-    //    std::cout << "start record" << std::endl;
+    // 启动流水线
+    pipeline->Start();
 
     getchar();
 }
