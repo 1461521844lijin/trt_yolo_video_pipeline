@@ -1,14 +1,13 @@
-#include <opencv2/opencv.hpp>
-
 #include "ffmpeg/record/Mp4RecordControlData.h"
 #include "infer/MultipleInferenceInstances.h"
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 
 int main() {
-    std::string input_stream_url  = "";
+    std::string input_stream_url =
+        "rtmp://192.168.161.149:11935/gate/f0389185-0fc2-49cf-d13d-38342b00fd95";
     std::string input_local_file  = "/tmp/tmp.wz9qvcR2y8/resource/test_video/car_test.mp4";
-    std::string output_stream_url = "";
+    std::string output_stream_url = "rtmp://192.168.161.149/yolov5/test";
 
     std::string model_path = "/root/trt_projects/infer-main/workspace/yolov5m.fp32.16bacth.engine";
     std::string v8_model_path =
@@ -30,7 +29,7 @@ int main() {
     std::vector<pipeline::YoloDetectPipeline::ptr> pipelines;
     for (int i = 0; i < 1; i++) {
         auto pipeline = std::make_shared<pipeline::YoloDetectPipeline>(
-            "test_pipeline_" + std::to_string(i), input_local_file,
+            "test_pipeline_" + std::to_string(i), input_stream_url,
             output_stream_url + std::to_string(i), trt_instance);
         pipelines.push_back(pipeline);
     }

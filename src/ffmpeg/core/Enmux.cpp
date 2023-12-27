@@ -23,8 +23,6 @@ Enmuxer::~Enmuxer() {
 }
 
 bool Enmuxer::open() {
-    if (m_format_name == "mp4")
-        utils::FileOperate::rm(m_out_url);
     ASSERT_FFMPEG(avformat_alloc_output_context2(&m_format_ctx, nullptr, m_format_name.c_str(),
                                                  m_out_url.c_str()));
     avformat_new_stream(m_format_ctx, m_encoder->get_codec_ctx()->codec);

@@ -5,7 +5,7 @@ unzip opencv_contrib-4.8.0.zip
 unzip opencv-4.8.0.zip
 tar -zxvf x264-master.tar.gz
 tar -zxvf ffmpeg-5.1.2.tar.gz
-tar -xzvf oatpp.tar.gz
+
 
 # 安装opencv
 cd ./opencv-4.8.0 \
@@ -35,19 +35,9 @@ cd ./ffmpeg-5.1.2 \
   && cd ../
 
 
-# 安装oatpp
-cd ./oatpp \
-  && mkdir -p build \
-  && cd build \
-  && cmake -D BUILD_SHARED_LIBS=ON  ..\
-  && make -j \
-  && make install \
-  && cd ../../
-
-
 rm -rf ./opencv-4.8.0
 rm -rf ./opencv_contrib-4.8.0
 rm -rf ./x264-master
 rm -rf ./ffmpeg-5.1.2
-rm -rf ./oatpp
+
 

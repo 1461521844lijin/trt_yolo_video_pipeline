@@ -1,4 +1,8 @@
 message("配置cuda环境")
+
+#
+# cuda环境的修改路径
+#
 set(CUDA_TOOLKIT_ROOT_DIR /usr/local/cuda-11.7)
 
 find_package(CUDA REQUIRED)

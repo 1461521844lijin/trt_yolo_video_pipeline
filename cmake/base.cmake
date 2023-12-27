@@ -18,7 +18,6 @@ file(GLOB_RECURSE FFmpeg_LIBS
 
 set(local_libs
         pthread
-        oatpp::oatpp
         ${FFmpeg_LIBS}
         ${OpenCV_LIBS}
         )
