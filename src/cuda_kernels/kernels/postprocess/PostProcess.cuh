@@ -111,6 +111,28 @@ void decode_pose_yolov8_kernel_invoker(float       *predict,
                                        int          NUM_BOX_ELEMENT,
                                        cudaStream_t stream);
 
+/**
+ * @brief yolo系列 decode后处理解析
+ * @param predict                   模型输出tensor
+ * @param num_bboxes                目标框数量
+ * @param num_classes               目标类别数量
+ * @param output_cdim               输出通道维度
+ * @param confidence_threshold      置信度阈值
+ * @param invert_affine_matrix      仿射变换矩阵
+ * @param parray                    输出目标框数组
+ * @param MAX_IMAGE_BOXES           最大目标框数量
+ * @param stream                    cuda流
+ */
+void decode_kernel_common_invoker(float       *predict,
+                                  int          num_bboxes,
+                                  int          num_classes,
+                                  int          output_cdim,
+                                  float        confidence_threshold,
+                                  float       *invert_affine_matrix,
+                                  float       *parray,
+                                  int          MAX_IMAGE_BOXES,
+                                  cudaStream_t stream);
+
 }  // namespace CUDA
 
 #endif  // VIDEOPIPELINE_POSTPROCESS_CUH

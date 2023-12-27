@@ -32,6 +32,14 @@ public:
         return m_infer_list[get_infer_index()]->commit(data);
     }
 
+    bool init() {
+        bool ret = true;
+        for (auto &infer_instance : m_infer_list) {
+            ret &= infer_instance->init();
+        }
+        return ret;
+    }
+
 private:
     int get_infer_index() {
         m_infer_index = (m_infer_index + 1) % m_infer_list.size();

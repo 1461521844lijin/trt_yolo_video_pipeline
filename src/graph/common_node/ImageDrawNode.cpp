@@ -67,6 +67,31 @@ Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
                       cv::Scalar(b, g, r), 2);
         cv::putText(image, obj.class_name, cv::Point(obj.left, obj.top - 5),
                     cv::FONT_HERSHEY_COMPLEX, 0.5, cv::Scalar(b, g, r), 1);
+
+        if (obj.mask.empty())
+            continue;
+
+        // 判断是否越界
+        if (obj.left < 0 || obj.right < 0 || obj.top < 0 || obj.bottom < 0)
+            continue;
+        if (obj.left > image.cols || obj.right > image.cols || obj.top > image.rows ||
+            obj.bottom > image.rows)
+            continue;
+        // 转为三通道图像并赋予随机颜色
+        cv::cvtColor(obj.mask, obj.mask, cv::COLOR_GRAY2BGR);
+        // 阈值化
+        cv::threshold(obj.mask, obj.mask, 100, 255, cv::THRESH_BINARY);
+        cv::Vec3b color = cv::Vec3b(b, g, r);
+        // 将掩码中的255像素赋予随机颜色
+        obj.mask.setTo(color, obj.mask == cv::Vec3b(255, 255, 255));
+        // 将掩码缩放到原图像大小
+        cv::Mat resize_mask;
+        cv::resize(obj.mask, resize_mask, cv::Size(obj.right - obj.left, obj.bottom - obj.top));
+        // 获取原始图像的ROI
+        cv::Mat imageROI =
+            image(cv::Rect(obj.left, obj.top, obj.right - obj.left, obj.bottom - obj.top));
+        // 将掩码叠加到ROI上
+        cv::addWeighted(imageROI, 1, resize_mask, 0.8, 1, imageROI);
     }
     return data;
 }

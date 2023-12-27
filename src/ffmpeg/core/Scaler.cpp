@@ -115,19 +115,22 @@ bool Scaler::scale_cvMat_to_avframe(cv::Mat src, std::shared_ptr<AVFrame> &dst) 
     if (m_sws_ctx) {
         if (!dst)
             return false;
-        dst->width  = src.cols;
-        dst->height = src.rows;
+        dst->width  = m_dstWidth;
+        dst->height = m_dstHeight;
         dst->format = AV_PIX_FMT_YUV420P;
         av_frame_get_buffer(dst.get(), 32);
 
         uint8_t *inData[AV_NUM_DATA_POINTERS] = {0};
         inData[0]                             = src.data;
-        int inLinesize[AV_NUM_DATA_POINTERS]  = {0};
-        inLinesize[0]                         = src.cols * src.elemSize();
+        inData[1]                             = nullptr;
+        inData[2]                             = nullptr;
+
+        int inLinesize[AV_NUM_DATA_POINTERS] = {0};
+        inLinesize[0]                        = src.cols * src.elemSize();
         int ret =
             sws_scale(m_sws_ctx.get(), inData, inLinesize, 0, src.rows, dst->data, dst->linesize);
 
-        //        delete[] *inData;
+        // delete[] *inData;
 
         return ret >= 0;
     }
