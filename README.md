@@ -81,9 +81,11 @@ int main() {
 
 作为cv相关（ctrl+c/ctrl+v）的开发人员，同样在开发过程中参考了很多优秀项目，特别是以下两个项目：
 
-该项目是基于原来对于手写AI的infer项目的简单修改而来，核心实现思路可以查看Old_README.md文档，新版本对其进行了更完善的修改（抄）和封装。
+该项目是基于原来对于手写AI的[infer](https://github.com/shouxieai/infer)
+项目的简单修改而来，核心实现思路可以查看Old_README.md文档，新版本对其进行了更完善的修改（抄）和封装。
 
-同时项目中的有向无环图的流水线处理结构参考了video_pipe_c项目的设计思路，自己在开发过程中进行了调整。
+同时项目中的有向无环图的流水线处理结构参考了[video_pipe_c](https://github.com/sherlockchou86/video_pipe_c)
+项目的设计思路，自己在开发过程中进行了调整。
 
 ## 存在的问题
 
