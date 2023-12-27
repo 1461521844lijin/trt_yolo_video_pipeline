@@ -64,3 +64,6 @@
         
         代码是支持硬件编解码的，但需要ffmpeg重新编译支持后测试
         要开启硬件解码的话使用 需要指定cmake的编译选项
+
+
+https://github.com/1461521844lijin/trt_yolov8_infer_example/blob/main/resource/test_video/test2.mp4
