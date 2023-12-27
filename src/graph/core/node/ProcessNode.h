@@ -37,6 +37,11 @@ public:
 
 public:
     /**
+     * @brief 初始化节点
+     */
+    virtual bool Init();
+
+    /**
      * @brief 启动工作线程
      */
     void Start();

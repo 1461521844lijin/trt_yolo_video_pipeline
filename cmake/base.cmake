@@ -16,12 +16,16 @@ file(GLOB_RECURSE FFmpeg_LIBS
         /usr/local/lib/libpostproc.so)
 
 
-set( local_libs
+set(local_libs
         pthread
         oatpp::oatpp
         ${FFmpeg_LIBS}
         ${OpenCV_LIBS}
-)
+        )
 
-file(GLOB_RECURSE CPP_SRC ${CMAKE_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE CPP_SRC
+        ${CMAKE_SOURCE_DIR}/src/ffmpeg/*.cpp
+        ${CMAKE_SOURCE_DIR}/src/graph/*.cpp
+        ${CMAKE_SOURCE_DIR}/src/infer/*.cpp
+        ${CMAKE_SOURCE_DIR}/src/utils/*.cpp)
 add_library(cpp_lib SHARED ${CPP_SRC})

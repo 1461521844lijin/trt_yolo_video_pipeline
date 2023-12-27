@@ -16,18 +16,28 @@ public:
 
     MultipleInferenceInstances() = delete;
 
+    template <typename... Args>
     explicit MultipleInferenceInstances(const std::string &infer_name,
                                         std::vector<int>   device_list,
-                                        int                max_batch_size) {
+                                        Args &&...args) {
+        m_infer_name = infer_name;
         for (auto &device_id : device_list) {
             m_device_id_list.push_back(device_id);
-            m_infer_list.push_back(
-                std::make_shared<INFER_INSTANCE>(infer_name, device_id, max_batch_size));
+            m_infer_list.push_back(std::make_shared<INFER_INSTANCE>(infer_name, device_id,
+                                                                    std::forward<Args>(args)...));
         }
     }
 
-    Data::BaseData::ptr commit(const Data::BaseData::ptr data) override {
+    Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override {
         return m_infer_list[get_infer_index()]->commit(data);
+    }
+
+    bool init() {
+        bool ret = true;
+        for (auto &infer_instance : m_infer_list) {
+            ret &= infer_instance->init();
+        }
+        return ret;
     }
 
 private:
@@ -37,9 +47,10 @@ private:
     }
 
 private:
-    std::vector<INFER_INSTANCE> m_infer_list;
-    std::vector<int>            m_device_id_list;
-    std::atomic_int             m_infer_index{0};  // 当前使用的推理设备索引
+    std::vector<std::shared_ptr<INFER_INSTANCE>> m_infer_list;
+    std::vector<int>                             m_device_id_list;
+    std::atomic_int m_infer_index{0};  // 当前使用的推理设备索引
+    std::string     m_infer_name;
 };
 
 }  // namespace infer

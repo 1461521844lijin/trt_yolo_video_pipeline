@@ -175,5 +175,8 @@ void Node::add_extra_data(const Data::BaseData::ptr &data) {
         m_extra_input_callback(data);
     }
 }
+bool Node::Init() {
+    return true;
+}
 
 }  // namespace GraphCore

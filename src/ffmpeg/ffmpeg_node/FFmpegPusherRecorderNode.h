@@ -12,7 +12,7 @@
 #include "ffmpeg/record/RecordTask.h"
 #include "graph/core/node/ProcessNode.h"
 
-namespace FFmpeg {
+namespace Node {
 
 /**
  * @brief 推流和视频录制封装在一起，录制mp4的数据复用推流的数据，节约性能
@@ -43,6 +43,6 @@ private:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
 };
 
-}  // namespace FFmpeg
+}  // namespace Node
 
 #endif  // VIDEOPIPELINE_STREAMPUSHERANDRECORDER_H
