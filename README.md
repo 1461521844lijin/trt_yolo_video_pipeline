@@ -22,7 +22,7 @@
 
 如果在Linux开发，ffmpeg和opencv环境的搭建请参考addons/BuildBaseEnv.sh脚本，帮你一键构建ffmpeg和opencv环境
 
-ffmpeg的一键编解码环境需要额外重新编译开启支持，使用默认脚本是不支持nvidia硬件编解码的
+ffmpeg的硬件编解码环境需要额外重新编译开启支持，使用默认脚本是不支持nvidia硬件编解码的
 
 tensorrt和cuda环境如果不在默认环境上，请到cmake/cuda.cmake和cmake/tensorrt.cmake文件下修改自己环境下的CUDA_TOOLKIT_ROOT_DIR和TENSORRT_ROOT_DIR路径配置
 
@@ -79,10 +79,17 @@ int main() {
 
 ## 参考
 
-该项目是基于原来对于手写AI的infer项目的简单修改而来，核心实现思路可以查看Old_README.md文档，新版本对其进行了更完善的修改和封装。
+作为cv相关（ctrl+c/ctrl+v）的开发人员，同样在开发过程中参考了很多优秀项目，特别是以下两个项目：
+
+该项目是基于原来对于手写AI的infer项目的简单修改而来，核心实现思路可以查看Old_README.md文档，新版本对其进行了更完善的修改（抄）和封装。
 
 同时项目中的有向无环图的流水线处理结构参考了video_pipe_c项目的设计思路，自己在开发过程中进行了调整。
 
 ## 存在的问题
 
 测试是yolov8-seg的分割后处理还存在问题，没跑通
+
+## 最后
+
+如果对你有帮助，欢迎star，如果有问题，欢迎提issue，如果有更好的建议，欢迎提pr，如果有更好的想法，欢迎联系我，一起交流学习。
+本人微信：lijin_km
