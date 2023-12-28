@@ -47,8 +47,8 @@ int main() {
     std::string model_path        = "TRTengine模型文件路径";
     std::string label_path        = "检测分类类别文件路径";
     int         max_batch_size    = 16;    // 最大batch数
-    int         config_threshold  = 0.25;  // 检测阈值
-    int         nms_threshold     = 0.5;   // nms阈值
+    float       config_threshold  = 0.25;  // 检测阈值
+    float       nms_threshold     = 0.5;   // nms阈值
 
     // 模型实例数量列表，列表为模型实例数，每个元素代表该模型实例在哪张显卡上的下标
     std::vector<int> device_list{0, 0, 1, 1};
