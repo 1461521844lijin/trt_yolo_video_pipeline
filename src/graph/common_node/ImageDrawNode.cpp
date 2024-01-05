@@ -61,9 +61,9 @@ Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
     auto image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
     //    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
 
-    // 图像最多等待80ms
+    // 图像最多等待120ms
     auto status =
-        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(80));
+        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(120));
     if (status == std::future_status::timeout) {
         printf("ImageDrawNode: %s wait for future timeout\n", getName().c_str());
         return nullptr;

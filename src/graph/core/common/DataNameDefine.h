@@ -10,6 +10,7 @@
 #include <opencv2/opencv.hpp>
 #include <string>
 
+#include "cuda_kernels/cuda_tools/AffineMatrix.h"
 #include "cuda_kernels/cuda_tools/Tensor.h"
 #include "graph/core/common/DetectionBox.h"
 
@@ -25,6 +26,8 @@ DataDefine(AV_PACKET, std::shared_ptr<AVPacket>);
 DataDefine(AV_FRAME, std::shared_ptr<AVFrame>);
 
 DataDefine(CUDA_TENSOR, std::shared_ptr<CUDA::Tensor>);
+DataDefine(CUDA_AFFINMATRIX_TENSOR, std::shared_ptr<CUDA::Tensor>);
+DataDefine(CUDA_AFFINMATRIX, CUDATools::AffineMatrix);
 
 // 数据来源
 

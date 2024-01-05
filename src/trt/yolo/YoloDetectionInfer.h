@@ -47,7 +47,9 @@ private:
     void infer_process(std::vector<Data::BaseData::ptr> &batch_data) override;
 
 private:
-    void image_to_tensor(const cv::Mat &image, std::shared_ptr<CUDA::Tensor> &tensor, int ibatch);
+    void image_to_tensor(Data::BaseData::ptr           &data,
+                         std::shared_ptr<CUDA::Tensor> &tensor,
+                         int                            ibatch);
 
 private:
     TRT::TRTEngine::ptr                              m_trt_engine;
@@ -59,8 +61,8 @@ private:
     std::vector<int>                                 m_input_shapes;
     std::vector<int>                                 m_output_shapes;
     CUDA::CUStream                                   m_stream = nullptr;
-    CUDATools::AffineMatrix                          m_affin_matrix;
-    std::shared_ptr<CUDA::Tensor>                    m_affin_matrix_tensor;
+    //    CUDATools::AffineMatrix                          m_affin_matrix;
+    //    std::shared_ptr<CUDA::Tensor>                    m_affin_matrix_tensor;
     YoloType                                         m_type;
     bool                                             m_dynamic     = false;
     bool                                             m_has_segmegt = false;
