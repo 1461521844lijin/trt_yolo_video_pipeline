@@ -58,8 +58,18 @@ std::tuple<uint8_t, uint8_t, uint8_t> random_color(int id) {
 }
 
 Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
-    auto image     = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    //    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
+
+    // 图像最多等待80ms
+    auto status =
+        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(80));
+    if (status == std::future_status::timeout) {
+        printf("ImageDrawNode: %s wait for future timeout\n", getName().c_str());
+        return nullptr;
+    }
     auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
+
     for (auto &obj : box_array) {
         uint8_t b, g, r;
         std::tie(b, g, r) = random_color(obj.class_label);
@@ -67,6 +77,11 @@ Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
                       cv::Scalar(b, g, r), 2);
         cv::putText(image, obj.class_name, cv::Point(obj.left, obj.top - 5),
                     cv::FONT_HERSHEY_COMPLEX, 0.5, cv::Scalar(b, g, r), 1);
+
+        //        printf("class_name: %s, confidence: %f, left: %f, top: %f, right: %f, bottom:
+        //        %f\n",
+        //               obj.class_name.c_str(), obj.confidence, obj.left, obj.top, obj.right,
+        //               obj.bottom);
 
         if (obj.mask.empty())
             continue;
@@ -90,6 +105,7 @@ Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
         // 获取原始图像的ROI
         cv::Mat imageROI =
             image(cv::Rect(obj.left, obj.top, obj.right - obj.left, obj.bottom - obj.top));
+        //        cv::imwrite("mask.jpg", obj.mask);
         // 将掩码叠加到ROI上
         cv::addWeighted(imageROI, 1, resize_mask, 0.8, 1, imageROI);
     }

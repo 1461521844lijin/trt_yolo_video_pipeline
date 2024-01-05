@@ -100,11 +100,14 @@ void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_d
             }
         }
     }
-    std::vector<void *> bindings = {m_input_tensor->gpu(), m_output_tensor->gpu()};
+    std::vector<void *> bindings;
     if (m_has_segmegt) {
         m_segment_tensor->resize(infer_batch_size, m_segment_shapes[1], m_segment_shapes[2],
                                  m_segment_shapes[3]);
+        m_segment_tensor->to_gpu();
         bindings = {m_input_tensor->gpu(), m_segment_tensor->gpu(), m_output_tensor->gpu()};
+    } else {
+        bindings = {m_input_tensor->gpu(), m_output_tensor->gpu()};
     }
     if (!m_trt_engine->forward(bindings, nullptr, nullptr)) {
         std::cout << "forward failed" << std::endl;
@@ -116,7 +119,7 @@ void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_d
 void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_data) {
     int          batch_size = batch_data.size();
     CUDA::Tensor output_array_device(CUDA::DataType::Float);
-    output_array_device.resize(batch_size, 1 + MAX_IMAGE_BBOX * NUM_BOX_ELEMENT).to_gpu();
+    output_array_device.resize(batch_size, 32 + MAX_IMAGE_BBOX * NUM_BOX_ELEMENT).to_gpu();
     for (int ibatch = 0; ibatch < batch_size; ++ibatch) {
         float *image_based_output = m_output_tensor->gpu<float>(ibatch);
         float *output_array_ptr   = output_array_device.gpu<float>(ibatch);
@@ -126,8 +129,7 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
             CUDA::decode_detect_yolov8_kernel_invoker(image_based_output, m_output_shapes[1],
                                                       m_class_nums, m_output_shapes[2],
                                                       m_confidence_threshold, affine_matrix,
-                                                      output_array_ptr, MAX_IMAGE_BBOX,
-                                                      NUM_BOX_ELEMENT, m_stream);
+                                                      output_array_ptr, MAX_IMAGE_BBOX, m_stream);
         } else {
             CUDA::decode_kernel_common_invoker(image_based_output, m_output_shapes[1], m_class_nums,
                                                m_output_shapes[2], m_confidence_threshold,
@@ -142,7 +144,7 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
     for (int ibatch = 0; ibatch < batch_size; ++ibatch) {
         float         *parray = output_array_device.cpu<float>(ibatch);
         int            count  = std::min(MAX_IMAGE_BBOX, (int)*parray);
-        DetectBoxArray boxArray(count);
+        DetectBoxArray boxArray;
         for (int i = 0; i < count; ++i) {
             float *pbox     = parray + 1 + i * NUM_BOX_ELEMENT;
             int    label    = pbox[5];
@@ -152,34 +154,62 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
                 DetectBox box  = {pbox[0], pbox[1], pbox[2], pbox[3], pbox[4], label};
                 box.class_name = m_class_names[label];
 
-                /*
                 if (m_has_segmegt) {
-                    int    row_index = pbox[7];
+                    int row_index = pbox[7];
+
+                    // 获取选中框对于的最后32个mask权重
                     float *mask_weights =
+                        m_output_tensor->gpu<float>(ibatch, row_index) + m_class_nums + 4;
+
+                    float *mask_weights2 =
                         m_output_tensor->gpu<float>() +
                         (ibatch * m_output_shapes[1] + row_index) * m_output_shapes[2] +
                         m_class_nums + 4;
 
+                    if (mask_weights != mask_weights2) {
+                        std::cout << "mask_weights != mask_weights2" << std::endl;
+                    }
+
+                    // 此时的pbox是相对原图的坐标，而mask是相对与模型160x160的坐标，需要转换
                     float left, top, right, bottom;
-                    affine_project(m_affin_matrix.d2i, pbox[0], pbox[1], &left, &top);
-                    affine_project(m_affin_matrix.d2i, pbox[2], pbox[3], &right, &bottom);
+                    affine_project(m_affin_matrix.i2d, pbox[0], pbox[1], &left, &top);
+                    affine_project(m_affin_matrix.i2d, pbox[2], pbox[3], &right, &bottom);
+
                     float scale_to_predict_x = m_segment_shapes[3] / (float)m_input_shapes[3];
                     float scale_to_predict_y = m_segment_shapes[2] / (float)m_input_shapes[2];
-                    int   mask_out_width     = (right - left) * scale_to_predict_x + 0.5f;
-                    int   mask_out_height    = (bottom - top) * scale_to_predict_y + 0.5f;
+
+                    // 此时box_width和box_height是相对于640 × 640的
+                    float box_width  = right - left;
+                    float box_height = bottom - top;
+
+                    // 此时的mask_out是当前框相对于160×160的mask宽高
+                    int mask_out_width  = box_width * scale_to_predict_x + 0.5f;
+                    int mask_out_height = box_height * scale_to_predict_y + 0.5f;
 
                     if (mask_out_width > 0 && mask_out_height > 0) {
-                        if (!m_segment_tensor_cache) {  // 第一次进入初始化缓存
-                            m_segment_tensor_cache = std::make_shared<CUDA::Tensor>();
+                        if (!m_segment_tensor_cache) {
+                            // 第一次进入初始化缓存
+                            // box_mask的内存申请
+                            m_segment_tensor_cache =
+                                std::make_shared<CUDA::Tensor>(CUDA::DataType::UInt8);
                         }
                         int bytes_of_mask_out = mask_out_width * mask_out_height;
-                        box.mask              = cv::Mat(mask_out_height, mask_out_width, CV_8UC1);
+                        // cpu的申请内存
+                        box.mask = cv::Mat(mask_out_height, mask_out_width, CV_8UC1);
                         m_segment_tensor_cache->resize(bytes_of_mask_out);
+                        m_segment_tensor_cache->to_gpu();
+
+                        // 解码mask
                         CUDA::decode_single_mask(
-                            left * scale_to_predict_x, top * scale_to_predict_y, mask_weights,
-                            m_segment_tensor->gpu<float>(ibatch), m_segment_shapes[3],
-                            m_segment_shapes[2], m_segment_tensor_cache->gpu<unsigned char>(),
+                            left * scale_to_predict_x, top * scale_to_predict_y,
+                            mask_weights,                                  // 1x32
+                            m_segment_tensor->gpu<float>(ibatch),          // 32x160x160
+                            m_segment_shapes[3],                           // 160
+                            m_segment_shapes[2],                           // 160
+                            m_segment_tensor_cache->gpu<unsigned char>(),  // 实际目标的掩码大小
                             m_segment_shapes[1], mask_out_width, mask_out_height, m_stream);
+
+                        // 将mask拷贝到cpu
                         checkCudaKernel(cudaMemcpyAsync(
                             box.mask.data, m_segment_tensor_cache->gpu<unsigned char>(),
                             m_segment_tensor_cache->bytes(), cudaMemcpyDeviceToHost, m_stream));
@@ -187,7 +217,6 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
                         checkCudaRuntime(cudaStreamSynchronize(m_stream));
                     }
                 }
-                 */
 
                 boxArray.emplace_back(box);
             }

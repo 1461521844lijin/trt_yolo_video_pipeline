@@ -10,7 +10,8 @@
 
 namespace CUDA {
 
-const int NUM_BOX_ELEMENT = 7;  // left, top, right, bottom, confidence, class, keepflag
+const int NUM_BOX_ELEMENT =
+    8;  // left, top, right, bottom, confidence, class, keepflag, row_index(output)
 static __device__ void affine_project(float *matrix, float x, float y, float *ox, float *oy) {
     *ox = matrix[0] * x + matrix[1] * y + matrix[2];
     *oy = matrix[3] * x + matrix[4] * y + matrix[5];
@@ -223,8 +224,7 @@ static __global__ void decode_kernel_v8_trans(float *predict,
                                               float  confidence_threshold,
                                               float *invert_affine_matrix,
                                               float *parray,
-                                              int    MAX_IMAGE_BOXES,
-                                              int    NUM_BOX_ELEMENT) {
+                                              int    MAX_IMAGE_BOXES) {
     int position = blockDim.x * blockIdx.x + threadIdx.x;
     if (position >= num_bboxes)
         return;
@@ -265,8 +265,7 @@ static __global__ void decode_kernel_v8_trans(float *predict,
     *pout_item++     = confidence;
     *pout_item++     = label;
     *pout_item++     = 1;  // 1 = keep, 0 = ignore
-    if (NUM_BOX_ELEMENT == 8)
-        *pout_item++ = position;
+    *pout_item++     = position;
 }
 
 static __global__ void decode_kernel_v8_pose_trans(float *predict,
@@ -365,13 +364,12 @@ void decode_detect_yolov8_kernel_invoker(float       *predict,
                                          float       *invert_affine_matrix,
                                          float       *parray,
                                          int          MAX_IMAGE_BOXES,
-                                         int          NUM_BOX_ELEMENT,
                                          cudaStream_t stream) {
     auto grid  = CUDATools::grid_dims(num_bboxes);
     auto block = CUDATools::block_dims(num_bboxes);
     checkCudaKernel(decode_kernel_v8_trans<<<grid, block, 0, stream>>>(
         predict, num_bboxes, num_classes, output_cdim, confidence_threshold, invert_affine_matrix,
-        parray, MAX_IMAGE_BOXES, NUM_BOX_ELEMENT));
+        parray, MAX_IMAGE_BOXES));
 }
 
 void decode_pose_yolov8_kernel_invoker(float       *predict,

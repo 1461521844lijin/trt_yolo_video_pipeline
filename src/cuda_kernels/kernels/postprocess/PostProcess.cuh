@@ -58,18 +58,17 @@ void decode_detect_yolov8_kernel_invoker(float       *predict,
                                          float       *invert_affine_matrix,
                                          float       *parray,
                                          int          MAX_IMAGE_BOXES,
-                                         int          NUM_BOX_ELEMENT,
                                          cudaStream_t stream);
 
 /**
  * @brief yolov8 segment分支后处理
  * @param left              目标框左上角x坐标
  * @param top               目标框左上角y坐标
- * @param mask_weights      分支权重
- * @param mask_predict      分支预测
+ * @param mask_weights      分支权重  1x32
+ * @param mask_predict      分支预测  32x160x160
  * @param mask_width        分支宽度
  * @param mask_height       分支高度
- * @param mask_out          分支输出
+ * @param mask_out          分支输出  160x160
  * @param mask_dim          分支维度
  * @param out_width         输出宽度
  * @param out_height        输出高度

@@ -68,7 +68,7 @@ private:
     CUDA::Norm                                       m_normalize;
 
     const int MAX_IMAGE_BBOX  = 1024;
-    const int NUM_BOX_ELEMENT = 7;  // left, top, right, bottom, confidence, class, keepflag
+    const int NUM_BOX_ELEMENT = 8;  // left, top, right, bottom, confidence, class, keepflag
 };
 
 }  // namespace infer
