@@ -19,10 +19,14 @@
 | ffmpeg   | 5.2   |
 | opencv   | 4.8.0 |
 | tensorrt | 8.6   |
+| c++      | 17    |
+| gcc      | 7.5以上 |
 
 如果在Linux开发，ffmpeg和opencv环境的搭建请参考addons/BuildBaseEnv.sh脚本，帮你一键构建ffmpeg和opencv环境
 
-ffmpeg的硬件编解码环境需要额外重新编译开启支持，使用默认脚本是不支持nvidia硬件编解码的
+ffmpeg的硬件编解码环境需要额外重新编译开启支持，使用默认脚本是不支持nvidia硬件编解码的，请参照脚本中的注释部分进行修改
+
+nvidia显卡硬件编解码能力参[考表](https://developer.nvidia.com/video-encode-decode-gpu-support-matrix)
 
 tensorrt和cuda环境如果不在默认环境上，请到cmake/cuda.cmake和cmake/tensorrt.cmake文件下修改自己环境下的CUDA_TOOLKIT_ROOT_DIR和TENSORRT_ROOT_DIR路径配置
 
