@@ -1,0 +1,96 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_bif.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_face_align.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark_aam.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark_lbf.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_loadsave.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_mace.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_face",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_face",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_face"
+	}
+}

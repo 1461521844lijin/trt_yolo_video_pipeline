@@ -1,0 +1,42 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/reg/perf/perf_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_reg",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/reg/perf/perf_reg.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_reg",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/reg/perf/perf_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_reg",
+				"PerfTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_reg",
+			"PerfTest"
+		],
+		"name" : "opencv_perf_reg"
+	}
+}

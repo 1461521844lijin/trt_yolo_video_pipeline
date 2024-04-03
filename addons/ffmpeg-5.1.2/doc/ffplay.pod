@@ -1,0 +1,1100 @@
+=encoding utf8
+
+=head1 NAME
+
+ffplay - FFplay media player
+
+=head1 SYNOPSIS
+
+
+ffplay [I<options>] [F<input_url>]
+
+
+=head1 DESCRIPTION
+
+
+FFplay is a very simple and portable media player using the FFmpeg
+libraries and the SDL library. It is mostly used as a testbed for the
+various FFmpeg APIs.
+
+
+=head1 OPTIONS
+
+
+All the numerical options, if not specified otherwise, accept a string
+representing a number as input, which may be followed by one of the SI
+unit prefixes, for example: 'K', 'M', or 'G'.
+
+If 'i' is appended to the SI unit prefix, the complete prefix will be
+interpreted as a unit prefix for binary multiples, which are based on
+powers of 1024 instead of powers of 1000. Appending 'B' to the SI unit
+prefix multiplies the value by 8. This allows using, for example:
+'KB', 'MiB', 'G' and 'B' as number suffixes.
+
+Options which do not take arguments are boolean options, and set the
+corresponding value to true. They can be set to false by prefixing
+the option name with "no". For example using "-nofoo"
+will set the boolean option with name "foo" to false.
+
+
+
+=head2 Stream specifiers
+
+Some options are applied per-stream, e.g. bitrate or codec. Stream specifiers
+are used to precisely specify which stream(s) a given option belongs to.
+
+A stream specifier is a string generally appended to the option name and
+separated from it by a colon. E.g. C<-codec:a:1 ac3> contains the
+C<a:1> stream specifier, which matches the second audio stream. Therefore, it
+would select the ac3 codec for the second audio stream.
+
+A stream specifier can match several streams, so that the option is applied to all
+of them. E.g. the stream specifier in C<-b:a 128k> matches all audio
+streams.
+
+An empty stream specifier matches all streams. For example, C<-codec copy>
+or C<-codec: copy> would copy all the streams without reencoding.
+
+Possible forms of stream specifiers are:
+
+=over 4
+
+
+=item I<stream_index>
+
+Matches the stream with this index. E.g. C<-threads:1 4> would set the
+thread count for the second stream to 4. If I<stream_index> is used as an
+additional stream specifier (see below), then it selects stream number
+I<stream_index> from the matching streams. Stream numbering is based on the
+order of the streams as detected by libavformat except when a program ID is
+also specified. In this case it is based on the ordering of the streams in the
+program.
+
+=item I<stream_type>B<[:>I<additional_stream_specifier>B<]>
+
+I<stream_type> is one of following: 'v' or 'V' for video, 'a' for audio, 's'
+for subtitle, 'd' for data, and 't' for attachments. 'v' matches all video
+streams, 'V' only matches video streams which are not attached pictures, video
+thumbnails or cover arts. If I<additional_stream_specifier> is used, then
+it matches streams which both have this type and match the
+I<additional_stream_specifier>. Otherwise, it matches all streams of the
+specified type.
+
+=item B<p:>I<program_id>B<[:>I<additional_stream_specifier>B<]>
+
+Matches streams which are in the program with the id I<program_id>. If
+I<additional_stream_specifier> is used, then it matches streams which both
+are part of the program and match the I<additional_stream_specifier>.
+
+
+=item B<#>I<stream_id> B<or i:>I<stream_id>
+
+Match the stream by stream id (e.g. PID in MPEG-TS container).
+
+=item B<m:>I<key>B<[:>I<value>B<]>
+
+Matches streams with the metadata tag I<key> having the specified value. If
+I<value> is not given, matches streams that contain the given tag with any
+value.
+
+=item B<u>
+
+Matches streams with usable configuration, the codec must be defined and the
+essential information such as video dimension or audio sample rate must be present.
+
+Note that in B<ffmpeg>, matching by metadata will only work properly for
+input files.
+
+=back
+
+
+
+=head2 Generic options
+
+
+These options are shared amongst the ff* tools.
+
+
+=over 4
+
+
+
+=item B<-L>
+
+Show license.
+
+
+=item B<-h, -?, -help, --help [>I<arg>B<]>
+
+Show help. An optional parameter may be specified to print help about a specific
+item. If no argument is specified, only basic (non advanced) tool
+options are shown.
+
+Possible values of I<arg> are:
+
+=over 4
+
+
+=item B<long>
+
+Print advanced tool options in addition to the basic tool options.
+
+
+=item B<full>
+
+Print complete list of options, including shared and private options
+for encoders, decoders, demuxers, muxers, filters, etc.
+
+
+=item B<decoder=>I<decoder_name>
+
+Print detailed information about the decoder named I<decoder_name>. Use the
+B<-decoders> option to get a list of all decoders.
+
+
+=item B<encoder=>I<encoder_name>
+
+Print detailed information about the encoder named I<encoder_name>. Use the
+B<-encoders> option to get a list of all encoders.
+
+
+=item B<demuxer=>I<demuxer_name>
+
+Print detailed information about the demuxer named I<demuxer_name>. Use the
+B<-formats> option to get a list of all demuxers and muxers.
+
+
+=item B<muxer=>I<muxer_name>
+
+Print detailed information about the muxer named I<muxer_name>. Use the
+B<-formats> option to get a list of all muxers and demuxers.
+
+
+=item B<filter=>I<filter_name>
+
+Print detailed information about the filter named I<filter_name>. Use the
+B<-filters> option to get a list of all filters.
+
+
+=item B<bsf=>I<bitstream_filter_name>
+
+Print detailed information about the bitstream filter named I<bitstream_filter_name>.
+Use the B<-bsfs> option to get a list of all bitstream filters.
+
+
+=item B<protocol=>I<protocol_name>
+
+Print detailed information about the protocol named I<protocol_name>.
+Use the B<-protocols> option to get a list of all protocols.
+
+=back
+
+
+
+=item B<-version>
+
+Show version.
+
+
+=item B<-buildconf>
+
+Show the build configuration, one option per line.
+
+
+=item B<-formats>
+
+Show available formats (including devices).
+
+
+=item B<-demuxers>
+
+Show available demuxers.
+
+
+=item B<-muxers>
+
+Show available muxers.
+
+
+=item B<-devices>
+
+Show available devices.
+
+
+=item B<-codecs>
+
+Show all codecs known to libavcodec.
+
+Note that the term 'codec' is used throughout this documentation as a shortcut
+for what is more correctly called a media bitstream format.
+
+
+=item B<-decoders>
+
+Show available decoders.
+
+
+=item B<-encoders>
+
+Show all available encoders.
+
+
+=item B<-bsfs>
+
+Show available bitstream filters.
+
+
+=item B<-protocols>
+
+Show available protocols.
+
+
+=item B<-filters>
+
+Show available libavfilter filters.
+
+
+=item B<-pix_fmts>
+
+Show available pixel formats.
+
+
+=item B<-sample_fmts>
+
+Show available sample formats.
+
+
+=item B<-layouts>
+
+Show channel names and standard channel layouts.
+
+
+=item B<-dispositions>
+
+Show stream dispositions.
+
+
+=item B<-colors>
+
+Show recognized color names.
+
+
+=item B<-sources> I<device>B<[,>I<opt1>B<=>I<val1>B<[,>I<opt2>B<=>I<val2>B<]...]>
+
+Show autodetected sources of the input device.
+Some devices may provide system-dependent source names that cannot be autodetected.
+The returned list cannot be assumed to be always complete.
+	
+	ffmpeg -sources pulse,server=192.168.0.4
+
+
+
+=item B<-sinks> I<device>B<[,>I<opt1>B<=>I<val1>B<[,>I<opt2>B<=>I<val2>B<]...]>
+
+Show autodetected sinks of the output device.
+Some devices may provide system-dependent sink names that cannot be autodetected.
+The returned list cannot be assumed to be always complete.
+	
+	ffmpeg -sinks pulse,server=192.168.0.4
+
+
+
+=item B<-loglevel [>I<flags>B<+]>I<loglevel> B<| -v [>I<flags>B<+]>I<loglevel>
+
+Set logging level and flags used by the library.
+
+The optional I<flags> prefix can consist of the following values:
+
+=over 4
+
+
+=item B<repeat>
+
+Indicates that repeated log output should not be compressed to the first line
+and the "Last message repeated n times" line will be omitted.
+
+=item B<level>
+
+Indicates that log output should add a C<[level]> prefix to each message
+line. This can be used as an alternative to log coloring, e.g. when dumping the
+log to file.
+
+=back
+
+Flags can also be used alone by adding a '+'/'-' prefix to set/reset a single
+flag without affecting other I<flags> or changing I<loglevel>. When
+setting both I<flags> and I<loglevel>, a '+' separator is expected
+between the last I<flags> value and before I<loglevel>.
+
+I<loglevel> is a string or a number containing one of the following values:
+
+=over 4
+
+
+=item B<quiet, -8>
+
+Show nothing at all; be silent.
+
+=item B<panic, 0>
+
+Only show fatal errors which could lead the process to crash, such as
+an assertion failure. This is not currently used for anything.
+
+=item B<fatal, 8>
+
+Only show fatal errors. These are errors after which the process absolutely
+cannot continue.
+
+=item B<error, 16>
+
+Show all errors, including ones which can be recovered from.
+
+=item B<warning, 24>
+
+Show all warnings and errors. Any message related to possibly
+incorrect or unexpected events will be shown.
+
+=item B<info, 32>
+
+Show informative messages during processing. This is in addition to
+warnings and errors. This is the default value.
+
+=item B<verbose, 40>
+
+Same as C<info>, except more verbose.
+
+=item B<debug, 48>
+
+Show everything, including debugging information.
+
+=item B<trace, 56>
+
+
+=back
+
+
+For example to enable repeated log output, add the C<level> prefix, and set
+I<loglevel> to C<verbose>:
+	
+	ffmpeg -loglevel repeat+level+verbose -i input output
+
+Another example that enables repeated log output without affecting current
+state of C<level> prefix flag or I<loglevel>:
+	
+	ffmpeg [...] -loglevel +repeat
+
+
+By default the program logs to stderr. If coloring is supported by the
+terminal, colors are used to mark errors and warnings. Log coloring
+can be disabled setting the environment variable
+B<AV_LOG_FORCE_NOCOLOR>, or can be forced setting
+the environment variable B<AV_LOG_FORCE_COLOR>.
+
+
+=item B<-report>
+
+Dump full command line and log output to a file named
+C<I<program>-I<YYYYMMDD>-I<HHMMSS>.log> in the current
+directory.
+This file can be useful for bug reports.
+It also implies C<-loglevel debug>.
+
+Setting the environment variable B<FFREPORT> to any value has the
+same effect. If the value is a ':'-separated key=value sequence, these
+options will affect the report; option values must be escaped if they
+contain special characters or the options delimiter ':' (see the
+``Quoting and escaping'' section in the ffmpeg-utils manual).
+
+The following options are recognized:
+
+=over 4
+
+
+=item B<file>
+
+set the file name to use for the report; C<%p> is expanded to the name
+of the program, C<%t> is expanded to a timestamp, C<%%> is expanded
+to a plain C<%>
+
+=item B<level>
+
+set the log verbosity level using a numerical value (see C<-loglevel>).
+
+=back
+
+
+For example, to output a report to a file named F<ffreport.log>
+using a log level of C<32> (alias for log level C<info>):
+
+	
+	FFREPORT=file=ffreport.log:level=32 ffmpeg -i input output
+
+
+Errors in parsing the environment variable are not fatal, and will not
+appear in the report.
+
+
+=item B<-hide_banner>
+
+Suppress printing banner.
+
+All FFmpeg tools will normally show a copyright notice, build options
+and library versions. This option can be used to suppress printing
+this information.
+
+
+=item B<-cpuflags flags (>I<global>B<)>
+
+Allows setting and clearing cpu flags. This option is intended
+for testing. Do not use it unless you know what you're doing.
+	
+	ffmpeg -cpuflags -sse+mmx ...
+	ffmpeg -cpuflags mmx ...
+	ffmpeg -cpuflags 0 ...
+
+Possible flags for this option are:
+
+=over 4
+
+
+=item B<x86>
+
+
+=over 4
+
+
+=item B<mmx>
+
+
+=item B<mmxext>
+
+
+=item B<sse>
+
+
+=item B<sse2>
+
+
+=item B<sse2slow>
+
+
+=item B<sse3>
+
+
+=item B<sse3slow>
+
+
+=item B<ssse3>
+
+
+=item B<atom>
+
+
+=item B<sse4.1>
+
+
+=item B<sse4.2>
+
+
+=item B<avx>
+
+
+=item B<avx2>
+
+
+=item B<xop>
+
+
+=item B<fma3>
+
+
+=item B<fma4>
+
+
+=item B<3dnow>
+
+
+=item B<3dnowext>
+
+
+=item B<bmi1>
+
+
+=item B<bmi2>
+
+
+=item B<cmov>
+
+
+=back
+
+
+=item B<ARM>
+
+
+=over 4
+
+
+=item B<armv5te>
+
+
+=item B<armv6>
+
+
+=item B<armv6t2>
+
+
+=item B<vfp>
+
+
+=item B<vfpv3>
+
+
+=item B<neon>
+
+
+=item B<setend>
+
+
+=back
+
+
+=item B<AArch64>
+
+
+=over 4
+
+
+=item B<armv8>
+
+
+=item B<vfp>
+
+
+=item B<neon>
+
+
+=back
+
+
+=item B<PowerPC>
+
+
+=over 4
+
+
+=item B<altivec>
+
+
+=back
+
+
+=item B<Specific Processors>
+
+
+=over 4
+
+
+=item B<pentium2>
+
+
+=item B<pentium3>
+
+
+=item B<pentium4>
+
+
+=item B<k6>
+
+
+=item B<k62>
+
+
+=item B<athlon>
+
+
+=item B<athlonxp>
+
+
+=item B<k8>
+
+
+=back
+
+
+=back
+
+
+
+=item B<-cpucount> I<count> B<(>I<global>B<)>
+
+Override detection of CPU count. This option is intended
+for testing. Do not use it unless you know what you're doing.
+	
+	ffmpeg -cpucount 2
+
+
+
+=item B<-max_alloc> I<bytes>
+
+Set the maximum size limit for allocating a block on the heap by ffmpeg's
+family of malloc functions. Exercise B<extreme caution> when using
+this option. Don't use if you do not understand the full consequence of doing so.
+Default is INT_MAX.
+
+=back
+
+
+
+=head2 AVOptions
+
+
+These options are provided directly by the libavformat, libavdevice and
+libavcodec libraries. To see the list of available AVOptions, use the
+B<-help> option. They are separated into two categories:
+
+=over 4
+
+
+=item B<generic>
+
+These options can be set for any container, codec or device. Generic options
+are listed under AVFormatContext options for containers/devices and under
+AVCodecContext options for codecs.
+
+=item B<private>
+
+These options are specific to the given container, device or codec. Private
+options are listed under their corresponding containers/devices/codecs.
+
+=back
+
+
+For example to write an ID3v2.3 header instead of a default ID3v2.4 to
+an MP3 file, use the B<id3v2_version> private option of the MP3
+muxer:
+	
+	ffmpeg -i input.flac -id3v2_version 3 out.mp3
+
+
+All codec AVOptions are per-stream, and thus a stream specifier
+should be attached to them:
+	
+	ffmpeg -i multichannel.mxf -map 0:v:0 -map 0:a:0 -map 0:a:0 -c:a:0 ac3 -b:a:0 640k -ac:a:1 2 -c:a:1 aac -b:2 128k out.mp4
+
+
+In the above example, a multichannel audio stream is mapped twice for output.
+The first instance is encoded with codec ac3 and bitrate 640k.
+The second instance is downmixed to 2 channels and encoded with codec aac. A bitrate of 128k is specified for it using
+absolute index of the output stream.
+
+Note: the B<-nooption> syntax cannot be used for boolean
+AVOptions, use B<-option 0>/B<-option 1>.
+
+Note: the old undocumented way of specifying per-stream AVOptions by
+prepending v/a/s to the options name is now obsolete and will be
+removed soon.
+
+
+=head2 Main options
+
+
+
+=over 4
+
+
+=item B<-x> I<width>
+
+Force displayed width.
+
+=item B<-y> I<height>
+
+Force displayed height.
+
+=item B<-fs>
+
+Start in fullscreen mode.
+
+=item B<-an>
+
+Disable audio.
+
+=item B<-vn>
+
+Disable video.
+
+=item B<-sn>
+
+Disable subtitles.
+
+=item B<-ss> I<pos>
+
+Seek to I<pos>. Note that in most formats it is not possible to seek
+exactly, so B<ffplay> will seek to the nearest seek point to
+I<pos>.
+
+I<pos> must be a time duration specification,
+see B<the Time duration section in the ffmpeg-utils(1) manual>.
+
+=item B<-t> I<duration>
+
+Play I<duration> seconds of audio/video.
+
+I<duration> must be a time duration specification,
+see B<the Time duration section in the ffmpeg-utils(1) manual>.
+
+=item B<-bytes>
+
+Seek by bytes.
+
+=item B<-seek_interval>
+
+Set custom interval, in seconds, for seeking using left/right keys. Default is 10 seconds.
+
+=item B<-nodisp>
+
+Disable graphical display.
+
+=item B<-noborder>
+
+Borderless window.
+
+=item B<-alwaysontop>
+
+Window always on top. Available on: X11 with SDL E<gt>= 2.0.5, Windows SDL E<gt>= 2.0.6.
+
+=item B<-volume>
+
+Set the startup volume. 0 means silence, 100 means no volume reduction or
+amplification. Negative values are treated as 0, values above 100 are treated
+as 100.
+
+=item B<-f> I<fmt>
+
+Force format.
+
+=item B<-window_title> I<title>
+
+Set window title (default is the input filename).
+
+=item B<-left> I<title>
+
+Set the x position for the left of the window (default is a centered window).
+
+=item B<-top> I<title>
+
+Set the y position for the top of the window (default is a centered window).
+
+=item B<-loop> I<number>
+
+Loops movie playback E<lt>numberE<gt> times. 0 means forever.
+
+=item B<-showmode> I<mode>
+
+Set the show mode to use.
+Available values for I<mode> are:
+
+=over 4
+
+
+=item B<0, video>
+
+show video
+
+=item B<1, waves>
+
+show audio waves
+
+=item B<2, rdft>
+
+show audio frequency band using RDFT ((Inverse) Real Discrete Fourier Transform)
+
+=back
+
+
+Default value is "video", if video is not present or cannot be played
+"rdft" is automatically selected.
+
+You can interactively cycle through the available show modes by
+pressing the key B<w>.
+
+
+=item B<-vf> I<filtergraph>
+
+Create the filtergraph specified by I<filtergraph> and use it to
+filter the video stream.
+
+I<filtergraph> is a description of the filtergraph to apply to
+the stream, and must have a single video input and a single video
+output. In the filtergraph, the input is associated to the label
+C<in>, and the output to the label C<out>. See the
+ffmpeg-filters manual for more information about the filtergraph
+syntax.
+
+You can specify this parameter multiple times and cycle through the specified
+filtergraphs along with the show modes by pressing the key B<w>.
+
+
+=item B<-af> I<filtergraph>
+
+I<filtergraph> is a description of the filtergraph to apply to
+the input audio.
+Use the option "-filters" to show all the available filters (including
+sources and sinks).
+
+
+=item B<-i> I<input_url>
+
+Read I<input_url>.
+
+=back
+
+
+
+=head2 Advanced options
+
+
+=over 4
+
+
+=item B<-stats>
+
+Print several playback statistics, in particular show the stream
+duration, the codec parameters, the current position in the stream and
+the audio/video synchronisation drift. It is shown by default, unless the
+log level is lower than C<info>. Its display can be forced by manually
+specifying this option. To disable it, you need to specify C<-nostats>.
+
+
+=item B<-fast>
+
+Non-spec-compliant optimizations.
+
+=item B<-genpts>
+
+Generate pts.
+
+=item B<-sync> I<type>
+
+Set the master clock to audio (C<type=audio>), video
+(C<type=video>) or external (C<type=ext>). Default is audio. The
+master clock is used to control audio-video synchronization. Most media
+players use audio as master clock, but in some cases (streaming or high
+quality broadcast) it is necessary to change that. This option is mainly
+used for debugging purposes.
+
+=item B<-ast> I<audio_stream_specifier>
+
+Select the desired audio stream using the given stream specifier. The stream
+specifiers are described in the B<Stream specifiers> chapter. If this option
+is not specified, the "best" audio stream is selected in the program of the
+already selected video stream.
+
+=item B<-vst> I<video_stream_specifier>
+
+Select the desired video stream using the given stream specifier. The stream
+specifiers are described in the B<Stream specifiers> chapter. If this option
+is not specified, the "best" video stream is selected.
+
+=item B<-sst> I<subtitle_stream_specifier>
+
+Select the desired subtitle stream using the given stream specifier. The stream
+specifiers are described in the B<Stream specifiers> chapter. If this option
+is not specified, the "best" subtitle stream is selected in the program of the
+already selected video or audio stream.
+
+=item B<-autoexit>
+
+Exit when video is done playing.
+
+=item B<-exitonkeydown>
+
+Exit if any key is pressed.
+
+=item B<-exitonmousedown>
+
+Exit if any mouse button is pressed.
+
+
+=item B<-codec:>I<media_specifier>B< >I<codec_name>
+
+Force a specific decoder implementation for the stream identified by
+I<media_specifier>, which can assume the values C<a> (audio),
+C<v> (video), and C<s> subtitle.
+
+
+=item B<-acodec> I<codec_name>
+
+Force a specific audio decoder.
+
+
+=item B<-vcodec> I<codec_name>
+
+Force a specific video decoder.
+
+
+=item B<-scodec> I<codec_name>
+
+Force a specific subtitle decoder.
+
+
+=item B<-autorotate>
+
+Automatically rotate the video according to file metadata. Enabled by
+default, use B<-noautorotate> to disable it.
+
+
+=item B<-framedrop>
+
+Drop video frames if video is out of sync. Enabled by default if the master
+clock is not set to video. Use this option to enable frame dropping for all
+master clock sources, use B<-noframedrop> to disable it.
+
+
+=item B<-infbuf>
+
+Do not limit the input buffer size, read as much data as possible from the
+input as soon as possible. Enabled by default for realtime streams, where data
+may be dropped if not read in time. Use this option to enable infinite buffers
+for all inputs, use B<-noinfbuf> to disable it.
+
+
+=item B<-filter_threads> I<nb_threads>
+
+Defines how many threads are used to process a filter pipeline. Each pipeline
+will produce a thread pool with this many threads available for parallel
+processing. The default is 0 which means that the thread count will be
+determined by the number of available CPUs.
+
+
+=back
+
+
+
+=head2 While playing
+
+
+
+=over 4
+
+
+=item B<q, ESC>
+
+Quit.
+
+
+=item B<f>
+
+Toggle full screen.
+
+
+=item B<p, SPC>
+
+Pause.
+
+
+=item B<m>
+
+Toggle mute.
+
+
+=item B<9, 0>
+
+
+=item B</, *>
+
+Decrease and increase volume respectively.
+
+
+=item B<a>
+
+Cycle audio channel in the current program.
+
+
+=item B<v>
+
+Cycle video channel.
+
+
+=item B<t>
+
+Cycle subtitle channel in the current program.
+
+
+=item B<c>
+
+Cycle program.
+
+
+=item B<w>
+
+Cycle video filters or show modes.
+
+
+=item B<s>
+
+Step to the next frame.
+
+Pause if the stream is not already paused, step to the next video
+frame, and pause.
+
+
+=item B<left/right>
+
+Seek backward/forward 10 seconds.
+
+
+=item B<down/up>
+
+Seek backward/forward 1 minute.
+
+
+=item B<page down/page up>
+
+Seek to the previous/next chapter.
+or if there are no chapters
+Seek backward/forward 10 minutes.
+
+
+=item B<right mouse click>
+
+Seek to percentage in file corresponding to fraction of width.
+
+
+=item B<left mouse double-click>
+
+Toggle full screen.
+
+
+=back
+
+
+
+
+
+=head1 SEE ALSO
+
+
+
+ffplay-all(1),
+ffmpeg(1), ffprobe(1),
+ffmpeg-utils(1), ffmpeg-scaler(1), ffmpeg-resampler(1),
+ffmpeg-codecs(1), ffmpeg-bitstream-filters(1), ffmpeg-formats(1),
+ffmpeg-devices(1), ffmpeg-protocols(1), ffmpeg-filters(1)
+
+
+=head1 AUTHORS
+
+
+The FFmpeg developers.
+
+For details about the authorship, see the Git history of the project
+(git://source.ffmpeg.org/ffmpeg), e.g. by typing the command
+B<git log> in the FFmpeg source directory, or browsing the
+online repository at E<lt>B<http://source.ffmpeg.org>E<gt>.
+
+Maintainers for the specific components are listed in the file
+F<MAINTAINERS> in the source code tree.
+
+
+

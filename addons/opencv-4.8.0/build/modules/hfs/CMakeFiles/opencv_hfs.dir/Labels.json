@@ -1,0 +1,165 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/include/opencv2/hfs.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/hfs.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/hfs_core.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/magnitude/magnitude.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/merge/merge.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/slic/gslic_engine.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/slic/slic.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/hfs_core.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/magnitude/magnitude.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/merge/merge.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/or_utils/or_image.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/or_utils/or_memory_block.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/or_utils/or_types.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/or_utils/or_vector.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/hfs/src/slic/slic.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_hfs",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h"
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_hfs",
+			"Module"
+		],
+		"name" : "opencv_hfs"
+	}
+}

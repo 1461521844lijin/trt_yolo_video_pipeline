@@ -1,0 +1,312 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/npy_blob.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_backends.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_caffe_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_common.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_darknet_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_googlenet.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_halide_layers.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_ie_models.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_int8_layers.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_layers.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_main.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_misc.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_model.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_nms.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_tf_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_tflite_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_torch_importer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/npy_blob.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_common.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_common.impl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter__cuda_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter__halide_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter__openvino.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter__vulkan_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_all_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_cpu_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_ocl_fp16_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_filter_opencv_ocl_fp32_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_onnx_conformance_layer_parser_denylist.inl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/dnn/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_dnn",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_dnn",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_dnn"
+	}
+}

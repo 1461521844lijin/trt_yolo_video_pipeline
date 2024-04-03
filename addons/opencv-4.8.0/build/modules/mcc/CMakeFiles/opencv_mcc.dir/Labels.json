@@ -1,0 +1,363 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/include/opencv2/mcc.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/include/opencv2/mcc/ccm.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/include/opencv2/mcc/checker_detector.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/include/opencv2/mcc/checker_model.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/bound_min.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/ccm.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/charts.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/checker_detector.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/checker_model.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/color.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/colorspace.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/common.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/debug.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/distance.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/graph_cluster.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/io.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/linearize.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/mcc.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/operations.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/utils.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/wiener_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/bound_min.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/charts.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/checker_detector.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/checker_model.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/color.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/colorspace.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/common.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/debug.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/dictionary.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/distance.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/graph_cluster.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/io.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/linearize.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/operations.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/utils.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/src/wiener_filter.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_mcc",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h"
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_mcc",
+			"Module"
+		],
+		"name" : "opencv_mcc"
+	}
+}

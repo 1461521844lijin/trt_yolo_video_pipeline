@@ -5,6 +5,8 @@
 #include "FFmpegReadNode.h"
 #include "graph/core/common/StatusCode.h"
 #include <utility>
+#include <thread>
+
 
 namespace Node {
 FFmpegReadNode::FFmpegReadNode(const std::string &name,

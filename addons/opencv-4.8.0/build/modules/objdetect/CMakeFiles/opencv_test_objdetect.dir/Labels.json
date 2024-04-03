@@ -1,0 +1,141 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/opencl/test_hogdetector.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_aruco_utils.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_arucodetection.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_barcode.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_boarddetection.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_cascadeandhog.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_charucodetection.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_face.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_main.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_qrcode.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_qrcode_encode.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_aruco_utils.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/objdetect/test/test_qr_utils.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_objdetect",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_objdetect",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_objdetect"
+	}
+}

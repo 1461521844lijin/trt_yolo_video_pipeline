@@ -1,0 +1,51 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/aruco/test/test_aruco_tutorial.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/aruco/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/aruco/test/test_aruco_utils.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/aruco/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_aruco",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_aruco",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_aruco"
+	}
+}

@@ -1,0 +1,21 @@
+# Target labels
+ Extra
+ opencv_mcc
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/test/test_ccm.cpp
+ Extra
+ opencv_mcc
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/test/test_main.cpp
+ Extra
+ opencv_mcc
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/test/test_mcc.cpp
+ Extra
+ opencv_mcc
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/mcc/test/test_precomp.hpp
+ Extra
+ opencv_mcc
+ AccuracyTest

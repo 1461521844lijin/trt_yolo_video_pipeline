@@ -1,0 +1,177 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_adaptive_manifold.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_bilateral_texture_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_disparity_wls_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_domain_transform.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_edgepreserving_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_fast_hough_transform.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_fgs_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_find_ellipses.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_guided_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_joint_bilateral_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_l0_smooth.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_radon_transform.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_ridge_detection_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_rolling_guidance_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_run_length_morphology.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_weighted_median_filter.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/ximgproc/perf/perf_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_ximgproc",
+				"PerfTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_ximgproc",
+			"PerfTest"
+		],
+		"name" : "opencv_perf_ximgproc"
+	}
+}

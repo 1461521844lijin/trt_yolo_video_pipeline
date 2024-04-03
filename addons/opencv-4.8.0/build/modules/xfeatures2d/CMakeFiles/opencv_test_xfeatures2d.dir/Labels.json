@@ -1,0 +1,105 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_detectors.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_features2d.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_gms_matcher.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_keypoints.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_logos_matcher.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_rotation_and_scale_invariance.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_surf.cuda.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_surf.ocl.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xfeatures2d/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_xfeatures2d",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_xfeatures2d",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_xfeatures2d"
+	}
+}

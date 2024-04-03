@@ -1,0 +1,33 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  repo_name: ${{ github.repository }}
+  sha_git: ${{ github.sha }}
+
+jobs:
+  Basic_Workflow:
+    strategy:
+      matrix:
+        version: [11, 14, 17, 20, 23]
+        os: [
+            ubuntu-20.04,
+            ubuntu-22.04,
+          ]
+  
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Stage
+        run: |
+          mkdir build && cd build
+          cmake -DENABLE_ADE_TESTING=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=${{ matrix.version }} ..
+          make -j
+
+      - name: ADE-Test Stage
+        run: ./build/bin/ade-tests 
+
+      - name: CMN-Test Stage
+        run: ./build/bin/common-tests

@@ -2,18 +2,25 @@
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 
-int main() {
-    std::string input_stream_url  = "输入流路径";
-    std::string output_stream_url = "输出流路径";
-    std::string model_path        = "TRTengine模型文件路径";
-    std::string label_path        = "检测分类类别文件路径";
-    int         max_batch_size    = 16;    // 最大batch数
+
+int main(int argc, char** argv) {
+    // std::string input_stream_url  = "rtmp://video-pull.yzhgk.com/ai/test";
+    // std::string output_stream_url = "rtmp://video-push.yzhgk.com/ai/test1";
+    // std::string model_path        = "../workspace/yolov5s.engine";
+    // std::string label_path        = "../labels.txt";
+
+    std::string input_stream_url(argv[1]);
+    std::string output_stream_url(argv[2]);
+    std::string model_path(argv[3]);
+    std::string label_path(argv[4]);
+
+    int         max_batch_size    = 10;    // 最大batch数
     float       config_threshold  = 0.25;  // 检测阈值
     float       nms_threshold     = 0.5;   // nms阈值
 
     // 模型实例数量列表，列表为模型实例数，每个元素代表该模型实例在哪张显卡上的下标
     std::vector<int> device_list{0, 0, 1, 1};
-    auto             type = infer::YoloType::V8;  // 模型类型
+    auto             type = infer::YoloType::V5;  // 模型类型
 
     // 创建多卡多实例推理对象
     auto trt_instance =

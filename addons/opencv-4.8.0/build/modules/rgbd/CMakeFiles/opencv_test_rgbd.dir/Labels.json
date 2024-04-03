@@ -1,0 +1,123 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/ocl/test_tsdf.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_colored_kinfu.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_dynafu.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_kinfu.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_normal.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_odometry.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_pose_graph.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_registration.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_tsdf.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_utils.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/rgbd/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_rgbd",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_rgbd",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_rgbd"
+	}
+}

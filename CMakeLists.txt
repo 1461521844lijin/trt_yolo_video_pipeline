@@ -21,7 +21,9 @@ if (ENABLE_TENSORRT)
 endif ()
 
 
-add_executable(test_yolo_detect test/test_example.cpp)
-target_link_libraries(test_yolo_detect cpp_lib cuda_lib trt_cpp_lib ${CUDA_LIBS} ${TRT_LIBS} ${local_libs})
+cuda_add_executable(test_yolo_detect test/test_example_1.cpp)
+target_link_libraries(test_yolo_detect cpp_lib trt_cpp_lib cuda_lib ${CUDA_LIBS} ${TRT_LIBS} ${local_libs} -lcurl -ljsoncpp)
 
+# add_executable(test_yolo_detect test/test_http.cpp)
+# target_link_libraries(test_yolo_detect -lcurl -ljsoncpp)
 

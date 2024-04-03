@@ -1,0 +1,25 @@
+# Target labels
+ Extra
+ opencv_structured_light
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/structured_light/test/test_faps.cpp
+ Extra
+ opencv_structured_light
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/structured_light/test/test_getProjPixel.cpp
+ Extra
+ opencv_structured_light
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/structured_light/test/test_main.cpp
+ Extra
+ opencv_structured_light
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/structured_light/test/test_plane.cpp
+ Extra
+ opencv_structured_light
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/structured_light/test/test_precomp.hpp
+ Extra
+ opencv_structured_light
+ AccuracyTest

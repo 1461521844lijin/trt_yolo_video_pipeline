@@ -1,0 +1,19 @@
+# Target labels
+ Extra
+ opencv_dnn_superres
+ Module
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/dnn_superres/include/opencv2/dnn_superres.hpp
+ Extra
+ opencv_dnn_superres
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/dnn_superres/src/dnn_superres.cpp
+ Extra
+ opencv_dnn_superres
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/dnn_superres/src/precomp.hpp
+ Extra
+ opencv_dnn_superres
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp

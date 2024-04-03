@@ -1,0 +1,17 @@
+# Target labels
+ Extra
+ opencv_wechat_qrcode
+ PerfTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/wechat_qrcode/perf/perf_main.cpp
+ Extra
+ opencv_wechat_qrcode
+ PerfTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/wechat_qrcode/perf/perf_wechat_qrcode_pipeline.cpp
+ Extra
+ opencv_wechat_qrcode
+ PerfTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/wechat_qrcode/perf/perf_precomp.hpp
+ Extra
+ opencv_wechat_qrcode
+ PerfTest

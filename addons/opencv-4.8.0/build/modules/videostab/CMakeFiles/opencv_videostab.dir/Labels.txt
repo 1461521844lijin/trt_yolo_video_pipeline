@@ -1,0 +1,119 @@
+# Target labels
+ Extra
+ opencv_videostab
+ Module
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/deblurring.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/fast_marching.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/fast_marching_inl.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/frame_source.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/global_motion.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/inpainting.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/log.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/motion_core.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/motion_stabilizing.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/optical_flow.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/outlier_rejection.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/ring_buffer.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/stabilizer.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/include/opencv2/videostab/wobble_suppression.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/deblurring.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/fast_marching.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/frame_source.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/global_motion.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/inpainting.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/log.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/motion_stabilizing.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/optical_flow.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/outlier_rejection.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/stabilizer.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/wobble_suppression.cpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/clp.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/videostab/src/precomp.hpp
+ Extra
+ opencv_videostab
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp

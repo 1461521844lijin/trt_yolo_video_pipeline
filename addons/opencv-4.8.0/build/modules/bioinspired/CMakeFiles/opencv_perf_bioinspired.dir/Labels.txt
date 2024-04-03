@@ -1,0 +1,17 @@
+# Target labels
+ Extra
+ opencv_bioinspired
+ PerfTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/bioinspired/perf/opencl/perf_retina.ocl.cpp
+ Extra
+ opencv_bioinspired
+ PerfTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/bioinspired/perf/perf_main.cpp
+ Extra
+ opencv_bioinspired
+ PerfTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/bioinspired/perf/perf_precomp.hpp
+ Extra
+ opencv_bioinspired
+ PerfTest

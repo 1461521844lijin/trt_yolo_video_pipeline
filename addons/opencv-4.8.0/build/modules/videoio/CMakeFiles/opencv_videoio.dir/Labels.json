@@ -1,0 +1,246 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/cap_ios.h",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/container_avi.private.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/legacy/constants_c.h",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/registry.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/videoio.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/include/opencv2/videoio/videoio_c.h",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor/obsensor_stream_channel_interface.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor/obsensor_stream_channel_v4l2.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor/obsensor_uvc_stream_channel.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor_capture.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/videoio_registry.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/videoio_c.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_images.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_mjpeg_encoder.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_mjpeg_decoder.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/backend_plugin.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/backend_static.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/container_avi.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_v4l.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor_capture.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor/obsensor_uvc_stream_channel.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/src/cap_obsensor/obsensor_stream_channel_v4l2.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h"
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_videoio",
+			"Module"
+		],
+		"name" : "opencv_videoio"
+	}
+}

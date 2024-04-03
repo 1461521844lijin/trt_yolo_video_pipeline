@@ -1,0 +1,25 @@
+# Target labels
+ Extra
+ opencv_stereo
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_block_matching.cpp
+ Extra
+ opencv_stereo
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_descriptors.cpp
+ Extra
+ opencv_stereo
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_main.cpp
+ Extra
+ opencv_stereo
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_qds_matching.cpp
+ Extra
+ opencv_stereo
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_precomp.hpp
+ Extra
+ opencv_stereo
+ AccuracyTest
