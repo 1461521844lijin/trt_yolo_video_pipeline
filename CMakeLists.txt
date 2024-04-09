@@ -22,6 +22,6 @@ endif ()
 
 
 add_executable(test_yolo_detect test/test_example.cpp)
-target_link_libraries(test_yolo_detect cpp_lib cuda_lib trt_cpp_lib ${CUDA_LIBS} ${TRT_LIBS} ${local_libs})
+target_link_libraries(test_yolo_detect cpp_lib trt_cpp_lib cuda_lib ${CUDA_LIBS} ${TRT_LIBS} ${local_libs})
 
 
