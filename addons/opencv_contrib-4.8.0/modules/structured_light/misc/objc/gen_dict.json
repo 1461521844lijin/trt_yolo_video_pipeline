@@ -1,5 +1,0 @@
-{
-    "AdditionalImports" : {
-        "*" : [ "\"structured_light.hpp\"" ]
-    }
-}

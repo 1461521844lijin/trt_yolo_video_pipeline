@@ -277,13 +277,17 @@ void YoloDetectionInfer::image_to_tensor(Data::BaseData::ptr           &data,
 }
 
 Data::BaseData::ptr YoloDetectionInfer::commit(const Data::BaseData::ptr &data) {
-    std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
-        std::make_shared<std::promise<DetectBoxArray>>();
-    std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
-    data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
-    data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
-    m_infer_node->add_data(data);
-    return data;
+    // 如果数据添加成功，返回一个promise，否则返回nullptr
+    bool res = m_infer_node->add_data_back(data);
+    if(res){
+        std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
+            std::make_shared<std::promise<DetectBoxArray>>();
+        std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
+        data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
+        data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
+        return data;
+    }
+    return nullptr;
 }
 
 }  // namespace infer

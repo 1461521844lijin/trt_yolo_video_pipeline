@@ -1,5 +1,0 @@
-{
-    "AdditionalImports" : {
-        "*" : [ "\"bioinspired.hpp\"" ]
-    }
-}

@@ -1,1 +1,0 @@
-config:x86:x86_64:generic:linux:gcc 11 (Ubuntu 11.4.0-1ubuntu1~22.04):--enable-gpl --enable-libx264 --prefix=/usr/local/ffmpeg-build --enable-shared

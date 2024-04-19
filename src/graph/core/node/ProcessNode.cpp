@@ -150,6 +150,12 @@ Data::BaseData::ptr Node::handle_data(Data::BaseData::ptr data) {
     return data;
 }
 
+
+bool Node::add_data_back(const Data::BaseData::ptr &data){
+    return m_input_buffers.begin()->second->Push(data);
+}
+
+
 void Node::add_data(const Data::BaseData::ptr &data) {
     m_input_buffers.begin()->second->push_front(data);
 }

@@ -1,6 +1,0 @@
-LIBAVUTIL_57 {
-    global:
-        av*;
-    local:
-        *;
-};

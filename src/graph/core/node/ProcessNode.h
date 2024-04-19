@@ -78,6 +78,8 @@ public:
      */
     void add_data(const Data::BaseData::ptr &data);
 
+    bool add_data_back(const Data::BaseData::ptr &data);
+
     void add_datas(const std::vector<Data::BaseData::ptr> &datas);
 
     void set_get_data_max_num(int num);

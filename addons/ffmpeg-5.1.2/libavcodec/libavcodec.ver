@@ -1,9 +1,0 @@
-LIBAVCODEC_59 {
-    global:
-        av_*;
-        avcodec_*;
-        avpriv_*;
-        avsubtitle_free;
-    local:
-        *;
-};

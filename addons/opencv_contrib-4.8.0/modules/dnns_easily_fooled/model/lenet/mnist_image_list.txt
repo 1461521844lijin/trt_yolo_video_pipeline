@@ -1,1 +1,0 @@
-/project/EvolvingAI/anguyen8/model/mnist_sample_image.png 0

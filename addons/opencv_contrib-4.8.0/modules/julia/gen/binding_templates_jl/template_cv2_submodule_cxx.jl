@@ -1,4 +1,0 @@
-
-${code}
-
-${submodule_imports}

@@ -1,6 +1,0 @@
-{
-    "AdditionalImports" : {
-        "*" : [ "\"phase_unwrapping.hpp\"" ],
-        "HistogramPhaseUnwrapping" : [ "\"phase_unwrapping/histogramphaseunwrapping.hpp\"" ]
-    }
-}

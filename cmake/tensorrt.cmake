@@ -3,7 +3,7 @@ message("配置tensorrt环境")
 #
 # 1. 配置tensorrt环境
 #
-set(TENSORRT_ROOT_DIR /home/my/package/AI/TensorRT-8.2.5.1)
+set(TENSORRT_ROOT_DIR /root/trt_projects/TensorRT-8.4.1.5)
 
 include_directories(${TENSORRT_ROOT_DIR}/include)
 link_directories(${TENSORRT_ROOT_DIR}/lib)
