@@ -63,7 +63,7 @@ private:
     std::string               m_client_url;          // 上传的服务器地址  http://ip:port
     std::string               m_post_url;            // 请求接口后缀  /api/v1/xxx
     httplib::Client           m_client;              // http client
-    int64                     m_post_cycle     = 0;  // 上传周期 单位ms
-    std::chrono::system_clock m_last_post_time = 0;  // 上次上传时间
+    int64                     m_post_cycle     = 0;  // 上传周期 单位s
+    int64                     m_last_post_time = 0 ;  // 上次上传时间
 };
 }  // namespace Node

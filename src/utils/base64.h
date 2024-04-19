@@ -24,6 +24,7 @@
 
 #    include <cstdint>
 #    include <string>
+#include <string.h>
 
 /**
  * Decode a base64-encoded string.

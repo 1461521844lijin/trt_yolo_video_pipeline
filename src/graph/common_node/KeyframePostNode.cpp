@@ -24,8 +24,8 @@ KeyframePostNode::KeyframePostNode(const std::string &name,
 Data::BaseData::ptr KeyframePostNode::handle_data(Data::BaseData::ptr data) {
     // 判断是否达到上传周期
     if (m_post_cycle > 0) {
-        auto now = std::chrono::system_clock::now();
-        if (now - m_last_post_time < std::chrono::milliseconds(m_post_cycle)) {
+        auto now = time(0);
+        if (now - m_last_post_time < m_post_cycle) {
             return nullptr;
         }
         m_last_post_time = now;
