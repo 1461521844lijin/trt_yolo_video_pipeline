@@ -111,12 +111,21 @@ bool FFmpegReadNode::Init() {
         return false;
     }
     if (!m_scaler) {
-        m_scaler = FFmpeg::Scaler::createShare(
-            m_demux->get_video_codec_parameters()->width,
-            m_demux->get_video_codec_parameters()->height,
-            (AVPixelFormat)m_demux->get_video_codec_parameters()->format,
-            m_demux->get_video_codec_parameters()->width,
-            m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
+        if(m_use_hw){
+            m_scaler = FFmpeg::Scaler::createShare(
+                m_demux->get_video_codec_parameters()->width,
+                m_demux->get_video_codec_parameters()->height,
+                AV_PIX_FMT_NV12,
+                m_demux->get_video_codec_parameters()->width,
+                m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
+        } else {
+            m_scaler = FFmpeg::Scaler::createShare(
+                m_demux->get_video_codec_parameters()->width,
+                m_demux->get_video_codec_parameters()->height,
+                (AVPixelFormat)m_demux->get_video_codec_parameters()->format,
+                m_demux->get_video_codec_parameters()->width,
+                m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
+        }
     }
     if (!m_decoder) {
         m_decoder = FFmpeg::Decoder::createShare(m_demux);

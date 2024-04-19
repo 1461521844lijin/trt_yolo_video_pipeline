@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 OPTION(ENABLE_CUDA "使用CUDA,TensorRT" ON)
 OPTION(ENABLE_TENSORRT "使用TensorRT" ON)
 OPTION(ENABLE_HWCODEC "使用硬件编解码能力" OFF)
+option(ENABLE_TEST "编译测试代码" ON)
+
+
 
 
 # 基础代码依赖配置
@@ -20,11 +23,7 @@ if (ENABLE_TENSORRT)
     include(${CMAKE_SOURCE_DIR}/cmake/tensorrt.cmake)
 endif ()
 
-
-cuda_add_executable(test_yolo_detect test/test_example_2.cpp)
-target_link_libraries(test_yolo_detect cpp_lib trt_cpp_lib cuda_lib ${CUDA_LIBS} ${TRT_LIBS} ${local_libs} -lcurl -ljsoncpp)
-
-
-# add_executable(test_yolo_detect test/test_http.cpp)
-# target_link_libraries(test_yolo_detect -lcurl -ljsoncpp)
-
+if(ENABLE_TEST)
+    # 测试代码依赖配置
+    include(${CMAKE_SOURCE_DIR}/cmake/test.cmake)
+endif()
