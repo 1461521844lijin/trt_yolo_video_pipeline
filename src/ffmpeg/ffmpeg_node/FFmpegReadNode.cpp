@@ -5,6 +5,8 @@
 #include "FFmpegReadNode.h"
 #include "graph/core/common/StatusCode.h"
 #include <utility>
+#include <thread>
+
 
 namespace Node {
 FFmpegReadNode::FFmpegReadNode(const std::string &name,
@@ -18,6 +20,7 @@ FFmpegReadNode::FFmpegReadNode(const std::string &name,
 
 void FFmpegReadNode::worker() {
     int frame_index = 0;
+    auto logger = GetLogger();
     while (m_run) {
         auto pkt = alloc_av_packet();
         int  re  = m_demux->read_packet(pkt);
@@ -32,7 +35,8 @@ void FFmpegReadNode::worker() {
             }
             cv::Mat image(frame->height, frame->width, CV_8UC3);
             if (!m_scaler->scale<av_frame, cv::Mat>(frame, image)) {
-                std::cout << "scale failed" << std::endl;
+                //std::cout << "scale failed" << std::endl;
+                logger.error("[{0}:{1}] Scale failed", __FILENAME__, __LINE__);
                 continue;
             }
             auto data = std::make_shared<Data::BaseData>(Data::DataType::FRAME);
@@ -42,7 +46,8 @@ void FFmpegReadNode::worker() {
             data->Insert<FRAME_HEIGHT_TYPE>(FRAME_HEIGHT, frame->height);
             send_output_data(data);
         } else if (re == AVERROR_EOF) {
-            std::cout << "read eof" << std::endl;
+            //std::cout << "read eof" << std::endl;
+            logger.info("[{0}:{1}] Read eof", __FILENAME__, __LINE__);
             if (m_cycle) {
                 m_demux->seek(0);
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -50,9 +55,32 @@ void FFmpegReadNode::worker() {
             }
             break;
         } else {
-            std::cout << "read error" << std::endl;
-            error_cb(getName(), GraphCore::StatusCode::NodeError, "读取节点错误，线程退出");
-            break;
+            //std::cout << "read error" << std::endl;
+            logger.error("[{0}:{1}] Read error", __FILENAME__, __LINE__);
+
+            if (re == -5 || re == -1){
+                //error_cb(getName(), GraphCore::StatusCode::NodeError, "读取节点错误，重连中。。。");
+                logger.error("[{0}:{1}] 读取节点错误，重连中", __FILENAME__, __LINE__);
+                for(int i=0; i<m_max_reconnect; i++)
+                {
+                    if(!Reconnect())
+                    {
+                        //printf("重连成功");
+                        logger.info("[{0}:{1}] 重连成功", __FILENAME__, __LINE__);
+                        break;
+                    }
+                    else
+                    {
+                        logger.info("[{0}:{1}], 读取节点重连中...[第{2}次]", __FILENAME__, __LINE__, i);
+                        //printf("读取节点重连中。。。，第%d次", i);
+                        std::this_thread::sleep_for(std::chrono::milliseconds(30));
+                    }
+                }
+                //break;
+                
+            }
+            continue;
+            //break;
         }
     }
 }
@@ -110,6 +138,15 @@ bool FFmpegReadNode::Init() {
     m_fps    = m_demux->get_video_stream()->avg_frame_rate.num /
             m_demux->get_video_stream()->avg_frame_rate.den;
     m_bitrate = m_demux->get_video_codec_parameters()->bit_rate;
+    return true;
+}
+
+// read error add reconnect
+bool FFmpegReadNode::Reconnect(){
+    m_demux.reset();
+    m_decoder.reset();
+    m_scaler.reset();
+    Init();
     return true;
 }
 

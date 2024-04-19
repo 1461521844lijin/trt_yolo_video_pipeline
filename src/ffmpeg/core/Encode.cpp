@@ -23,6 +23,7 @@ Encoder::~Encoder() {
 }
 
 bool Encoder::open(bool use_hw) {
+    //logger = spdlog::get("logger");
     const AVCodec *codec = nullptr;
     switch (m_codec_id) {
         case AV_CODEC_ID_H264: {
@@ -44,12 +45,16 @@ bool Encoder::open(bool use_hw) {
         default: break;
     }
     if (!codec) {
+        //logger->error("[{0}:{1}] avcodec_find_decoder failed", __FILENAME__, __LINE__);
+
         std::cout << "avcodec_find_decoder failed" << std::endl;
         return false;
     }
 
     m_codec_ctx = alloc_av_codec_context(codec);
     if (!m_codec_ctx) {
+        //logger->error("[{0}:{1}] alloc_av_codec_context failed", __FILENAME__, __LINE__);
+
         std::cout << "alloc_av_codec_context failed" << std::endl;
         return false;
     }
@@ -78,6 +83,8 @@ bool Encoder::open(bool use_hw) {
 
 bool Encoder::send(av_frame frame) {
     if (!m_codec_ctx) {
+        //logger->error("[{0}:{1}] m_codec_ctx failed", __FILENAME__, __LINE__);
+
         std::cout << "m_codec_ctx is nullptr" << std::endl;
         return false;
     }
@@ -87,6 +94,8 @@ bool Encoder::send(av_frame frame) {
 
 bool Encoder::receive(av_packet &packet) {
     if (!m_codec_ctx) {
+        //logger->error("[{0}:{1}] m_codec_ctx failed", __FILENAME__, __LINE__);
+
         std::cout << "m_codec_ctx is nullptr" << std::endl;
         return false;
     }

@@ -1,0 +1,78 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_average_hash.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_block_mean_hash.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_marr_hildreth_hash.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_phash.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_radial_variance_hash.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/img_hash/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_img_hash",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_img_hash",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_img_hash"
+	}
+}

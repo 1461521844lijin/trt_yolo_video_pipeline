@@ -18,6 +18,7 @@ cd ./opencv-4.8.0 \
   && cd ../../
 
 # 安装x264
+sudo apt-get install nasm
 cd ./x264-master \
   && ./configure --enable-shared \
   && make -j10 \
@@ -25,6 +26,9 @@ cd ./x264-master \
   && cd ../
 
 # 安装ffmpeg
+sudo apt-get install yasm -y
+sudo apt install libx264-dev libx265-dev  \
+         libfdk-aac-dev libmp3lame-dev libvorbis-dev 
 cd ./ffmpeg-5.1.2 \
   && export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
   && ./configure --enable-gpl --enable-libx264 \
@@ -61,7 +65,23 @@ cd ./ffmpeg-5.1.2 \
 #   && make install \
 #   && cd ../
 
+# 安装oatpp
+# git clone https://github.com/oatpp/oatpp.git
+# cd oatpp/
+# mkdir build && cd build
+# cmake ..
+# sudo make && sudo make install
 
+# 安装json cpp
+# cd jsoncpp-1.9.5
+# mkdir build && cd build
+# cmake .. -DCMAKE_BUILD_TYPE=debug -DJSONCPP_LIB_BUILD_STATIC=ON
+# make
+# sudo make install
+
+# 安装curl
+# sudo apt install curl
+# sudo apt-get install  libcurl4-openssl-dev
 rm -rf ./opencv-4.8.0
 rm -rf ./opencv_contrib-4.8.0
 rm -rf ./x264-master

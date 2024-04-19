@@ -1,0 +1,17 @@
+# Target labels
+ Extra
+ opencv_saliency
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/saliency/test/test_main.cpp
+ Extra
+ opencv_saliency
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/saliency/test/test_static_saliency_spectral_residual.cpp
+ Extra
+ opencv_saliency
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/saliency/test/test_precomp.hpp
+ Extra
+ opencv_saliency
+ AccuracyTest

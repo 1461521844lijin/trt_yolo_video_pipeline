@@ -50,6 +50,8 @@ private:
     int                      m_video_stream_index = 0;
 
     std::mutex m_mutex;
+    // log
+    //std::shared_ptr<spdlog::logger> logger = nullptr;
 };
 
 }  // namespace FFmpeg

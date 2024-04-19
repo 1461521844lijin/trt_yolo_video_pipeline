@@ -35,7 +35,7 @@ void Node::Start() {
             after_start_cb(getName(), StatusCode::OK, "节点线程启动完成");
         }
     } else {
-        throw std::runtime_error("改线程重复启动");
+        throw std::runtime_error("线程重复启动");
     }
 }
 
@@ -54,6 +54,7 @@ void Node::Stop() {
     if (exit_cb) {
         std::string name = getName();
         exit_cb(getName(), StatusCode::NodeExit, "节点线程退出");
+        
     }
     std::cout << getName() << " exit" << std::endl;
 }
@@ -106,7 +107,10 @@ void Node::worker() {
             m_base_cond->wait(lk);
             continue;
         }
+
     }
+
+    
 }
 
 void Node::get_input_datas(std::vector<Data::BaseData::ptr> &datas) {

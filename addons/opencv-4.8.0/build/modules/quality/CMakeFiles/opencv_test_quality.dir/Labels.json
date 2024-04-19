@@ -1,0 +1,78 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_brisque.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_gmsd.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_mse.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_psnr.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_ssim.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/quality/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_quality",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_quality",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_quality"
+	}
+}

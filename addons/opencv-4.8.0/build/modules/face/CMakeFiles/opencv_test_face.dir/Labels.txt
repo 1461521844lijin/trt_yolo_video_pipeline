@@ -1,0 +1,41 @@
+# Target labels
+ Extra
+ opencv_face
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_bif.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_face_align.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark_aam.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_facemark_lbf.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_loadsave.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_mace.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_main.cpp
+ Extra
+ opencv_face
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/face/test/test_precomp.hpp
+ Extra
+ opencv_face
+ AccuracyTest

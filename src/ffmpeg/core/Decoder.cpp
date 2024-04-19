@@ -8,6 +8,7 @@ Decoder::Decoder(std::shared_ptr<Demuxer> demux) {
 }
 
 bool Decoder::open(bool use_hw) {
+    //logger = spdlog::get("logger");
     AVCodecID      codec_id = m_demux->get_video_codec_id();
     const AVCodec *codec    = nullptr;
     if (codec_id == AV_CODEC_ID_H264) {
@@ -25,11 +26,13 @@ bool Decoder::open(bool use_hw) {
         }
     }
     if (!codec) {
+        //logger->error("[{0}:{1}] avcodec_find_decoder", __FILENAME__, __LINE__);
         std::cout << "avcodec_find_decoder failed" << std::endl;
         return false;
     }
     m_codec_ctx = alloc_av_codec_context(codec);
     if (!m_codec_ctx) {
+        //logger->error("[{0}:{1}] alloc_av_codec_context failed", __FILENAME__, __LINE__);
         std::cout << "alloc_av_codec_context failed" << std::endl;
         return false;
     }

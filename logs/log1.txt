@@ -1,0 +1,29 @@
+[15:32:26] [logger] [---I---] [:] [] Failed load config.json
+[15:33:16] [logger] [---I---] [:] [] Failed load config.json
+[15:33:22] [logger] [---I---] [:] [] Failed load config.json
+[15:33:24] [logger] [---I---] [:] [] Failed load config.json
+[15:38:02] [logger] [---E---] [:] [] Failed load config.json
+[15:38:15] [logger] [---E---] [:] [] Failed load config.json
+[15:38:17] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 15:44:08.521] [logger] [error] Failed load config.json
+[2024-04-12 15:44:12.750] [logger] [error] Failed load config.json
+[2024-04-12 15:45:53.794] [logger] [error] Failed load config.json
+[2024-04-12 15:46:03.254] [logger] [error] Failed load config.json
+[2024-49-04/12/24][15:49:34] [logger] [---E---] [:] [] Failed load config.json
+[2024-49-04/12/24][15:49:46] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:06:31.166] [logger] [error] Failed load config.json
+[2024-04-12 16:06:38.039] [logger] [error] Failed load config.json
+[2024-04-12 16:07:41.254] [logger] [error] Failed load config.json
+[2024-04-12 16:10:58.972] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:11:04.091] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:17:46.395] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:18:38.330] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:18:49.476] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:29:55.570] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:30:03.894] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:30:10.543] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:34:11.019] [logger] [---E---] [:] [] Failed load config.json
+[2024-04-12 16:34:31.734] [logger] [info] Failed load config.json
+[2024-04-12 16:36:03.864] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:37:00.609] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:37:14.816] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json

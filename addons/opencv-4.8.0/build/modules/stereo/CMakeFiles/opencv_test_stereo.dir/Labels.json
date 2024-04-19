@@ -1,0 +1,60 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_block_matching.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_stereo",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_descriptors.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_stereo",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_main.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_stereo",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_qds_matching.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_stereo",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/stereo/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_stereo",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_stereo",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_stereo"
+	}
+}

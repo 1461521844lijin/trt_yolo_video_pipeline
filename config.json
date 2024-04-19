@@ -1,0 +1,15 @@
+{
+    "input_url": "rtmp://video-pull.eflyyzh.com/0402/1",
+    "output_url": "rtmp://video-push.eflyyzh.com/ai/test",
+    "keyframe_url": "http://127.0.0.1:8899/items/",
+    "model_path": "./yolov5s.engine",
+    "label_path": "./labels.txt",
+    "onnx": "yolov5s_atwl.onnx",
+    "max_batch_size": "10",
+    "config_threshold": 0.25,
+    "nms_threshold": 0.5,
+    "push_keyframe": true,
+    "output_width": 1280,
+    "output_height": 720,
+    "output_fps": 25
+}

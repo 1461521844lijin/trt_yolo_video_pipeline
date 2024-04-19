@@ -1,0 +1,25 @@
+# Target labels
+ Extra
+ opencv_fuzzy
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/test/test_f0.cpp
+ Extra
+ opencv_fuzzy
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/test/test_f1.cpp
+ Extra
+ opencv_fuzzy
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/test/test_image.cpp
+ Extra
+ opencv_fuzzy
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/test/test_main.cpp
+ Extra
+ opencv_fuzzy
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/test/test_precomp.hpp
+ Extra
+ opencv_fuzzy
+ AccuracyTest

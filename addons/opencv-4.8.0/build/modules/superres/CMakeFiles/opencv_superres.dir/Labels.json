@@ -1,0 +1,150 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/include/opencv2/superres.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/include/opencv2/superres/optical_flow.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/btv_l1.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/btv_l1_cuda.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/frame_source.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/input_array_utility.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/optical_flow.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/super_resolution.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/opencl/superres_btvl1.cl",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/modules/superres/opencl_kernels_superres.cpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/modules/superres/opencl_kernels_superres.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/input_array_utility.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/precomp.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/superres/src/ring_buffer.hpp",
+			"labels" : 
+			[
+				"Extra",
+				"opencv_superres",
+				"Module"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h"
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp"
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/modules/superres/opencl_kernels_superres.cpp.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Extra",
+			"opencv_superres",
+			"Module"
+		],
+		"name" : "opencv_superres"
+	}
+}

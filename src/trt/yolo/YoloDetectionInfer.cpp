@@ -73,7 +73,7 @@ bool YoloDetectionInfer::init() {
 
 void YoloDetectionInfer::pre_process(std::vector<Data::BaseData::ptr> &batch_data) {
     int batch_size = batch_data.size();
-    std::cout << "batch_size: " << batch_size << std::endl;
+    //std::cout << "batch_size: " << batch_size << std::endl;
     m_input_tensor->resize(batch_size, m_input_shapes[1], m_input_shapes[2], m_input_shapes[3]);
     m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
     for (int i = 0; i < batch_size; ++i) {

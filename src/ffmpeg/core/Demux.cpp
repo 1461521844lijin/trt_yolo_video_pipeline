@@ -15,7 +15,8 @@ bool Demuxer::open(const std::string &url) {
     av_ctx_info.stimeout       = "3000000";
     av_ctx_info.buffer_size    = "1024000";
     if (url.find("rtmp") == std::string::npos) {
-        av_ctx_info.timeout = "3000000";
+        //av_ctx_info.timeout = "3000000";
+        av_ctx_info.timeout = "10000000";
     }
     DESERIALIZE_INFO_TO_DICT(av_ctx_info, opt);
     // 打开上下文

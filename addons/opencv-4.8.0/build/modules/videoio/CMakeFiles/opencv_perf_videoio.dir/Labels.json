@@ -1,0 +1,60 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/perf/perf_input.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/perf/perf_main.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/perf/perf_output.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/perf/perf_camera.impl.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"PerfTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/perf/perf_precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"PerfTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_videoio",
+			"PerfTest"
+		],
+		"name" : "opencv_perf_videoio"
+	}
+}

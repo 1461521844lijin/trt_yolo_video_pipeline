@@ -1,0 +1,132 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_audio.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_camera.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_container_avi.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_dynamic.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_ffmpeg.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_gstreamer.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_main.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_mfx.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_microphone.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_orientation.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_plugins.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_video_io.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/videoio/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_videoio",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_videoio",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_videoio"
+	}
+}

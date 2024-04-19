@@ -1,0 +1,45 @@
+# Target labels
+ Extra
+ opencv_xphoto
+ AccuracyTest
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/dct_image_denoising.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/simple_color_balance.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_denoise_bm3d.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_grayworld.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_hdr.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_inpainting.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_learning_based_color_balance.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_main.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_oil_painting.cpp
+ Extra
+ opencv_xphoto
+ AccuracyTest
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/xphoto/test/test_precomp.hpp
+ Extra
+ opencv_xphoto
+ AccuracyTest

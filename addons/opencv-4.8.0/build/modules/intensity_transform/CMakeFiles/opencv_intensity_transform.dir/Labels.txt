@@ -1,0 +1,23 @@
+# Target labels
+ Extra
+ opencv_intensity_transform
+ Module
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/intensity_transform/include/opencv2/intensity_transform.hpp
+ Extra
+ opencv_intensity_transform
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/intensity_transform/src/bimef.cpp
+ Extra
+ opencv_intensity_transform
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/intensity_transform/src/intensity_transform.cpp
+ Extra
+ opencv_intensity_transform
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/intensity_transform/src/precomp.hpp
+ Extra
+ opencv_intensity_transform
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp

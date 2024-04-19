@@ -10,6 +10,13 @@
 #include "ffmpeg/core/Decoder.h"
 #include "ffmpeg/core/Demuxer.h"
 #include "ffmpeg/core/Scaler.h"
+#include "utils/logger.hpp"
+
+#ifdef WIN32
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)
+#else
+#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
+#endif
 
 namespace Node {
 class FFmpegReadNode : public GraphCore::Node {
@@ -36,6 +43,7 @@ public:
                                             bool               cycle  = false);
 
     bool Init() override;
+    bool Reconnect();
 
 public:
     // 接收宽、高、帧率、码率数据返回
@@ -54,6 +62,12 @@ private:
     int     m_height  = 0;
     int     m_fps     = 0;
     int64_t m_bitrate = 0;
+
+    // 最大重连次数
+    int m_max_reconnect = 5;
+
+    // log
+    std::shared_ptr<spdlog::logger> logger = nullptr;
 
 private:
     std::shared_ptr<FFmpeg::Scaler>  m_scaler;   // 视频缩放、格式转换

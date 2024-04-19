@@ -1,0 +1,141 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_ann.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_bayes.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_em.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_kmeans.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_knearest.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_lr.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_main.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_mltests.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_rtrees.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_save_load.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_svmsgd.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_svmtrainauto.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_utils.cpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		},
+		{
+			"file" : "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/modules/ml/test/test_precomp.hpp",
+			"labels" : 
+			[
+				"Main",
+				"opencv_ml",
+				"AccuracyTest"
+			]
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"Main",
+			"opencv_ml",
+			"AccuracyTest"
+		],
+		"name" : "opencv_test_ml"
+	}
+}

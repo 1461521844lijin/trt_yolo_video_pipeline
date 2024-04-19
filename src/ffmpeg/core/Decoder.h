@@ -24,5 +24,7 @@ public:
 private:
     av_codec_context         m_codec_ctx;
     std::shared_ptr<Demuxer> m_demux;
+    // log
+    //std::shared_ptr<spdlog::logger> logger = nullptr;
 };
 }  // namespace FFmpeg

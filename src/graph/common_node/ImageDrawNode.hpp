@@ -5,6 +5,9 @@
 
 #include "graph/core/common/DetectionBox.h"
 #include "graph/core/node/ProcessNode.h"
+#include "utils/json.hpp"
+#include "utils/HttpService.hpp"
+
 
 namespace Node {
 
@@ -34,5 +37,16 @@ public:
 private:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
 };
+
+// add post
+class ImageKeyframeNode : public GraphCore::Node {
+public:
+    explicit ImageKeyframeNode(std::string name)
+        : Node(std::move(name), GraphCore::NODE_TYPE::DES_NODE) {}
+
+private:
+    Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
+};
+
 
 }  // namespace Node

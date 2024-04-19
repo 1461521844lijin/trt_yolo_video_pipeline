@@ -1,0 +1,43 @@
+# Target labels
+ Extra
+ opencv_fuzzy
+ Module
+# Source files and their labels
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/include/opencv2/fuzzy.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F0_math.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_F1_math.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/include/opencv2/fuzzy/fuzzy_image.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/include/opencv2/fuzzy/types.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/src/fuzzy_F0_math.cpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/src/fuzzy_F1_math.cpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/src/fuzzy_image.cpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv_contrib-4.8.0/modules/fuzzy/src/precomp.hpp
+ Extra
+ opencv_fuzzy
+ Module
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/cvconfig.h
+/home/my/workflow2024/01_project/trt_yolo_video_pipeline/addons/opencv-4.8.0/build/opencv2/opencv_modules.hpp
