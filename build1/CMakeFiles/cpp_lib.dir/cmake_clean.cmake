@@ -27,6 +27,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/cpp_lib.dir/src/ffmpeg/record/RecordTask.cpp.o.d"
   "CMakeFiles/cpp_lib.dir/src/graph/common_node/ImageDrawNode.cpp.o"
   "CMakeFiles/cpp_lib.dir/src/graph/common_node/ImageDrawNode.cpp.o.d"
+  "CMakeFiles/cpp_lib.dir/src/graph/common_node/KeyfamePostNode.cpp.o"
+  "CMakeFiles/cpp_lib.dir/src/graph/common_node/KeyfamePostNode.cpp.o.d"
   "CMakeFiles/cpp_lib.dir/src/graph/core/node/ProcessNode.cpp.o"
   "CMakeFiles/cpp_lib.dir/src/graph/core/node/ProcessNode.cpp.o.d"
   "CMakeFiles/cpp_lib.dir/src/graph/pipeline/Pipeline.cpp.o"

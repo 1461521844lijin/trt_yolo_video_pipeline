@@ -9,6 +9,8 @@
 #include "ffmpeg/core/Enmuxer.h"
 #include "ffmpeg/core/Scaler.h"
 #include "graph/core/node/ProcessNode.h"
+#include <thread>
+#incldue "utils/logger.hpp"
 namespace Node {
 
 class FFmpegOutputNode : public GraphCore::Node {
@@ -57,6 +59,8 @@ public:
 
 public:
     bool Init() override;
+    bool Reconnect();
+
 
 private:
     Data::BaseData::ptr handle_data(Data::BaseData::ptr data) override;
@@ -83,6 +87,10 @@ protected:
 
     av_frame m_yuv_frame = alloc_av_frame();
     int      pts         = 0;
+
+private:
+    int m_max_reconnect = 100;
+    int m_write_error = 0;
 };
 
 }  // namespace Node

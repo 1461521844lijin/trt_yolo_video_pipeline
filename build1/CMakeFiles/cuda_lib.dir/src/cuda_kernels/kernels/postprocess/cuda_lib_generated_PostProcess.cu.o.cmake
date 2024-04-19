@@ -58,18 +58,18 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "/usr/bin/cmake") # path
-set(source_file "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/kernels/postprocess/PostProcess.cu") # path
-set(NVCC_generated_dependency_file "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.NVCC-depend") # path
-set(cmake_dependency_file "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.depend") # path
+set(source_file "/home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/kernels/postprocess/PostProcess.cu") # path
+set(NVCC_generated_dependency_file "/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.NVCC-depend") # path
+set(cmake_dependency_file "/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.depend") # path
 set(CUDA_make2cmake "/usr/share/cmake-3.22/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "/usr/share/cmake-3.22/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "/usr/bin/cc") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/.") # path
-set(generated_file_internal "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o") # path
-set(generated_cubin_file_internal "/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o.cubin.txt") # path
+set(generated_file_path "/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/.") # path
+set(generated_file_internal "/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o") # path
+set(generated_cubin_file_internal "/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "/usr/local/cuda-11.7/bin/nvcc") # path
 set(CUDA_NVCC_FLAGS  ;; ) # list
@@ -79,7 +79,7 @@ set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64;-Dcuda_lib_EXPORTS) # list
-set(CUDA_NVCC_INCLUDE_DIRS [==[/usr/local/cuda-11.7/include;/usr/local/include;/usr/local/include/opencv4;/usr/local/include/oatpp-1.3.0/oatpp;/home/my/workflow2024/01_project/trt_yolo_video_pipeline/src;/usr/local/cuda-11.7/include;/home/my/package/AI/TensorRT-8.2.5.1/include]==]) # list (needs to be in lua quotes to address backslashes)
+set(CUDA_NVCC_INCLUDE_DIRS [==[/usr/local/cuda-11.7/include;/usr/local/include;/usr/local/include/opencv4;/usr/local/include/oatpp-1.3.0/oatpp;/home/my/workflow2024/trt_yolo_video_pipeline/src;/usr/local/cuda-11.7/include;/home/my/package/AI/TensorRT-8.2.5.1/include]==]) # list (needs to be in lua quotes to address backslashes)
 string(REPLACE "\\" "/" CUDA_NVCC_INCLUDE_DIRS "${CUDA_NVCC_INCLUDE_DIRS}")
 set(CUDA_NVCC_COMPILE_DEFINITIONS [==[]==]) # list (needs to be in lua quotes see #16510 ).
 set(format_flag "-c") # string

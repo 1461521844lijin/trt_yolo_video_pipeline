@@ -7,12 +7,14 @@
 #include "ffmpeg/ffmpeg_node/FFmpegReadNode.h"
 #include "ffmpeg/ffmpeg_node/FFmpegRecordNode.h"
 #include "graph/common_node/ImageDrawNode.hpp"
+#include "graph/common_node/KeyfamePostNode.hpp"
 #include "infer/InferNode.h"
 namespace pipeline {
 
 YoloDetectPipeline::YoloDetectPipeline(std::string              task_name,
                                        std::string              input_url,
                                        std::string              output_url,
+                                       std::string              keyframe_url,
                                        const infer::Infer::ptr &trt_instance,
                                        int                      output_width,
                                        int                      output_height,
@@ -21,6 +23,7 @@ YoloDetectPipeline::YoloDetectPipeline(std::string              task_name,
     : Pipeline(std::move(task_name)),
       m_input_url(std::move(input_url)),
       m_output_url(std::move(output_url)),
+      m_keyframe_url(keyframe_url),
       m_output_width(output_width),
       m_output_height(output_height),
       m_output_fps(output_fps),
@@ -48,20 +51,26 @@ bool YoloDetectPipeline::Init() {
                                                  input_h, AV_PIX_FMT_BGR24, m_output_width,
                                                  m_output_height, AV_PIX_FMT_YUV420P, fps, bitrate);
     ASSERT_INIT(ffmpeg_output_node->Init());
-    auto record_node = std::make_shared<Node::FFmpegRecordNode>("record_node");
+    //auto record_node = std::make_shared<Node::FFmpegRecordNode>("record_node");
+    printf("%d: %s",__LINE__, m_keyframe_url.c_str());
+    auto post_node = std::make_shared<Node::KeyfamePostNode>("post_node", m_keyframe_url.c_str());
+
 
     trt_node->set_trt_instance(m_trt_instance);
 
     GraphCore::LinkNode(ffmpeg_input_node, trt_node);
     GraphCore::LinkNode(trt_node, trt_draw_node);
+    GraphCore::LinkNode(trt_node, post_node);
+
     GraphCore::LinkNode(trt_draw_node, ffmpeg_output_node);
-    GraphCore::LinkNode(trt_draw_node, record_node);
+    //GraphCore::LinkNode(trt_draw_node, record_node);
 
     m_nodes["ffmpeg_input_node"]  = ffmpeg_input_node;
     m_nodes["trt_node"]           = trt_node;
     m_nodes["trt_draw_node"]      = trt_draw_node;
+    m_nodes["post_node"]          = post_node;
     m_nodes["ffmpeg_output_node"] = ffmpeg_output_node;
-    m_nodes["record_node"]        = record_node;
+    //m_nodes["record_node"]        = record_node;
 
     m_initialized = true;
     return true;

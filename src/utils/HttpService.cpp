@@ -1,7 +1,7 @@
 #include "HttpService.hpp"
 
-Httpservice::Httpservice(){}
-Httpservice::~Httpservice(){}
+HttpService::HttpService(){}
+HttpService::~HttpService(){}
 
 
 size_t http_data_writer(void* data, size_t size, size_t nmemb, void* content)
@@ -19,13 +19,13 @@ size_t http_data_writer(void* data, size_t size, size_t nmemb, void* content)
 	return totalSize;
 }
 
-bool Httpservice::is_base64(const char c)
+bool HttpService::is_base64(const char c)
 {
     return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
 
-std::string Httpservice::base64_encode(const unsigned char * bytes_to_encode, unsigned int in_len)
+std::string HttpService::base64_encode(const unsigned char * bytes_to_encode, unsigned int in_len)
 {
     std::string ret;
     int i = 0;
@@ -76,7 +76,7 @@ std::string Httpservice::base64_encode(const unsigned char * bytes_to_encode, un
 }
 
 
-std::string Httpservice::base64_decode(std::string const & encoded_string)
+std::string HttpService::base64_decode(std::string const & encoded_string)
 {
     int in_len = (int) encoded_string.size();
     int i = 0;
@@ -117,7 +117,7 @@ std::string Httpservice::base64_decode(std::string const & encoded_string)
     return ret;  
 }
 
-std::string Httpservice::b64_encode(cv::Mat img)
+std::string HttpService::b64_encode(cv::Mat img)
 {
 
     m_vec_compresion.push_back(cv::IMWRITE_JPEG_QUALITY);
@@ -129,12 +129,13 @@ std::string Httpservice::b64_encode(cv::Mat img)
 }
 
 
-std::string Httpservice::requesthttp(std::string sendstr, std::string url)
+std::string HttpService::requesthttp(std::string sendstr, std::string url)
 {
 	std::string str_data;
 	CURL *p_curl = NULL;
 	CURLcode res;
 	p_curl = curl_easy_init();
+    //logger = spdlog::get("logger");
 
 	if (NULL != p_curl)
 	{
@@ -165,14 +166,9 @@ std::string Httpservice::requesthttp(std::string sendstr, std::string url)
 		// check for error
 		if (res!=CURLE_OK)
 		{
-			printf("Post failed\n");
 			return "error";
-		}
-		else
-		{
-			printf("Post success\n");
 		}
 		curl_global_cleanup();
 	}
-	return str_data;
+	return "ok";
 }

@@ -14,6 +14,7 @@
 #include <iostream>
 #include <map>
 
+
 namespace GraphCore {
 
 enum NODE_TYPE {

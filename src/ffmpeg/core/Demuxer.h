@@ -39,6 +39,7 @@ private:
     AVFormatContext *m_format_ctx;
     int              m_video_stream_index = -1;
     std::string      m_suffix;
+    // log
 };
 
 }  // namespace FFmpeg

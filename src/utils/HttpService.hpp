@@ -6,14 +6,15 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-
+#include <unistd.h>
 #include "json.hpp"
 #include "curl/curl.h"
+#include "logger.hpp"
 
-class Httpservice{
+class HttpService{
     public:
-    Httpservice();
-    ~Httpservice();
+    HttpService();
+    ~HttpService();
     static bool is_base64(const char c);
     std::string base64_encode(const unsigned char * bytes_to_encode, unsigned int in_len);
     std::string base64_decode(std::string const & encoded_string);

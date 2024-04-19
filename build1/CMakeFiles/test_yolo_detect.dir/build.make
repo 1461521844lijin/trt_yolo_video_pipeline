@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/my/workflow2024/01_project/trt_yolo_video_pipeline
+CMAKE_SOURCE_DIR = /home/my/workflow2024/trt_yolo_video_pipeline
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1
+CMAKE_BINARY_DIR = /home/my/workflow2024/trt_yolo_video_pipeline/build1
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test_yolo_detect.dir/depend.make
@@ -69,28 +69,28 @@ include CMakeFiles/test_yolo_detect.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/test_yolo_detect.dir/flags.make
 
-CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o: CMakeFiles/test_yolo_detect.dir/flags.make
-CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o: ../test/test_example_1.cpp
-CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o: CMakeFiles/test_yolo_detect.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o -MF CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o.d -o CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o -c /home/my/workflow2024/01_project/trt_yolo_video_pipeline/test/test_example_1.cpp
+CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o: CMakeFiles/test_yolo_detect.dir/flags.make
+CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o: ../test/test_example_2.cpp
+CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o: CMakeFiles/test_yolo_detect.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o -MF CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o.d -o CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o -c /home/my/workflow2024/trt_yolo_video_pipeline/test/test_example_2.cpp
 
-CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/01_project/trt_yolo_video_pipeline/test/test_example_1.cpp > CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.i
+CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/trt_yolo_video_pipeline/test/test_example_2.cpp > CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.i
 
-CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/01_project/trt_yolo_video_pipeline/test/test_example_1.cpp -o CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.s
+CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/trt_yolo_video_pipeline/test/test_example_2.cpp -o CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.s
 
 # Object files for target test_yolo_detect
 test_yolo_detect_OBJECTS = \
-"CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o"
+"CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o"
 
 # External object files for target test_yolo_detect
 test_yolo_detect_EXTERNAL_OBJECTS =
 
-test_yolo_detect: CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o
+test_yolo_detect: CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o
 test_yolo_detect: CMakeFiles/test_yolo_detect.dir/build.make
 test_yolo_detect: /usr/local/cuda-11.7/lib64/libcudart_static.a
 test_yolo_detect: /usr/lib/x86_64-linux-gnu/librt.a
@@ -159,7 +159,7 @@ test_yolo_detect: /usr/local/lib/libopencv_photo.so.4.8.0
 test_yolo_detect: /usr/local/lib/libopencv_imgproc.so.4.8.0
 test_yolo_detect: /usr/local/lib/libopencv_core.so.4.8.0
 test_yolo_detect: CMakeFiles/test_yolo_detect.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_yolo_detect"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test_yolo_detect"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_yolo_detect.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -171,6 +171,6 @@ CMakeFiles/test_yolo_detect.dir/clean:
 .PHONY : CMakeFiles/test_yolo_detect.dir/clean
 
 CMakeFiles/test_yolo_detect.dir/depend:
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/my/workflow2024/01_project/trt_yolo_video_pipeline /home/my/workflow2024/01_project/trt_yolo_video_pipeline /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/test_yolo_detect.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/my/workflow2024/trt_yolo_video_pipeline /home/my/workflow2024/trt_yolo_video_pipeline /home/my/workflow2024/trt_yolo_video_pipeline/build1 /home/my/workflow2024/trt_yolo_video_pipeline/build1 /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/test_yolo_detect.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test_yolo_detect.dir/depend
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o"
-  "CMakeFiles/test_yolo_detect.dir/test/test_example_1.cpp.o.d"
+  "CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o"
+  "CMakeFiles/test_yolo_detect.dir/test/test_example_2.cpp.o.d"
   "test_yolo_detect"
   "test_yolo_detect.pdb"
 )

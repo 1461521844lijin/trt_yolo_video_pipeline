@@ -7,7 +7,13 @@ extern "C" {
 }
 #include <iostream>  // for std::cout
 #include <memory>
+#include "spdlog/spdlog.h"
 
+#ifdef WIN32
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)
+#else
+#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
+#endif
 /*
  * Safe libAVFormat
  * 使用智能指针管理 libAVFormat 的变量

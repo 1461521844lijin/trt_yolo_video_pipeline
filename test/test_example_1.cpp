@@ -2,6 +2,7 @@
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 #include "utils/json.hpp"
+#include "spdlog/spdlog.h"
 using namespace std;
 
 // 加载配置文件
@@ -83,10 +84,11 @@ int main() {
 
     // 创建处理pipeline
     auto pipeline = std::make_shared<pipeline::YoloDetectPipeline>(
-        "test_pipeline", input_url, output_url, trt_instance, output_width, output_height, output_fps);
+        "test_pipeline", input_url, output_url, keyframe_url, trt_instance, output_width, output_height, output_fps);
 
     // 启动流水线
     pipeline->Start();
+    printf("Process done\n");
 
     getchar();
 }

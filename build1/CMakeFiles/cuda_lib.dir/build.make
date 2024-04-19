@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/my/workflow2024/01_project/trt_yolo_video_pipeline
+CMAKE_SOURCE_DIR = /home/my/workflow2024/trt_yolo_video_pipeline
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1
+CMAKE_BINARY_DIR = /home/my/workflow2024/trt_yolo_video_pipeline/build1
 
 # Include any dependencies generated for this target.
 include CMakeFiles/cuda_lib.dir/depend.make
@@ -358,9 +358,9 @@ CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o: /usr/local/cuda-11.7/include/vector_types.h
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o: CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.cmake
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o: ../src/cuda_kernels/kernels/postprocess/PostProcess.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building NVCC (Device) object CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o"
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess && /usr/bin/cmake -E make_directory /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/.
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o -D generated_cubin_file:STRING=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o.cubin.txt -P /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.cmake
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building NVCC (Device) object CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o"
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess && /usr/bin/cmake -E make_directory /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/.
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o -D generated_cubin_file:STRING=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/./cuda_lib_generated_PostProcess.cu.o.cubin.txt -P /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o.cmake
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o: ../src/cuda_kernels/cuda_tools/cuda_tools.h
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o: ../src/cuda_kernels/cuda_tools/ilogger.hpp
@@ -651,65 +651,65 @@ CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_P
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o: /usr/local/cuda-11.7/include/vector_types.h
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o: CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o.cmake
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o: ../src/cuda_kernels/kernels/preprocess/PreProcess.cu
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building NVCC (Device) object CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o"
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess && /usr/bin/cmake -E make_directory /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/.
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/./cuda_lib_generated_PreProcess.cu.o -D generated_cubin_file:STRING=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/./cuda_lib_generated_PreProcess.cu.o.cubin.txt -P /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o.cmake
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building NVCC (Device) object CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o"
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess && /usr/bin/cmake -E make_directory /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/.
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess && /usr/bin/cmake -D verbose:BOOL=$(VERBOSE) -D build_configuration:STRING= -D generated_file:STRING=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/./cuda_lib_generated_PreProcess.cu.o -D generated_cubin_file:STRING=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/./cuda_lib_generated_PreProcess.cu.o.cubin.txt -P /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o.cmake
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o: CMakeFiles/cuda_lib.dir/flags.make
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o: ../src/cuda_kernels/cuda_tools/CudaTimer.cpp
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o: CMakeFiles/cuda_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o -c /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o -c /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.i
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/CudaTimer.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.s
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o: CMakeFiles/cuda_lib.dir/flags.make
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o: ../src/cuda_kernels/cuda_tools/Tensor.cpp
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o: CMakeFiles/cuda_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o -c /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o -c /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.i
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/Tensor.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.s
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o: CMakeFiles/cuda_lib.dir/flags.make
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o: ../src/cuda_kernels/cuda_tools/cuda_tools.cpp
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o: CMakeFiles/cuda_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o -c /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.o -c /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.i
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/cuda_tools.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/cuda_tools.cpp.s
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o: CMakeFiles/cuda_lib.dir/flags.make
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o: ../src/cuda_kernels/cuda_tools/ilogger.cpp
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o: CMakeFiles/cuda_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o -c /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o -MF CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o.d -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.o -c /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp > CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.i
 
 CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/01_project/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/my/workflow2024/trt_yolo_video_pipeline/src/cuda_kernels/cuda_tools/ilogger.cpp -o CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/ilogger.cpp.s
 
 # Object files for target cuda_lib
 cuda_lib_OBJECTS = \
@@ -720,8 +720,8 @@ cuda_lib_OBJECTS = \
 
 # External object files for target cuda_lib
 cuda_lib_EXTERNAL_OBJECTS = \
-"/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o" \
-"/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o"
+"/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o" \
+"/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o"
 
 libcuda_lib.so: CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/CudaTimer.cpp.o
 libcuda_lib.so: CMakeFiles/cuda_lib.dir/src/cuda_kernels/cuda_tools/Tensor.cpp.o
@@ -733,7 +733,7 @@ libcuda_lib.so: CMakeFiles/cuda_lib.dir/build.make
 libcuda_lib.so: /usr/local/cuda-11.7/lib64/libcudart_static.a
 libcuda_lib.so: /usr/lib/x86_64-linux-gnu/librt.a
 libcuda_lib.so: CMakeFiles/cuda_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library libcuda_lib.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX shared library libcuda_lib.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cuda_lib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -746,6 +746,6 @@ CMakeFiles/cuda_lib.dir/clean:
 
 CMakeFiles/cuda_lib.dir/depend: CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/postprocess/cuda_lib_generated_PostProcess.cu.o
 CMakeFiles/cuda_lib.dir/depend: CMakeFiles/cuda_lib.dir/src/cuda_kernels/kernels/preprocess/cuda_lib_generated_PreProcess.cu.o
-	cd /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/my/workflow2024/01_project/trt_yolo_video_pipeline /home/my/workflow2024/01_project/trt_yolo_video_pipeline /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1 /home/my/workflow2024/01_project/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/my/workflow2024/trt_yolo_video_pipeline/build1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/my/workflow2024/trt_yolo_video_pipeline /home/my/workflow2024/trt_yolo_video_pipeline /home/my/workflow2024/trt_yolo_video_pipeline/build1 /home/my/workflow2024/trt_yolo_video_pipeline/build1 /home/my/workflow2024/trt_yolo_video_pipeline/build1/CMakeFiles/cuda_lib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/cuda_lib.dir/depend
 

@@ -1,0 +1,25 @@
+[2024-04-12 16:39:35.028] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:39:46.522] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:39:47.421] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:39:48.547] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:39:53.211] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:39:53.990] [logger] [---I---] [:] [] [test_example_2.cpp:67] Failed load config.json
+[2024-04-12 16:42:35.793] [logger] [---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:42:40.215] [logger] [---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:43:25.418] [---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:44:11.289][---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:44:12.789][---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:44:15.172][---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:44:16.649][---I---]  [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:02.015] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:04.680] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:05.570] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:08.303] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:09.024] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:09.644] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:10.087] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:10.536] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:11.148] [---I---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:33.850] [---E---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:41.037] [---E---] [test_example_2.cpp:65] Failed load config.json
+[2024-04-12 16:45:41.775] [---E---] [test_example_2.cpp:65] Failed load config.json

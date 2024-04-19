@@ -1,6 +1,6 @@
-#include "utils/json.hpp"
+#include <json/json.h>
 #include <fstream>
-#include "utils/HttpService.hpp"
+//#include "utils/HttpService.hpp"
 
 
 using namespace std;
@@ -16,8 +16,7 @@ int mode;
 int max_batch_size;
 
 
-int main()
-{
+int loadconfig(){
 	// Load config
 	std::ifstream file("../config.json");
 	if (!file.is_open())
@@ -52,4 +51,29 @@ int main()
 		printf("Failed to parse the JSON:%s\n", err.c_str());
 		return 1;
 	}
+}
+
+int main()
+{
+
+	Json::Value js_task;
+	Json::Value js_sub_target1;
+	js_task["keyframe"] = "keyframe_test";
+	js_task["task_no"] = "task_no_test";
+	js_task["date"] = "date_tesk";
+	for (size_t i = 0; i < 5; i++)
+	{
+		Json::Value temp;
+		temp["index"] = 1;
+		temp["width"] = 1;
+		temp["height"] = 1;
+		temp["left"] = 1;
+		temp["top"] = 1;
+		temp["type"] = "car";
+		js_task["targets"].append(temp);
+	}
+	
+	std::string str_obj = js_task.toStyledString();
+	printf("%s", str_obj.c_str());
+	return 0;
 }

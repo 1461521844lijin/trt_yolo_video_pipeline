@@ -46,7 +46,29 @@ Data::BaseData::ptr FFmpegOutputNode::handle_data(Data::BaseData::ptr data) {
     }
     if (!m_enmux->write_packet(pkt)) {
         std::cout << "write packet failed" << std::endl;
+        m_write_error ++;
+        if (m_write_error==100)
+        {
+            // 触发重连回调
+            error_cb(getName(), GraphCore::StatusCode::NodeError, "输出节点错误，重连中。。。");
+    
+            for(int i=0; i<m_max_reconnect; i++)
+            {
+                if(Reconnect())
+                {
+                    printf("重连成功！");
+                    m_write_error = 0;
+                    return data;
+                    break;
+                }
+                else
+                {
+                    printf("输出节点重连中。。。第%d次\n", i);
+                    std::this_thread::sleep_for(std::chrono::milliseconds(30));
+                }
+            }                           
         return nullptr;
+        }
     }
     return data;
 }
@@ -99,4 +121,13 @@ bool FFmpegOutputNode::Init() {
     }
     return true;
 }
+
+bool FFmpegOutputNode::Reconnect(){
+    m_scaler.reset();
+    m_encoder.reset();
+    m_enmux.reset();
+    Init();
+    return true;
+}
+
 }  // namespace Node
