@@ -20,7 +20,6 @@ FFmpegReadNode::FFmpegReadNode(const std::string &name,
 
 void FFmpegReadNode::worker() {
     int frame_index = 0;
-    auto logger = GetLogger();
     while (m_run) {
         auto pkt = alloc_av_packet();
         int  re  = m_demux->read_packet(pkt);
@@ -35,8 +34,7 @@ void FFmpegReadNode::worker() {
             }
             cv::Mat image(frame->height, frame->width, CV_8UC3);
             if (!m_scaler->scale<av_frame, cv::Mat>(frame, image)) {
-                //std::cout << "scale failed" << std::endl;
-                logger.error("[{0}:{1}] Scale failed", __FILENAME__, __LINE__);
+                ErrorL << "scale failed";
                 continue;
             }
             auto data = std::make_shared<Data::BaseData>(Data::DataType::FRAME);
@@ -46,8 +44,7 @@ void FFmpegReadNode::worker() {
             data->Insert<FRAME_HEIGHT_TYPE>(FRAME_HEIGHT, frame->height);
             send_output_data(data);
         } else if (re == AVERROR_EOF) {
-            //std::cout << "read eof" << std::endl;
-            logger.info("[{0}:{1}] Read eof", __FILENAME__, __LINE__);
+            ErrorL << "read end of file";
             if (m_cycle) {
                 m_demux->seek(0);
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -55,24 +52,19 @@ void FFmpegReadNode::worker() {
             }
             break;
         } else {
-            //std::cout << "read error" << std::endl;
-            logger.error("[{0}:{1}] Read error", __FILENAME__, __LINE__);
-
+            ErrorL << "read error";
             if (re == -5 || re == -1){
-                //error_cb(getName(), GraphCore::StatusCode::NodeError, "读取节点错误，重连中。。。");
-                logger.error("[{0}:{1}] 读取节点错误，重连中", __FILENAME__, __LINE__);
+                ErrorL << "读取节点错误，重连中。。。";
                 for(int i=0; i<m_max_reconnect; i++)
                 {
                     if(!Reconnect())
                     {
-                        //printf("重连成功");
-                        logger.info("[{0}:{1}] 重连成功", __FILENAME__, __LINE__);
+                        ErrorL << "重连成功";
                         break;
                     }
                     else
                     {
-                        logger.info("[{0}:{1}], 读取节点重连中...[第{2}次]", __FILENAME__, __LINE__, i);
-                        //printf("读取节点重连中。。。，第%d次", i);
+                        ErrorL << "读取节点重连中...[第" << i << "次]";
                         std::this_thread::sleep_for(std::chrono::milliseconds(30));
                     }
                 }

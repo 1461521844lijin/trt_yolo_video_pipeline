@@ -7,7 +7,7 @@ extern "C" {
 }
 #include <iostream>  // for std::cout
 #include <memory>
-#include "spdlog/spdlog.h"
+#include "utils/logger.h"
 
 #ifdef WIN32
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)

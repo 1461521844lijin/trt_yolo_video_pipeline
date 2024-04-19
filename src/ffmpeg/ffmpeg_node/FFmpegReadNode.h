@@ -10,7 +10,7 @@
 #include "ffmpeg/core/Decoder.h"
 #include "ffmpeg/core/Demuxer.h"
 #include "ffmpeg/core/Scaler.h"
-#include "utils/logger.hpp"
+#include "utils/logger.h"
 
 #ifdef WIN32
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)
@@ -65,9 +65,6 @@ private:
 
     // 最大重连次数
     int m_max_reconnect = 5;
-
-    // log
-    std::shared_ptr<spdlog::logger> logger = nullptr;
 
 private:
     std::shared_ptr<FFmpeg::Scaler>  m_scaler;   // 视频缩放、格式转换

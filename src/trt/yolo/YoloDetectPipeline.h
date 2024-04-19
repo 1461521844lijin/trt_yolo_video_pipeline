@@ -8,7 +8,6 @@
 #include "ffmpeg/record/Mp4RecordControlData.h"
 #include "graph/pipeline/Pipeline.h"
 #include "infer/Infer.h"
-#include "utils/HttpService.hpp"
 
 
 namespace pipeline {
@@ -20,7 +19,6 @@ public:
     explicit YoloDetectPipeline(std::string              task_name,
                                 std::string              input_url,
                                 std::string              output_url,
-                                std::string              keyframe_url,
                                 const infer::Infer::ptr &trt_instance,
                                 int                      output_width   = 1920,
                                 int                      output_height  = 1080,
@@ -37,7 +35,6 @@ private:
     infer::Infer::ptr m_trt_instance;
     std::string       m_input_url;      // rtsp url or video file path
     std::string       m_output_url;     // rtmp url
-    std::string       m_keyframe_url;   // keyframe_url
     int               m_output_width   = 1920;
     int               m_output_height  = 1080;
     int               m_output_fps     = 25;

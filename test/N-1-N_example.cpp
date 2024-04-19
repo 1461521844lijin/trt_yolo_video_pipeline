@@ -15,10 +15,10 @@ int main() {
 
     // 流水线数量，即视频流数量 ps：这里只是示例，实际应用中可以根据实际情况修改，输入的视频都是同一个视频流
     int stream_num = 20;
-    std::string input_stream_url  = "rtmp://192.168.161.149:11935/gate/f9edf7cb-b05a-407f-9cc1-aab7494b7cbf";
-    std::string output_stream_url = "rtmp://192.168.161.149/test/yolov8n";
-    std::string model_path        = "/root/trt_projects/yolov8n.transd.engine";
-    std::string label_path        = "/tmp/tmp.C5wIfz4ahJ/resource/labels/coco.labels";
+    std::string input_stream_url  = "";
+    std::string output_stream_url = "";
+    std::string model_path        = "";
+    std::string label_path        = "";
     int         max_batch_size    = 16;    // 最大batch数
     float       config_threshold  = 0.25;  // 检测阈值
     float       nms_threshold     = 0.5;   // nms阈值

@@ -2,12 +2,14 @@
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 
+#include "utils/logger.h"
 
 int main(int argc, char** argv) {
-    // std::string input_stream_url  = "rtmp://video-pull.yzhgk.com/ai/test";
-    // std::string output_stream_url = "rtmp://video-push.yzhgk.com/ai/test1";
-    // std::string model_path        = "../workspace/yolov5s.engine";
-    // std::string label_path        = "../labels.txt";
+
+
+    InfoL << "argc: ";
+    return 0;
+
 
     std::string input_stream_url(argv[1]);
     std::string output_stream_url(argv[2]);

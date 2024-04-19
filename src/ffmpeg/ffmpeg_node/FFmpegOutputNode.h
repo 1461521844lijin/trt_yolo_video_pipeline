@@ -10,7 +10,7 @@
 #include "ffmpeg/core/Scaler.h"
 #include "graph/core/node/ProcessNode.h"
 #include <thread>
-#incldue "utils/logger.hpp"
+#include "utils/logger.h"
 namespace Node {
 
 class FFmpegOutputNode : public GraphCore::Node {

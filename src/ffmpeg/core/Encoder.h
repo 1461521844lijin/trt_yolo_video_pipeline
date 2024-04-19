@@ -65,8 +65,6 @@ private:
     int              m_bitrate;
     int              m_gop_size = 50;
     AVCodecID        m_codec_id = AV_CODEC_ID_H264;
-    // log
-    std::shared_ptr<spdlog::logger> logger = nullptr;
 };
 
 }  // namespace FFmpeg
