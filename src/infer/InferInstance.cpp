@@ -3,7 +3,7 @@
 //
 
 #include "InferInstance.h"
-#include "utils/Ticker.h"
+#include "utils/TimeTicker.h"
 
 #include <utility>
 
@@ -22,7 +22,7 @@ InferInstance::InferInstance(std::string infer_name,
     m_infer_node->set_get_data_max_num(m_max_batch_size);
     m_infer_node->set_batch_data_handler_hooker(
         [this](std::vector<Data::BaseData::ptr> &batch_data) -> std::vector<Data::BaseData::ptr> {
-            TICKER1(40);
+            TimeTicker1(40);
             pre_process(batch_data);
             infer_process(batch_data);
             post_process(batch_data);

@@ -5,6 +5,7 @@
 #include "YoloDetectionInfer.h"
 #include "cuda_kernels/cuda_tools/cuda_tools.h"
 #include "graph/core/common/DetectionBox.h"
+#include "utils/logger.h"
 
 #include <utility>
 
@@ -65,7 +66,7 @@ bool YoloDetectionInfer::init() {
         m_normalize  = CUDA::Norm::None();
         m_class_nums = m_output_shapes[2] - 5;
     } else {
-        std::cout << "not support type" << std::endl;
+        ErrorL << "not support type";
         return false;
     }
     return true;
@@ -73,7 +74,7 @@ bool YoloDetectionInfer::init() {
 
 void YoloDetectionInfer::pre_process(std::vector<Data::BaseData::ptr> &batch_data) {
     int batch_size = batch_data.size();
-    //std::cout << "batch_size: " << batch_size << std::endl;
+    DebugL << "batch_size: " << batch_size;
     m_input_tensor->resize(batch_size, m_input_shapes[1], m_input_shapes[2], m_input_shapes[3]);
     m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
     for (int i = 0; i < batch_size; ++i) {
@@ -88,13 +89,13 @@ void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_d
         model_batch_size) {  // 当模型单次推理batch_size不等于infer_batch时，需要重新设置模型的batch_size
         if (m_dynamic) {
             if (!m_trt_engine->set_run_dims(0, m_input_tensor->dims())) {
-                std::cout << "设置推理batch失败！" << std::endl;
+                ErrorL << "设置推理batch失败！";
                 batch_data.clear();
                 return;
             }
         } else {
             if (infer_batch_size > model_batch_size) {
-                std::cout << "静态模型的单次推理batch大小不能超过模型配置本身！" << std::endl;
+                ErrorL << "静态模型的单次推理batch大小不能超过模型配置本身！";
                 batch_data.clear();
                 return;
             }

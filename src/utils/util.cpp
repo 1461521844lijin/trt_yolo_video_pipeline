@@ -22,7 +22,7 @@
 #include "onceToken.h"
 #include "logger.h"
 #include "uv_errno.h"
-#include "Network/sockutil.h"
+//#include "Network/sockutil.h"
 
 #if defined(_WIN32)
 #include <cstdio>
@@ -258,9 +258,9 @@ bool end_with(const string &str, const string &substr) {
     return pos != string::npos && pos == str.size() - substr.size();
 }
 
-bool isIP(const char *str) {
-    return SockUtil::is_ipv4(str) || SockUtil::is_ipv6(str);
-}
+// bool isIP(const char *str) {
+//     return SockUtil::is_ipv4(str) || SockUtil::is_ipv6(str);
+// }
 
 #if defined(_WIN32)
 void sleep(int second) {
@@ -271,19 +271,21 @@ void usleep(int micro_seconds) {
 }
 
 int gettimeofday(struct timeval *tp, void *tzp) {
-    auto now_stamp = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-    tp->tv_sec = (decltype(tp->tv_sec))(now_stamp / 1000000LL);
+    auto now_stamp = std::chrono::duration_cast<std::chrono::microseconds>(
+                         std::chrono::system_clock::now().time_since_epoch())
+                         .count();
+    tp->tv_sec  = (decltype(tp->tv_sec))(now_stamp / 1000000LL);
     tp->tv_usec = now_stamp % 1000000LL;
     return 0;
 }
 
-const char *strcasestr(const char *big, const char *little){
-    string big_str = big;
+const char *strcasestr(const char *big, const char *little) {
+    string big_str    = big;
     string little_str = little;
     strToLower(big_str);
     strToLower(little_str);
     auto pos = strstr(big_str.data(), little_str.data());
-    if (!pos){
+    if (!pos) {
         return nullptr;
     }
     return big + (pos - big_str.data());
@@ -296,7 +298,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap) {
         return -1;
     }
     size_t size = (size_t)len + 1;
-    char *str = (char*)malloc(size);
+    char  *str  = (char *)malloc(size);
     if (!str) {
         return -1;
     }
@@ -310,7 +312,7 @@ int vasprintf(char **strp, const char *fmt, va_list ap) {
     return r;
 }
 
- int asprintf(char **strp, const char *fmt, ...) {
+int asprintf(char **strp, const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
     int r = vasprintf(strp, fmt, ap);

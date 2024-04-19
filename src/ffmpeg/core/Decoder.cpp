@@ -1,5 +1,6 @@
 #include "Decoder.h"
 #include "NvidiaTools.h"
+#include "utils/logger.h"
 
 namespace FFmpeg {
 Decoder::Decoder(std::shared_ptr<Demuxer> demux) {
@@ -8,7 +9,6 @@ Decoder::Decoder(std::shared_ptr<Demuxer> demux) {
 }
 
 bool Decoder::open(bool use_hw) {
-    //logger = spdlog::get("logger");
     AVCodecID      codec_id = m_demux->get_video_codec_id();
     const AVCodec *codec    = nullptr;
     if (codec_id == AV_CODEC_ID_H264) {
@@ -26,14 +26,12 @@ bool Decoder::open(bool use_hw) {
         }
     }
     if (!codec) {
-        //logger->error("[{0}:{1}] avcodec_find_decoder", __FILENAME__, __LINE__);
-        std::cout << "avcodec_find_decoder failed" << std::endl;
+        ErrorL << "avcodec_find_decoder failed";
         return false;
     }
     m_codec_ctx = alloc_av_codec_context(codec);
     if (!m_codec_ctx) {
-        //logger->error("[{0}:{1}] alloc_av_codec_context failed", __FILENAME__, __LINE__);
-        std::cout << "alloc_av_codec_context failed" << std::endl;
+        ErrorL << "alloc_av_codec_context failed";
         return false;
     }
 
@@ -60,7 +58,7 @@ bool Decoder::open(bool use_hw) {
 
 bool Decoder::send(av_packet packet) {
     if (!m_codec_ctx) {
-        std::cout << "m_codec_ctx is nullptr" << std::endl;
+        ErrorL << "m_codec_ctx is nullptr";
         return false;
     }
     ASSERT_FFMPEG(avcodec_send_packet(m_codec_ctx.get(), packet.get()));
@@ -69,7 +67,7 @@ bool Decoder::send(av_packet packet) {
 
 bool Decoder::receive(av_frame &frame) {
     if (!m_codec_ctx) {
-        std::cout << "m_codec_ctx is nullptr" << std::endl;
+        ErrorL << "m_codec_ctx is nullptr";
         return false;
     }
     ASSERT_FFMPEG(avcodec_receive_frame(m_codec_ctx.get(), frame.get()));

@@ -62,24 +62,24 @@ Data::BaseData::ptr FFmpegPusherRecorderNode::handle_data(Data::BaseData::ptr da
     av_frame_unref(m_yuv_frame.get());
     auto mat_image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
     if (!m_scaler->scale<cv::Mat, av_frame>(mat_image, m_yuv_frame)) {
-        std::cout << "scale failed" << std::endl;
+        ErrorL << "scale failed";
         return nullptr;
     }
     auto pkt         = alloc_av_packet();
     m_yuv_frame->pts = pts++;
     if (!m_encoder->encode(m_yuv_frame, pkt)) {
-        std::cout << "encode failed" << std::endl;
+        ErrorL << "encode failed";
         return nullptr;
     }
     if (!m_enmux->write_packet(pkt)) {
-        std::cout << "write packet failed" << std::endl;
+        ErrorL << "write packet failed";
         return nullptr;
     }
 
     auto new_packet = alloc_av_packet_with(pkt.get());
     data->Insert<AV_PACKET_TYPE>(AV_PACKET, new_packet);
     if (!m_enmux->write_packet(pkt)) {
-        std::cout << "write packet failed" << std::endl;
+        ErrorL << "write packet failed";
         return nullptr;
     }
     // pkt数据保存后存入record task

@@ -12,12 +12,6 @@
 #include "ffmpeg/core/Scaler.h"
 #include "utils/logger.h"
 
-#ifdef WIN32
-#define __FILENAME__ (strrchr(__FILE__, '\\') ? (strrchr(__FILE__, '\\') + 1):__FILE__)
-#else
-#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
-#endif
-
 namespace Node {
 class FFmpegReadNode : public GraphCore::Node {
 public:

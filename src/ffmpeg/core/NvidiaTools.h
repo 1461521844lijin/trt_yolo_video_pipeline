@@ -5,7 +5,7 @@
 #ifndef VIDEO_FUSION_2_0_NVIDIATOOLS_H
 #define VIDEO_FUSION_2_0_NVIDIATOOLS_H
 
-#include "utils/FileOperate.h"
+#include "utils/File.h"
 #include "utils/String.h"
 #include <dlfcn.h>
 #include <iostream>
@@ -23,7 +23,7 @@ static bool checkIfSupportedNvidia_l() {
     }
     dlclose(so);
     bool find_driver = false;
-    utils::FileOperate::scanDir(
+    toolkit::File::scanDir(
         "/dev",
         [&](const std::string &path, bool is_dir) {
             if (!is_dir && utils::String::start_with(path, "/dev/nvidia")) {

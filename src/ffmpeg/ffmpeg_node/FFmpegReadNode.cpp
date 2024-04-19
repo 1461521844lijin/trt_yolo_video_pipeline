@@ -4,9 +4,8 @@
 
 #include "FFmpegReadNode.h"
 #include "graph/core/common/StatusCode.h"
-#include <utility>
 #include <thread>
-
+#include <utility>
 
 namespace Node {
 FFmpegReadNode::FFmpegReadNode(const std::string &name,
@@ -53,26 +52,21 @@ void FFmpegReadNode::worker() {
             break;
         } else {
             ErrorL << "read error";
-            if (re == -5 || re == -1){
+            if (re == -5 || re == -1) {
                 ErrorL << "读取节点错误，重连中。。。";
-                for(int i=0; i<m_max_reconnect; i++)
-                {
-                    if(!Reconnect())
-                    {
+                for (int i = 0; i < m_max_reconnect; i++) {
+                    if (!Reconnect()) {
                         ErrorL << "重连成功";
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         ErrorL << "读取节点重连中...[第" << i << "次]";
                         std::this_thread::sleep_for(std::chrono::milliseconds(30));
                     }
                 }
-                //break;
-                
+                // break;
             }
             continue;
-            //break;
+            // break;
         }
     }
 }
@@ -99,17 +93,17 @@ bool FFmpegReadNode::Init() {
         m_demux = FFmpeg::Demuxer::createShare();
     }
     if (!(m_demux->open(m_open_source))) {
-        std::cout << "open url " << m_open_source << "failed" << std::endl;
+        ErrorL << "open url " << m_open_source << "failed";
         return false;
     }
     if (!m_scaler) {
-        if(m_use_hw){
-            m_scaler = FFmpeg::Scaler::createShare(
-                m_demux->get_video_codec_parameters()->width,
-                m_demux->get_video_codec_parameters()->height,
-                AV_PIX_FMT_NV12,
-                m_demux->get_video_codec_parameters()->width,
-                m_demux->get_video_codec_parameters()->height, AV_PIX_FMT_BGR24);
+        if (m_use_hw) {
+            m_scaler = FFmpeg::Scaler::createShare(m_demux->get_video_codec_parameters()->width,
+                                                   m_demux->get_video_codec_parameters()->height,
+                                                   AV_PIX_FMT_NV12,
+                                                   m_demux->get_video_codec_parameters()->width,
+                                                   m_demux->get_video_codec_parameters()->height,
+                                                   AV_PIX_FMT_BGR24);
         } else {
             m_scaler = FFmpeg::Scaler::createShare(
                 m_demux->get_video_codec_parameters()->width,
@@ -134,12 +128,11 @@ bool FFmpegReadNode::Init() {
 }
 
 // read error add reconnect
-bool FFmpegReadNode::Reconnect(){
+bool FFmpegReadNode::Reconnect() {
     m_demux.reset();
     m_decoder.reset();
     m_scaler.reset();
-    Init();
-    return true;
+    return Init();
 }
 
 }  // namespace Node

@@ -57,8 +57,6 @@ public:
      */
     virtual bool Init() = 0;
 
-    bool Start_byname(std::string node_name);
-
 private:
 protected:
     std::mutex                                            m_mutex;

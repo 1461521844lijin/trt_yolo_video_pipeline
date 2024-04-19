@@ -7,25 +7,25 @@
 #include "trt/yolo/YoloDetectionInfer.h"
 
 int main() {
-
     /*
      * 该示例展示了如何创建多个流水线，每个流水线都使用同一个多实例推理推理对象
      * 示例中创建了5个流水线（5路视频），分别在1号和2号显卡上各创建两个模型实例，进行轮询负载推理
      */
 
-    // 流水线数量，即视频流数量 ps：这里只是示例，实际应用中可以根据实际情况修改，输入的视频都是同一个视频流
-    int stream_num = 20;
-    std::string input_stream_url  = "";
-    std::string output_stream_url = "";
-    std::string model_path        = "";
-    std::string label_path        = "";
+    // 流水线数量，即视频流数量
+    // ps：这里只是示例，实际应用中可以根据实际情况修改，输入的视频都是同一个视频流
+    int         stream_num        = 5;
+    std::string input_stream_url  = "输入流路径";
+    std::string output_stream_url = "输出流路径";
+    std::string model_path        = "TRTengine模型文件路径";
+    std::string label_path        = "检测分类类别文件路径";
     int         max_batch_size    = 16;    // 最大batch数
     float       config_threshold  = 0.25;  // 检测阈值
     float       nms_threshold     = 0.5;   // nms阈值
 
     // 模型实例数量列表，列表为模型实例数，每个元素代表该模型实例在哪张显卡上的下标
     // 该示例中，1号和2号显卡上各创建两个模型实例
-    std::vector<int> device_list{0,0,0};
+    std::vector<int> device_list{0, 0, 0};
     auto             type = infer::YoloType::V8;  // 模型类型
 
     // 创建多卡多实例推理对象

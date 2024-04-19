@@ -2,14 +2,7 @@
 #include "trt/yolo/YoloDetectPipeline.h"
 #include "trt/yolo/YoloDetectionInfer.h"
 
-#include "utils/logger.h"
-
 int main(int argc, char** argv) {
-
-
-    InfoL << "argc: ";
-    return 0;
-
 
     std::string input_stream_url(argv[1]);
     std::string output_stream_url(argv[2]);

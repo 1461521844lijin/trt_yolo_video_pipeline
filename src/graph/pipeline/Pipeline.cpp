@@ -15,8 +15,6 @@ void Pipeline::Start() {
     for (auto &node : m_nodes) {
         node.second->Start();
     }
-    // auto node_prt = m_nodes["ffmpeg_input_node"];
-    // node_prt->Start();
 }
 
 void Pipeline::Stop() {
@@ -27,12 +25,6 @@ void Pipeline::Stop() {
 
 Pipeline::~Pipeline() {
     Stop();
-}
-
-bool Pipeline::Start_byname(std::string node_name)
-{
-    auto node_prt = m_nodes[node_name];
-    node_prt->Start();
 }
 
 

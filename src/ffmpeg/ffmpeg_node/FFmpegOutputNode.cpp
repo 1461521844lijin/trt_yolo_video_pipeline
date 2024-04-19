@@ -35,30 +35,25 @@ Data::BaseData::ptr FFmpegOutputNode::handle_data(Data::BaseData::ptr data) {
     av_frame_unref(m_yuv_frame.get());
     auto mat_image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
     if (!m_scaler->scale<cv::Mat, av_frame>(mat_image, m_yuv_frame)) {
-        std::cout << "scale failed" << std::endl;
+        ErrorL << "scale failed";
         return nullptr;
     }
     auto pkt         = alloc_av_packet();
     m_yuv_frame->pts = pts++;
     if (!m_encoder->encode(m_yuv_frame, pkt)) {
-        std::cout << "encode failed" << std::endl;
+        ErrorL << "encode failed";
         return nullptr;
     }
     if (!m_enmux->write_packet(pkt)) {
-        std::cout << "write packet failed" << std::endl;
-        m_write_error ++;
-        if (m_write_error==100)
-        {
+        ErrorL << "write packet failed";
+        m_write_error++;
+        if (m_write_error == 100) {
             // 触发重连回调
             error_cb(getName(), GraphCore::StatusCode::NodeError, "输出节点错误，重连中。。。");
-    
-            for(int i=0; i<m_max_reconnect; i++)
-            {
-                if(Reconnect())
-                {
+            for (int i = 0; i < m_max_reconnect; i++) {
+                if (Reconnect()) {
                     printf("重连成功！");
                     m_write_error = 0;
-                    return data;
                     break;
                 }
                 else
@@ -122,12 +117,12 @@ bool FFmpegOutputNode::Init() {
     return true;
 }
 
-bool FFmpegOutputNode::Reconnect(){
+bool FFmpegOutputNode::Reconnect() {
     m_scaler.reset();
     m_encoder.reset();
     m_enmux.reset();
-    Init();
-    return true;
+    return Init();
+    ;
 }
 
 }  // namespace Node

@@ -83,11 +83,12 @@ bool Scaler::scale_uint8_to_uint8(uint8_t *src, uint8_t *dst) {
 
 bool Scaler::scale_avframe_to_avframe(av_frame src, av_frame &dst) {
     if (src->format != m_srcFormat || src->width != m_srcWidth || src->height != m_srcHeight) {
-        std::cout << "src format error" << std::endl;
+        ErrorL << "src format error";
+
         return false;
     }
     if (dst->format != m_dstFormat || dst->width != m_dstWidth || dst->height != m_dstHeight) {
-        std::cout << "dst format error" << std::endl;
+        ErrorL << "dst format error";
         return false;
     }
     if (dst->format == AV_PIX_FMT_BGR24) {

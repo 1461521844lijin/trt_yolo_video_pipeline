@@ -49,21 +49,20 @@ bool YoloDetectPipeline::Init() {
                                                  input_h, AV_PIX_FMT_BGR24, m_output_width,
                                                  m_output_height, AV_PIX_FMT_YUV420P, fps, bitrate);
     ASSERT_INIT(ffmpeg_output_node->Init());
-    //auto record_node = std::make_shared<Node::FFmpegRecordNode>("record_node");
-
+    auto record_node = std::make_shared<Node::FFmpegRecordNode>("record_node");
 
     trt_node->set_trt_instance(m_trt_instance);
 
     GraphCore::LinkNode(ffmpeg_input_node, trt_node);
     GraphCore::LinkNode(trt_node, trt_draw_node);
     GraphCore::LinkNode(trt_draw_node, ffmpeg_output_node);
-    //GraphCore::LinkNode(trt_draw_node, record_node);
+    GraphCore::LinkNode(trt_draw_node, record_node);
 
     m_nodes["ffmpeg_input_node"]  = ffmpeg_input_node;
     m_nodes["trt_node"]           = trt_node;
     m_nodes["trt_draw_node"]      = trt_draw_node;
     m_nodes["ffmpeg_output_node"] = ffmpeg_output_node;
-    //m_nodes["record_node"]        = record_node;
+    m_nodes["record_node"]        = record_node;
 
     m_initialized = true;
     return true;
