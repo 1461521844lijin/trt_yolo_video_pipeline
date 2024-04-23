@@ -122,7 +122,6 @@ bool FFmpegOutputNode::Reconnect() {
     m_encoder.reset();
     m_enmux.reset();
     return Init();
-    ;
 }
 
 }  // namespace Node

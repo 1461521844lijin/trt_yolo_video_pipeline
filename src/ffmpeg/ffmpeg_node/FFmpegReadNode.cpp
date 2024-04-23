@@ -55,7 +55,7 @@ void FFmpegReadNode::worker() {
             if (re == -5 || re == -1) {
                 ErrorL << "读取节点错误，重连中。。。";
                 for (int i = 0; i < m_max_reconnect; i++) {
-                    if (!Reconnect()) {
+                    if (Reconnect()) {
                         ErrorL << "重连成功";
                         break;
                     } else {
