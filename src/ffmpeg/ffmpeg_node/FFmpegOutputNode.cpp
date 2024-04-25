@@ -52,17 +52,15 @@ Data::BaseData::ptr FFmpegOutputNode::handle_data(Data::BaseData::ptr data) {
             error_cb(getName(), GraphCore::StatusCode::NodeError, "输出节点错误，重连中。。。");
             for (int i = 0; i < m_max_reconnect; i++) {
                 if (Reconnect()) {
-                    printf("重连成功！");
+                    WarnL << "重连成功！";
                     m_write_error = 0;
                     break;
-                }
-                else
-                {
-                    printf("输出节点重连中。。。第%d次\n", i);
+                } else {
+                    WarnL << "输出节点重连中。。。第" << i << "次";
                     std::this_thread::sleep_for(std::chrono::milliseconds(30));
                 }
-            }                           
-        return nullptr;
+            }
+            return nullptr;
         }
     }
     return data;

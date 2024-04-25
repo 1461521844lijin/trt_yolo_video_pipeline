@@ -43,7 +43,7 @@ void FFmpegReadNode::worker() {
             data->Insert<FRAME_HEIGHT_TYPE>(FRAME_HEIGHT, frame->height);
             send_output_data(data);
         } else if (re == AVERROR_EOF) {
-            ErrorL << "read end of file";
+            InfoL << "read end of file";
             if (m_cycle) {
                 m_demux->seek(0);
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -57,6 +57,7 @@ void FFmpegReadNode::worker() {
                 for (int i = 0; i < m_max_reconnect; i++) {
                     if (Reconnect()) {
                         ErrorL << "重连成功";
+                        timeout_cb(getName(), GraphCore::StatusCode::FFMpegReadError, "节点重连成功");
                         break;
                     } else {
                         ErrorL << "读取节点重连中...[第" << i << "次]";

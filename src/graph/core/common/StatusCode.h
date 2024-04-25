@@ -17,6 +17,12 @@ enum StatusCode {
     NodeExit,        // 节点退出
     NodeStop,        // 节点停止
 
+    // ffmpeg 状态
+    FFMpegReadError,  // ffmpeg 读取错误
+    FFMpegWriteError, // ffmpeg 写入错误
+    FFmpegDecodeError, // ffmpeg 解码错误
+    FFmpegEncodeError, // ffmpeg 编码错误
+
     // 模型状态
 
     // 管道状态

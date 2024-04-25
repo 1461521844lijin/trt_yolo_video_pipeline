@@ -49,10 +49,10 @@ void Node::Stop() {
     std::for_each(m_output_buffers.begin(), m_output_buffers.end(),
                   [&](const auto &item) { item.second->clear(); });
     m_base_cond->notify_all();
-    if (m_worker.joinable())
+    if (m_worker.joinable()) {
         m_worker.join();
+    }
     if (exit_cb) {
-        std::string name = getName();
         exit_cb(getName(), StatusCode::NodeExit, "节点线程退出");
         
     }

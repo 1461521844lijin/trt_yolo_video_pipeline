@@ -53,6 +53,23 @@ bool YoloDetectPipeline::Init() {
 
     trt_node->set_trt_instance(m_trt_instance);
 
+    // 当读取节点超时, 在回调中会同步重启输出节点
+    std::weak_ptr<Node::FFmpegOutputNode> weak_ffmpeg_output_node = ffmpeg_output_node;
+    auto ffmpeg_read_reconnect_cb =  [weak_ffmpeg_output_node](std::string tag, int code, std::string msg) {
+        InfoL << tag << "code:" << code << "msg:" << msg;
+        InfoL << "ffmpeg读取节点重启成功，准备重启输出节点";
+        auto true_ffmpeg_output_node = weak_ffmpeg_output_node.lock();
+        if (!true_ffmpeg_output_node) {
+            ErrorL << "输出节点已经销毁";
+            return -1;
+        }
+        int success = true_ffmpeg_output_node->Reconnect();
+        return  success;
+    };
+    // 设置读取节点超时回调函数
+    ffmpeg_input_node->set_timeout_cb(ffmpeg_read_reconnect_cb);
+
+
     GraphCore::LinkNode(ffmpeg_input_node, trt_node);
     GraphCore::LinkNode(trt_node, trt_draw_node);
     GraphCore::LinkNode(trt_draw_node, ffmpeg_output_node);
