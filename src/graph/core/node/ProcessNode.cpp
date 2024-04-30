@@ -54,7 +54,6 @@ void Node::Stop() {
     }
     if (exit_cb) {
         exit_cb(getName(), StatusCode::NodeExit, "节点线程退出");
-        
     }
     std::cout << getName() << " exit" << std::endl;
 }
@@ -107,24 +106,13 @@ void Node::worker() {
             m_base_cond->wait(lk);
             continue;
         }
-
     }
-
-    
 }
 
 void Node::get_input_datas(std::vector<Data::BaseData::ptr> &datas) {
     datas.clear();
     for (auto &item : m_input_buffers) {
-        Data::BaseData::ptr data;
-        int                 count = 0;
-        while (item.second->Pop(data)) {
-            datas.push_back(data);
-            count++;
-            if (count >= m_get_data_max_num) {
-                break;
-            }
-        }
+        item.second->PopList(datas, m_get_data_max_num);
     }
 }
 
@@ -150,11 +138,9 @@ Data::BaseData::ptr Node::handle_data(Data::BaseData::ptr data) {
     return data;
 }
 
-
-bool Node::add_data_back(const Data::BaseData::ptr &data){
+bool Node::add_data_back(const Data::BaseData::ptr &data) {
     return m_input_buffers.begin()->second->Push(data);
 }
-
 
 void Node::add_data(const Data::BaseData::ptr &data) {
     m_input_buffers.begin()->second->push_front(data);
