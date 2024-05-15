@@ -40,17 +40,18 @@ public:
                             m_list.push_back(data);
                         }
                         m_work_cond->notify_one();
-                        return false;  // 返回的false标识缓冲队列满
+                        return true;  // 丢弃的是最早的帧, 但是添加成功
                     }
                     break;
                 }
                 case BufferOverStrategy::DROP_LATE: {
                     if (m_list.front()->get_data_type() == Data::DataType::FRAME) {
-                        {
-                            std::unique_lock<std::mutex> lock(m_mutex);
-                            m_list.pop_back();
-                            m_list.push_back(data);
-                        }
+                        // 这一帧直接丢掉了
+//                        {
+//                            std::unique_lock<std::mutex> lock(m_mutex);
+//                            m_list.pop_back();
+//                            m_list.push_back(data);
+//                        }
                         m_work_cond->notify_one();
                         return false;  // 丢弃的是最新的帧
                     }
@@ -60,7 +61,6 @@ public:
                     {
                         std::unique_lock<std::mutex> lock(m_mutex);
                         m_list.clear();
-                        m_list.push_back(data);
                     }
                     DebugL << "清空缓冲队列，丢弃所有数据，重新添加数据";
                     m_work_cond->notify_one();
