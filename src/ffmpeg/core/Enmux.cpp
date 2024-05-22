@@ -18,7 +18,6 @@ Enmuxer::Enmuxer(std::shared_ptr<Encoder> encoder, std::string out_url) {
 }
 
 Enmuxer::~Enmuxer() {
-    m_format_ctx = nullptr;
     close();
 }
 
