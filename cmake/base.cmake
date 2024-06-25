@@ -8,8 +8,6 @@ include_directories(/usr/local/include/opencv4)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-# 启用硬件编解码加速标识
-add_definitions(-D__HWCODEC__)
 
 # ffmpeg动态库
 file(GLOB_RECURSE FFmpeg_LIBS

@@ -19,7 +19,7 @@ void RecordTask::Start() {
         return;
     }
     record_status = RecordStatus::STARTING;
-    m_thread      = std::thread(&RecordTask::worker, shared_from_this());
+    m_thread      = std::thread(&RecordTask::worker, this);
 }
 
 void RecordTask::worker() {
@@ -40,6 +40,7 @@ void RecordTask::Stop() {
     if (m_thread.joinable()) {
         m_thread.join();
     }
+    std::cout << "RecordTask Stop" << std::endl;
 }
 
 void RecordTask::set_record_complete_cb(RecordTask::RecordEvent_CB cb) {

@@ -55,7 +55,6 @@ Mp4RecordTask::Mp4RecordTask(RecordConfig config) : RecordTask(std::move(config)
 }
 
 Mp4RecordTask::~Mp4RecordTask() {
-    Stop();
     m_scaler.reset();
     m_enmuxer.reset();
     m_encoder.reset();

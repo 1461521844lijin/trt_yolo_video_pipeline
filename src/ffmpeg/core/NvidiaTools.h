@@ -13,9 +13,6 @@
 namespace FFmpeg {
 
 static bool checkIfSupportedNvidia_l() {
-#ifndef __HWCODEC__
-    return false;
-#endif
     auto so = dlopen("libnvcuvid.so.1", RTLD_LAZY);
     if (!so) {
         std::cerr << "libnvcuvid.so.1加载失败" << std::endl;

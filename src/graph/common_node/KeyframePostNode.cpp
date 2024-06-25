@@ -1,4 +1,3 @@
-#pragma once
 #include "KeyframePostNode.hpp"
 #include "utils/base64.h"
 #include "utils/json11.hpp"
