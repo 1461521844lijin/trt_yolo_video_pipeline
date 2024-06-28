@@ -58,8 +58,12 @@ void Enmuxer::close() {
 }
 
 void Enmuxer::write_trailer() {
-    if (m_format_name == "mp4" || m_format_name == "jpg")
+    static bool is_write_trailer = false;
+    if (!is_write_trailer && (m_format_name == "mp4" || m_format_name == "jpg")){
         av_write_trailer(m_format_ctx);
+        is_write_trailer = true;
+    }
+
 }
 
 }  // namespace FFmpeg

@@ -85,9 +85,6 @@ std::tuple<int, int, int, int64_t> FFmpegReadNode::get_video_info() const {
 
 FFmpegReadNode::~FFmpegReadNode() {
     Stop();
-    m_demux.reset();
-    m_decoder.reset();
-    m_scaler.reset();
 }
 bool FFmpegReadNode::Init() {
     if (!m_demux) {

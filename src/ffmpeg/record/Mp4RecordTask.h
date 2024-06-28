@@ -22,7 +22,6 @@ public:
 
 public:
     explicit Mp4RecordTask(RecordConfig config);
-    ~Mp4RecordTask() override;
 
 private:
     void record_handler(Data::BaseData::ptr data) override;

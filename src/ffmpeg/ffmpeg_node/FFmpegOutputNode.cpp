@@ -68,9 +68,6 @@ Data::BaseData::ptr FFmpegOutputNode::handle_data(Data::BaseData::ptr data) {
 
 FFmpegOutputNode::~FFmpegOutputNode() {
     Stop();
-    m_encoder.reset();
-    m_scaler.reset();
-    m_enmux.reset();
 }
 FFmpegOutputNode::ptr FFmpegOutputNode::CreateShared(std::string        name,
                                                      const std::string &open_source,
