@@ -3,12 +3,10 @@
 //
 
 #include "Tensor.h"
-
-#include "cuda_tools.h"
 #include <algorithm>
 #include <cuda_fp16.h>
 #include <cuda_runtime.h>
-
+#include "cuda_tools.h"
 namespace CUDA {
 
 using namespace cv;
@@ -23,18 +21,18 @@ float16 float_to_float16(float value) {
     return *reinterpret_cast<float16 *>(&val);
 }
 
-int data_type_size(DataType dt) {
-    switch (dt) {
-        case DataType::Float: return sizeof(float);
-        case DataType::Float16: return sizeof(float16);
-        case DataType::Int32: return sizeof(int);
-        case DataType::UInt8: return sizeof(uint8_t);
-        default: {
-            INFOE("Not support dtype: %d", dt);
-            return -1;
-        }
-    }
-}
+//int data_type_size(DataType dt) {
+//    switch (dt) {
+//        case DataType::FP32: return sizeof(float);
+//        case DataType::FP16: return sizeof(float16);
+//        case DataType::INT32: return sizeof(int);
+//        case DataType::UINT8: return sizeof(uint8_t);
+//        default: {
+//            INFOE("Not support dtype: %d", dt);
+//            return -1;
+//        }
+//    }
+//}
 
 inline static int get_device(int device_id) {
     if (device_id != CURRENT_DEVICE_ID) {
@@ -46,108 +44,13 @@ inline static int get_device(int device_id) {
     return device_id;
 }
 
-MixMemory::MixMemory(int device_id) {
-    device_id_ = get_device(device_id);
-}
 
-MixMemory::MixMemory(void *cpu, size_t cpu_size, void *gpu, size_t gpu_size) {
-    reference_data(cpu, cpu_size, gpu, gpu_size);
-}
-
-void MixMemory::reference_data(void *cpu, size_t cpu_size, void *gpu, size_t gpu_size) {
-    release_all();
-
-    if (cpu == nullptr || cpu_size == 0) {
-        cpu      = nullptr;
-        cpu_size = 0;
-    }
-
-    if (gpu == nullptr || gpu_size == 0) {
-        gpu      = nullptr;
-        gpu_size = 0;
-    }
-
-    this->cpu_      = cpu;
-    this->cpu_size_ = cpu_size;
-    this->gpu_      = gpu;
-    this->gpu_size_ = gpu_size;
-
-    this->owner_cpu_ = !(cpu && cpu_size > 0);
-    this->owner_gpu_ = !(gpu && gpu_size > 0);
-    checkCudaRuntime(cudaGetDevice(&device_id_));
-}
-
-MixMemory::~MixMemory() {
-    release_all();
-}
-
-void *MixMemory::gpu(size_t size) {
-    if (gpu_size_ < size) {
-        release_gpu();
-
-        gpu_size_ = size;
-        CUDATools::AutoDevice auto_device_exchange(device_id_);
-        checkCudaRuntime(cudaMalloc(&gpu_, size));
-        checkCudaRuntime(cudaMemset(gpu_, 0, size));
-    }
-    return gpu_;
-}
-
-void *MixMemory::cpu(size_t size) {
-    if (cpu_size_ < size) {
-        release_cpu();
-
-        cpu_size_ = size;
-        CUDATools::AutoDevice auto_device_exchange(device_id_);
-        checkCudaRuntime(cudaMallocHost(&cpu_, size));
-        Assert(cpu_ != nullptr);
-        memset(cpu_, 0, size);
-    }
-    return cpu_;
-}
-
-void MixMemory::release_cpu() {
-    if (cpu_) {
-        if (owner_cpu_) {
-            CUDATools::AutoDevice auto_device_exchange(device_id_);
-            checkCudaRuntime(cudaFreeHost(cpu_));
-        }
-        cpu_ = nullptr;
-    }
-    cpu_size_ = 0;
-}
-
-void MixMemory::release_gpu() {
-    if (gpu_) {
-        if (owner_gpu_) {
-            CUDATools::AutoDevice auto_device_exchange(device_id_);
-            checkCudaRuntime(cudaFree(gpu_));
-        }
-        gpu_ = nullptr;
-    }
-    gpu_size_ = 0;
-}
-
-void MixMemory::release_all() {
-    release_cpu();
-    release_gpu();
-}
 
 const char *data_head_string(DataHead dh) {
     switch (dh) {
         case DataHead::Init: return "Init";
         case DataHead::Device: return "Device";
         case DataHead::Host: return "Host";
-        default: return "Unknow";
-    }
-}
-
-const char *data_type_string(DataType dt) {
-    switch (dt) {
-        case DataType::Float: return "Float32";
-        case DataType::Float16: return "Float16";
-        case DataType::Int32: return "Int32";
-        case DataType::UInt8: return "UInt8";
         default: return "Unknow";
     }
 }
@@ -166,7 +69,7 @@ Tensor::Tensor(int                   n,
     resize(n, c, h, w);
 }
 
-Tensor::Tensor(const std::vector<int> &dims,
+Tensor::Tensor(const std::vector<int64_t> &dims,
                DataType                dtype,
                shared_ptr<MixMemory>   data,
                int                     device_id) {
@@ -177,8 +80,8 @@ Tensor::Tensor(const std::vector<int> &dims,
     resize(dims);
 }
 
-Tensor::Tensor(int                   ndims,
-               const int            *dims,
+Tensor::Tensor(int64_t                   ndims,
+               const int64_t            *dims,
                DataType              dtype,
                shared_ptr<MixMemory> data,
                int                   device_id) {
@@ -205,7 +108,7 @@ const char *Tensor::descriptor() const {
     char *descriptor_ptr = (char *)descriptor_string_;
     int   device_id      = device();
     snprintf(descriptor_ptr, sizeof(descriptor_string_), "Tensor:%p, %s, %s, CUDA:%d", data_.get(),
-             data_type_string(dtype_), shape_string_, device_id);
+             type_to_string(dtype_).c_str(), shape_string_, device_id);
     return descriptor_ptr;
 }
 
@@ -228,7 +131,7 @@ Tensor &Tensor::compute_shape_string() {
     return *this;
 }
 
-void Tensor::reference_data(const vector<int> &shape,
+void Tensor::reference_data(const vector<int64_t> &shape,
                             void              *cpu_data,
                             size_t             cpu_size,
                             void              *gpu_data,
@@ -373,7 +276,7 @@ int Tensor::count(int start_axis) const {
     }
 }
 
-Tensor &Tensor::resize(const std::vector<int> &dims) {
+Tensor &Tensor::resize(const std::vector<int64_t> &dims) {
     return resize(dims.size(), dims.data());
 }
 
@@ -393,8 +296,8 @@ Tensor &Tensor::resize_single_dim(int idim, int size) {
     return resize(new_shape);
 }
 
-Tensor &Tensor::resize(int ndims, const int *dims) {
-    vector<int> setup_dims(ndims);
+Tensor &Tensor::resize(int64_t ndims, const int64_t *dims) {
+    vector<int64_t> setup_dims(ndims);
     for (int i = 0; i < ndims; ++i) {
         int dim = dims[i];
         if (dim == -1) {
@@ -470,23 +373,23 @@ Tensor &Tensor::to_cpu(bool copy) {
 }
 
 Tensor &Tensor::to_float() {
-    if (type() == DataType::Float)
+    if (type() == DataType::FP32)
         return *this;
 
-    if (type() != DataType::Float16) {
+    if (type() != DataType::FP16) {
         INFOF("not implement function");
         return *this;
     }
 
     auto     c              = count();
-    float   *convert_memory = (float *)malloc(c * data_type_size(DataType::Float));
+    float   *convert_memory = (float *)malloc(c * data_type_size(DataType::FP32));
     float   *dst            = convert_memory;
     float16 *src            = cpu<float16>();
 
     for (int i = 0; i < c; ++i)
         *dst++ = float16_to_float(*src++);
 
-    this->dtype_ = DataType::Float;
+    this->dtype_ = DataType::FP32;
     adajust_memory_by_update_dims_or_type();
     memcpy(cpu(), convert_memory, bytes_);
     free(convert_memory);
@@ -494,23 +397,23 @@ Tensor &Tensor::to_float() {
 }
 
 Tensor &Tensor::to_half() {
-    if (type() == DataType::Float16)
+    if (type() == DataType::FP16)
         return *this;
 
-    if (type() != DataType::Float) {
+    if (type() != DataType::FP32) {
         INFOF("not implement function");
         return *this;
     }
 
     auto     c              = count();
-    float16 *convert_memory = (float16 *)malloc(c * data_type_size(DataType::Float16));
+    float16 *convert_memory = (float16 *)malloc(c * data_type_size(DataType::FP16));
     float16 *dst            = convert_memory;
     float   *src            = cpu<float>();
 
     for (int i = 0; i < c; ++i)
         *dst++ = float_to_float16(*src++);
 
-    this->dtype_ = DataType::Float16;
+    this->dtype_ = DataType::FP16;
     adajust_memory_by_update_dims_or_type();
     memcpy(cpu(), convert_memory, bytes_);
     free(convert_memory);
@@ -525,13 +428,13 @@ static inline void memset_any_type(_T *ptr, size_t count, _T value) {
 
 Tensor &Tensor::set_to(float value) {
     int c = count();
-    if (dtype_ == DataType::Float) {
+    if (dtype_ == DataType::FP32) {
         memset_any_type(cpu<float>(), c, value);
-    } else if (dtype_ == DataType::Float16) {
+    } else if (dtype_ == DataType::FP16) {
         memset_any_type(cpu<float16>(), c, float_to_float16(value));
-    } else if (dtype_ == DataType::Int32) {
+    } else if (dtype_ == DataType::INT32) {
         memset_any_type(cpu<int>(), c, (int)value);
-    } else if (dtype_ == DataType::UInt8) {
+    } else if (dtype_ == DataType::UINT8) {
         memset_any_type(cpu<uint8_t>(), c, (uint8_t)value);
     } else {
         INFOE("Unsupport type: %d", dtype_);
@@ -557,7 +460,7 @@ int Tensor::offset_array(const std::vector<int> &index_array) const {
 }
 
 Tensor &Tensor::set_norm_mat(int n, const cv::Mat &image, float mean[3], float std[3]) {
-    Assert(image.channels() == 3 && !image.empty() && type() == DataType::Float);
+    Assert(image.channels() == 3 && !image.empty() && type() == DataType::FP32);
     Assert(ndims() == 4 && n < shape_[0]);
     to_cpu(false);
 
@@ -586,7 +489,7 @@ Tensor &Tensor::set_norm_mat(int n, const cv::Mat &image, float mean[3], float s
 
 Tensor &Tensor::set_mat(int n, const cv::Mat &_image) {
     cv::Mat image = _image;
-    Assert(!image.empty() && CV_MAT_DEPTH(image.type()) == CV_32F && type() == DataType::Float);
+    Assert(!image.empty() && CV_MAT_DEPTH(image.type()) == CV_32F && type() == DataType::FP32);
     std::cout << "image.channels() = " << image.channels() << std::endl;
 
     Assert(shape_.size() == 4 && n < shape_[0] && image.channels() == shape_[1]);
@@ -647,7 +550,7 @@ bool Tensor::load_from_file(const std::string &file) {
 
     int         ndims = head[1];
     auto        dtype = (DataType)head[2];
-    vector<int> dims(ndims);
+    vector<int64_t> dims(ndims);
     fread(dims.data(), 1, ndims * sizeof(dims[0]), f);
 
     this->dtype_ = dtype;

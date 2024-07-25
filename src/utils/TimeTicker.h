@@ -39,8 +39,7 @@ public:
     ~Ticker() {
         uint64_t tm = createdTime();
         if (tm > _min_ms) {
-            _ctx << "take time: " << tm << "ms"
-                 << ", thread may be overloaded";
+            _ctx << "take time: " << tm << "ms";
         } else {
             _ctx.clear();
         }
@@ -137,7 +136,7 @@ private:
 };
 
 #if !defined(NDEBUG)
-#    define TimeTicker() toolkit::Ticker __ticker(5, WarnL, true)
+#    define TimeTicker() toolkit::Ticker __ticker(0, WarnL, true)
 #    define TimeTicker1(tm) toolkit::Ticker __ticker1(tm, WarnL, true)
 #    define TimeTicker2(tm, log) toolkit::Ticker __ticker2(tm, log, true)
 #else

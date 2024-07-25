@@ -6,6 +6,7 @@
 #ifndef VIDEOPIPELINE_TENSOR_H
 #define VIDEOPIPELINE_TENSOR_H
 
+#include "MixMemory.h"
 #include <map>
 #include <memory>
 #include <opencv2/opencv.hpp>
@@ -15,8 +16,6 @@
 struct CUstream_st;
 typedef CUstream_st CUStreamRaw;
 
-#define CURRENT_DEVICE_ID -1
-
 namespace CUDA {
 
 typedef struct {
@@ -24,105 +23,148 @@ typedef struct {
 } float16;
 typedef CUStreamRaw *CUStream;
 
-enum class DataHead : int { Init = 0, Device = 1, Host = 2 };
+enum class DataHead : int {
+    Init   = 0,  // 未初始化
+    Device = 1,  // 在设备上
+    Host   = 2   // 在主机上
+};
 
-enum class DataType : int { Unknow = -1, Float = 0, Float16 = 1, Int32 = 2, UInt8 = 3 };
+enum class DataType : int {
+    Unknow = -1,
+    INT8,
+    INT16,
+    INT32,
+    INT64,
+    UINT8,
+    UINT16,
+    UINT32,
+    UINT64,
+    FP16,
+    FP32,
+    FP64
+};
 static std::string type_to_string(DataType type) {
     switch (type) {
-        case DataType::Int32: return "INT32";
-        case DataType::UInt8: return "UINT8";
-        case DataType::Float16: return "FP16";
-        case DataType::Float: return "FP32";
+        case DataType::INT8: return "INT8";
+        case DataType::INT16: return "INT16";
+        case DataType::INT32: return "INT32";
+        case DataType::INT64: return "INT64";
+        case DataType::UINT8: return "UINT8";
+        case DataType::UINT16: return "UINT16";
+        case DataType::UINT32: return "UINT32";
+        case DataType::UINT64: return "UINT64";
+        case DataType::FP16: return "FP16";
+        case DataType::FP32: return "FP32";
+        case DataType::FP64: return "FP64";
         default: return "INVALID";
     }
 }
+
+static DataType string_to_type(const std::string &type) {
+    if (type == "INT8") {
+        return DataType::INT8;
+    } else if (type == "INT16") {
+        return DataType::INT16;
+    } else if (type == "INT32") {
+        return DataType::INT32;
+    } else if (type == "INT64") {
+        return DataType::INT64;
+    } else if (type == "UINT8") {
+        return DataType::UINT8;
+    } else if (type == "UINT16") {
+        return DataType::UINT16;
+    } else if (type == "UINT32") {
+        return DataType::UINT32;
+    } else if (type == "UINT64") {
+        return DataType::UINT64;
+    } else if (type == "FP16") {
+        return DataType::FP16;
+    } else if (type == "FP32") {
+        return DataType::FP32;
+    } else if (type == "FP64") {
+        return DataType::FP64;
+    } else {
+        throw std::runtime_error("Invalid data type: " + type);
+    }
+}
+
+static int data_type_size(DataType dt) {
+    switch (dt) {
+        case DataType::INT8: return 1;
+        case DataType::INT16: return 2;
+        case DataType::INT32: return 4;
+        case DataType::INT64: return 8;
+        case DataType::UINT8: return 1;
+        case DataType::UINT16: return 2;
+        case DataType::UINT32: return 4;
+        case DataType::UINT64: return 8;
+        case DataType::FP16: return 2;
+        case DataType::FP32: return 4;
+        case DataType::FP64: return 8;
+        default: return 0;
+    }
+}
+
+static int data_type_size(const std::string &dt) {
+    return data_type_size(string_to_type(dt));
+
+}
+
+static int data_nums(std::vector<int64_t> shape) {
+    int nums = 1;
+    for (auto &s : shape) {
+        assert(s>0);
+        nums *= s;
+    }
+    return nums;
+}
+
+
+
 
 float       float16_to_float(float16 value);
 float16     float_to_float16(float value);
 int         data_type_size(DataType dt);
 const char *data_head_string(DataHead dh);
-const char *data_type_string(DataType dt);
-
-class MixMemory {
-public:
-    MixMemory(int device_id = CURRENT_DEVICE_ID);
-    MixMemory(void *cpu, size_t cpu_size, void *gpu, size_t gpu_size);
-    virtual ~MixMemory();
-    void *gpu(size_t size);
-    void *cpu(size_t size);
-    void  release_gpu();
-    void  release_cpu();
-    void  release_all();
-
-    inline bool owner_gpu() const {
-        return owner_gpu_;
-    }
-    inline bool owner_cpu() const {
-        return owner_cpu_;
-    }
-
-    inline size_t cpu_size() const {
-        return cpu_size_;
-    }
-    inline size_t gpu_size() const {
-        return gpu_size_;
-    }
-    inline int device_id() const {
-        return device_id_;
-    }
-
-    inline void *gpu() const {
-        return gpu_;
-    }
-
-    // Pinned Memory
-    inline void *cpu() const {
-        return cpu_;
-    }
-
-    void reference_data(void *cpu, size_t cpu_size, void *gpu, size_t gpu_size);
-
-private:
-    void  *cpu_       = nullptr;
-    size_t cpu_size_  = 0;
-    bool   owner_cpu_ = true;
-    int    device_id_ = 0;
-
-    void  *gpu_       = nullptr;
-    size_t gpu_size_  = 0;
-    bool   owner_gpu_ = true;
-};
 
 class Tensor {
+public:
+    typedef std::shared_ptr<Tensor> ptr;
+
 public:
     Tensor(const Tensor &other)            = delete;
     Tensor &operator=(const Tensor &other) = delete;
 
-    explicit Tensor(DataType                   dtype     = DataType::Float,
+    explicit Tensor(DataType                   dtype     = DataType::FP32,
                     std::shared_ptr<MixMemory> data      = nullptr,
                     int                        device_id = CURRENT_DEVICE_ID);
     explicit Tensor(int                        n,
                     int                        c,
                     int                        h,
                     int                        w,
-                    DataType                   dtype     = DataType::Float,
+                    DataType                   dtype     = DataType::FP32,
                     std::shared_ptr<MixMemory> data      = nullptr,
                     int                        device_id = CURRENT_DEVICE_ID);
-    explicit Tensor(int                        ndims,
-                    const int                 *dims,
-                    DataType                   dtype     = DataType::Float,
+    explicit Tensor(int64_t                    ndims,
+                    const int64_t             *dims,
+                    DataType                   dtype     = DataType::FP32,
                     std::shared_ptr<MixMemory> data      = nullptr,
                     int                        device_id = CURRENT_DEVICE_ID);
-    explicit Tensor(const std::vector<int>    &dims,
-                    DataType                   dtype     = DataType::Float,
-                    std::shared_ptr<MixMemory> data      = nullptr,
-                    int                        device_id = CURRENT_DEVICE_ID);
+    explicit Tensor(const std::vector<int64_t> &dims,
+                    DataType                    dtype     = DataType::FP32,
+                    std::shared_ptr<MixMemory>  data      = nullptr,
+                    int                         device_id = CURRENT_DEVICE_ID);
     virtual ~Tensor();
 
-    int        numel() const;
+    // 数据元素个数
+    int numel() const;
+
+    // 数据维度
     inline int ndims() const {
         return shape_.size();
     }
+
+    // 数据维度数值
     inline int size(int index) const {
         return shape_[index];
     }
@@ -146,12 +188,18 @@ public:
     inline DataType type() const {
         return dtype_;
     }
-    inline const std::vector<int> &dims() const {
+
+    // 数据shape
+    inline const std::vector<int64_t> &dims() const {
         return shape_;
     }
+
+    // 数据步长
     inline const std::vector<size_t> &strides() const {
         return strides_;
     }
+
+    // 数据字节大小
     inline int bytes() const {
         return bytes_;
     }
@@ -161,6 +209,8 @@ public:
     inline int element_size() const {
         return data_type_size(dtype_);
     }
+
+    // 数据存放位置
     inline DataHead head() const {
         return head_;
     }
@@ -180,13 +230,13 @@ public:
     int offset_array(size_t size, const int *index_array) const;
 
     template <typename... _Args>
-    Tensor &resize(int dim_size, _Args... dim_size_args) {
-        const int dim_size_array[] = {dim_size, dim_size_args...};
+    Tensor &resize(int64_t dim_size, _Args... dim_size_args) {
+        const int64_t dim_size_array[] = {dim_size, dim_size_args...};
         return resize(sizeof...(dim_size_args) + 1, dim_size_array);
     }
 
-    Tensor &resize(int ndims, const int *dims);
-    Tensor &resize(const std::vector<int> &dims);
+    Tensor &resize(int64_t ndims, const int64_t *dims);
+    Tensor &resize(const std::vector<int64_t> &dims);
     Tensor &resize_single_dim(int idim, int size);
     int     count(int start_axis = 0) const;
     int     device() const {
@@ -281,12 +331,12 @@ public:
                           int         device_id = CURRENT_DEVICE_ID);
     Tensor &copy_from_cpu(size_t offset, const void *src, size_t num_element);
 
-    void reference_data(const std::vector<int> &shape,
-                        void                   *cpu_data,
-                        size_t                  cpu_size,
-                        void                   *gpu_data,
-                        size_t                  gpu_size,
-                        DataType                dtype);
+    void reference_data(const std::vector<int64_t> &shape,
+                        void                       *cpu_data,
+                        size_t                      cpu_size,
+                        void                       *gpu_data,
+                        size_t                      gpu_size,
+                        DataType                    dtype);
 
     /**
 
@@ -322,11 +372,11 @@ private:
     void    setup_data(std::shared_ptr<MixMemory> data);
 
 private:
-    std::vector<int>           shape_;
+    std::vector<int64_t>       shape_;
     std::vector<size_t>        strides_;
     size_t                     bytes_        = 0;
     DataHead                   head_         = DataHead::Init;
-    DataType                   dtype_        = DataType::Float;
+    DataType                   dtype_        = DataType::FP32;
     CUStream                   stream_       = nullptr;
     bool                       stream_owner_ = false;
     int                        device_id_    = 0;
@@ -336,6 +386,6 @@ private:
     std::shared_ptr<MixMemory> workspace_;
 };
 
-}  // namespace cuda
+}  // namespace CUDA
 
 #endif  // VIDEOPIPELINE_TENSOR_H
