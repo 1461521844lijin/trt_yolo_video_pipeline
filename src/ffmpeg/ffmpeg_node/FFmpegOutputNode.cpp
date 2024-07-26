@@ -3,6 +3,7 @@
 //
 
 #include "FFmpegOutputNode.h"
+#include "utils/TimeTicker.h"
 
 #include <utility>
 
@@ -32,8 +33,9 @@ FFmpegOutputNode::FFmpegOutputNode(std::string name,
       GraphCore::Node(std::move(name), GraphCore::NODE_TYPE::MID_NODE) {}
 
 Data::BaseData::ptr FFmpegOutputNode::handle_data(Data::BaseData::ptr data) {
+    TimeTicker();
     av_frame_unref(m_yuv_frame.get());
-    auto mat_image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto mat_image = data->MAT_IMAGE;
     if (!m_scaler->scale<cv::Mat, av_frame>(mat_image, m_yuv_frame)) {
         ErrorL << "scale failed";
         return nullptr;

@@ -32,15 +32,15 @@ Data::BaseData::ptr KeyframePostNode::handle_data(Data::BaseData::ptr data) {
 
     // 获取检测结果
     auto status =
-        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(120));
+        data->DETECTBOX_FUTURE.wait_for(std::chrono::milliseconds(120));
     if (status == std::future_status::timeout) {
         WarnL << "推理结果等待超时";
         return nullptr;
     }
-    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
+    auto box_array = data->DETECTBOX_FUTURE.get();
 
     // 生成json数据
-    auto               image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto               image = data->MAT_IMAGE;
     std::vector<uchar> img_data;
     cv::imencode(".jpg", image, img_data);
     std::string img_base64 = encodeBase64(std::string(img_data.begin(), img_data.end()));
@@ -57,7 +57,7 @@ Data::BaseData::ptr KeyframePostNode::handle_data(Data::BaseData::ptr data) {
     json11::Json json_data = json11::Json::object{{"img_base64", img_base64},
                                                   {"img_width", image.cols},
                                                   {"img_height", image.rows},
-                                                  {"frame_id", data->Get<int>(FRAME_INDEX)},
+                                                  {"frame_id", data->FRAME_INDEX},
                                                   {"post_time", Time2Str(time(nullptr))},
                                                   {"detection_boxes", detect_boxes}};
 

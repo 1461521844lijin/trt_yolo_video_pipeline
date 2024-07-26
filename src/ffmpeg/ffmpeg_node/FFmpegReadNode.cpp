@@ -36,11 +36,13 @@ void FFmpegReadNode::worker() {
                 ErrorL << "scale failed";
                 continue;
             }
-            auto data = std::make_shared<Data::BaseData>(Data::DataType::FRAME);
-            data->Insert<MAT_IMAGE_TYPE>(MAT_IMAGE, image);
-            data->Insert<FRAME_INDEX_TYPE>(FRAME_INDEX, frame_index++);
-            data->Insert<FRAME_WIDTH_TYPE>(FRAME_WIDTH, frame->width);
-            data->Insert<FRAME_HEIGHT_TYPE>(FRAME_HEIGHT, frame->height);
+            auto data          = std::make_shared<Data::BaseData>(Data::DataType::FRAME);
+            data->data_name    = getName();
+            data->MAT_IMAGE    = image;
+            data->FRAME_INDEX  = frame_index++;
+            data->FRAME_WIDTH  = frame->width;
+            data->FRAME_HEIGHT = frame->height;
+//            ErrorL << "输出生成：" << data->FRAME_INDEX;
             send_output_data(data);
         } else if (re == AVERROR_EOF) {
             InfoL << "read end of file";
@@ -57,7 +59,8 @@ void FFmpegReadNode::worker() {
                 for (int i = 0; i < m_max_reconnect; i++) {
                     if (Reconnect()) {
                         ErrorL << "重连成功";
-                        timeout_cb(getName(), GraphCore::StatusCode::FFMpegReadError, "节点重连成功");
+                        timeout_cb(getName(), GraphCore::StatusCode::FFMpegReadError,
+                                   "节点重连成功");
                         break;
                     } else {
                         ErrorL << "读取节点重连中...[第" << i << "次]";

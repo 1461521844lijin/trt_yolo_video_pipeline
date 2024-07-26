@@ -10,7 +10,7 @@ namespace record {
 
 void Mp4RecordTask::record_handler(Data::BaseData::ptr data) {
     auto frame     = alloc_av_frame();
-    auto mat_image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto mat_image = data->MAT_IMAGE;
     if (!m_scaler->scale<cv::Mat, av_frame>(mat_image, frame)) {
         std::cout << "scale failed" << std::endl;
         return;

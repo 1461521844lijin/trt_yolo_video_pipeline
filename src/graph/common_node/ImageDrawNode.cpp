@@ -1,4 +1,5 @@
 #include "ImageDrawNode.hpp"
+#include "utils/TimeTicker.h"
 #include <opencv2/opencv.hpp>
 #include <tuple>
 namespace Node {
@@ -58,18 +59,19 @@ std::tuple<uint8_t, uint8_t, uint8_t> random_color(int id) {
 }
 
 Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
-    auto image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+//    TimeTicker();
+    auto image = data->MAT_IMAGE;
     //    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
 
-    // 图像最多等待120ms
-    auto status =
-        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(120));
-    if (status == std::future_status::timeout) {
-        printf("ImageDrawNode: %s wait for future timeout\n", getName().c_str());
-        return nullptr;
-    }
-    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
-
+//    // 图像最多等待120ms
+//    auto status =
+//        data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).wait_for(std::chrono::milliseconds(300));
+//    if (status == std::future_status::timeout) {
+//        printf("ImageDrawNode: %s wait for future timeout\n", getName().c_str());
+//        return nullptr;
+//    }
+//    ErrorL << data->FRAME_INDEX;
+    auto box_array = data->DETECTBOX_FUTURE.get();
     for (auto &obj : box_array) {
         uint8_t b, g, r;
         std::tie(b, g, r) = random_color(obj.class_label);

@@ -52,5 +52,16 @@ target_link_libraries(test_triton_grpc_client
         cuda_lib
         ${CUDA_LIBS}
         ${local_libs}
+)
 
+add_executable(test_triton_yolo_pipeline test/test_triton_yolo_pipeline.cpp)
+target_link_libraries(test_triton_yolo_pipeline
+        triton_cpp_lib
+        protobuf
+        grpcclient
+        httpclient
+        cpp_lib
+        cuda_lib
+        ${CUDA_LIBS}
+        ${local_libs}
 )

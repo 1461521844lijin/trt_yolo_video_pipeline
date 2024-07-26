@@ -150,13 +150,13 @@ bool TritonModelInfer::GetOutput(const std::string &output_name, CUDA::Tensor::p
     FALSE_CHECK(it != m_outputs_map.end(), "error: 输出名称不存在");
     std::vector<int64_t> output_shape;
     RETURN_FALSE_CHECK(m_result->Shape(output_name, &output_shape), "获取输出shape失败");
-    InfoL << "输出shape: ";
-    for (auto &i : output_shape) {
-        InfoL << i << " ";
-    }
+//    DebugL << "输出shape: ";
+//    for (auto &i : output_shape) {
+//        DebugL << i << " ";
+//    }
     std::string output_datatype;
     RETURN_FALSE_CHECK(m_result->Datatype(output_name, &output_datatype), "获取输出数据类型失败");
-    InfoL << "输出数据类型: " << output_datatype << std::endl;
+//    DebugL << "输出数据类型: " << output_datatype << std::endl;
     FALSE_CHECK(output_datatype == m_output_datatype[output_name], "error: 输出数据类型不匹配");
 
     // 拷贝输出数据

@@ -19,7 +19,7 @@ Mp4RecordNoEncodeTask::Mp4RecordNoEncodeTask(RecordConfig                     co
 }
 
 void Mp4RecordNoEncodeTask::record_handler(Data::BaseData::ptr data) {
-    auto av_pkt = data->Get<AV_PACKET_TYPE>(AV_PACKET);
+    auto av_pkt = data->AV_PACKET;
     if (!av_pkt) {
         throw std::runtime_error("data is not av packet");
     }

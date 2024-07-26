@@ -27,7 +27,7 @@ public:
     explicit FFmpegReadNode(const std::string &name,
                             std::string        open_source,
                             bool               use_hw = false,
-                            bool               cycle  = false);
+                            bool               cycle  = true);
 
     ~FFmpegReadNode() override;
 

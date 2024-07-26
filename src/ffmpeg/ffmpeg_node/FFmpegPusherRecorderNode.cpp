@@ -60,7 +60,7 @@ FFmpegPusherRecorderNode::FFmpegPusherRecorderNode(std::string name,
 
 Data::BaseData::ptr FFmpegPusherRecorderNode::handle_data(Data::BaseData::ptr data) {
     av_frame_unref(m_yuv_frame.get());
-    auto mat_image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto &mat_image = data->MAT_IMAGE;
     if (!m_scaler->scale<cv::Mat, av_frame>(mat_image, m_yuv_frame)) {
         ErrorL << "scale failed";
         return nullptr;
@@ -77,7 +77,7 @@ Data::BaseData::ptr FFmpegPusherRecorderNode::handle_data(Data::BaseData::ptr da
     }
 
     auto new_packet = alloc_av_packet_with(pkt.get());
-    data->Insert<AV_PACKET_TYPE>(AV_PACKET, new_packet);
+    data->AV_PACKET = new_packet;
     if (!m_enmux->write_packet(pkt)) {
         ErrorL << "write packet failed";
         return nullptr;

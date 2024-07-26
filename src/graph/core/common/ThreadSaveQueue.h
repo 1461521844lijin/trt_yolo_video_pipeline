@@ -46,15 +46,10 @@ public:
                 }
                 case BufferOverStrategy::DROP_LATE: {
                     if (m_list.front()->get_data_type() == Data::DataType::FRAME) {
-                        // 这一帧直接丢掉了
-//                        {
-//                            std::unique_lock<std::mutex> lock(m_mutex);
-//                            m_list.pop_back();
-//                            m_list.push_back(data);
-//                        }
                         m_work_cond->notify_one();
                         return false;  // 丢弃的是最新的帧
                     }
+                    ErrorL << "缓冲队列满，丢弃最新的帧";
                     break;
                 }
                 case BufferOverStrategy::CLEAR: {
@@ -69,6 +64,11 @@ public:
                 case BufferOverStrategy::BLOCK: {
                     std::unique_lock<std::mutex> lock(m_mutex);
                     m_self_cond.wait(lock);
+                    {
+                        std::unique_lock<std::mutex> lock(m_mutex);
+                        m_list.push_back(data);
+                        return true;
+                    }
                     break;
                 }
                 default: {
@@ -83,6 +83,7 @@ public:
             m_work_cond->notify_one();
             return true;
         }
+        return false;
     }
 
     bool Pop(Data::BaseData::ptr &data) {
@@ -113,8 +114,10 @@ public:
                 if (m_list.empty()) {
                     break;
                 }
-                data_list.push_back(m_list.front());
+                auto data = m_list.front();
+                data_list.push_back(data);
                 m_list.pop_front();
+//                ErrorL <<"拿出队列：" <<data->Get<FRAME_INDEX_TYPE>(FRAME_INDEX);
             }
         }
         if (m_buffer_strategy == BufferOverStrategy::BLOCK) {
@@ -164,8 +167,8 @@ private:
     std::shared_ptr<std::condition_variable> m_work_cond;  // 用于唤醒工作线程的条件变量
     std::condition_variable                  m_self_cond;      // 用于唤醒自身的条件变量
     std::list<Data::BaseData::ptr>           m_list;           // 缓冲队列
-    int                                      max_number = 25;  // 默认最大缓冲帧数
-    BufferOverStrategy m_buffer_strategy = BufferOverStrategy::DROP_EARLY;  // 缓冲队列满时的策略
+    int                                      max_number = 50;  // 默认最大缓冲帧数
+    BufferOverStrategy m_buffer_strategy = BufferOverStrategy::DROP_LATE;  // 缓冲队列满时的策略
 };
 
 }  // namespace GraphCore
