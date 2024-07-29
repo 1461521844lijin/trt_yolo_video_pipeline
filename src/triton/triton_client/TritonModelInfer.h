@@ -1,5 +1,5 @@
 //
-// Created by Lenovo on 24-7-18.
+// Created by lijin on 24-7-18.
 //
 
 #ifndef VIDEOPIPELINE_TRITONMODELINFER_H

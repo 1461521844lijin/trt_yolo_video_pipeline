@@ -1,5 +1,5 @@
 //
-// Created by Lenovo on 24-7-12.
+// Created by lijin on 24-7-12.
 //
 
 #ifndef VIDEOPIPELINE_TRITONHTTPCLIENT_H
