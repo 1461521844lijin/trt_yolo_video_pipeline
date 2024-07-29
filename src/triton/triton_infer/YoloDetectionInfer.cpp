@@ -143,6 +143,8 @@ void YoloDetectionInfer::post_process(Data::BatchData::ptr &batch_data) {
         }
         batch_data->batch_data[ibatch]->DETECTBOX_PROMISE->set_value(boxArray);
     }
+    batch_data->BATCH_INPUT_TENSOR->release();
+    batch_data->BATCH_OUTPUT_TENSOR->release();
 }
 
 void YoloDetectionInfer::image_to_tensor(Data::BaseData::ptr           &data,

@@ -10,11 +10,11 @@
 cd /
 
 
-trtexec --onnx=/root/trt_projects/infer-main/workspace/yolov8n.transd.onnx \
+trtexec --onnx=/root/host/model.onnx \
     --minShapes=images:1x3x640x640 \
     --maxShapes=images:16x3x640x640 \
-    --optShapes=images:1x3x640x640 \
-    --saveEngine=/root/trt_projects/infer-main/workspace/yolov8n.transd.engine
+    --optShapes=images:8x3x640x640 \
+    --saveEngine=/root/host/model.plan
 
 
 trtexec --onnx=/root/trt_projects/infer-main/workspace/yolov8n.transd.onnx \

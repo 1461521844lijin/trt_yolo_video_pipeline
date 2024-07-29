@@ -42,9 +42,9 @@ public:
     Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override;
 
 private:
-    void pre_process(std::vector<Data::BaseData::ptr> &batch_data) override;
-    void post_process(std::vector<Data::BaseData::ptr> &batch_data) override;
-    void infer_process(std::vector<Data::BaseData::ptr> &batch_data) override;
+    void pre_process(Data::BatchData::ptr &data) override;
+    void post_process(Data::BatchData::ptr &data) override;
+    void infer_process(Data::BatchData::ptr &data) override;
 
 private:
     void image_to_tensor(Data::BaseData::ptr           &data,
@@ -61,8 +61,6 @@ private:
     std::vector<int>                                 m_input_shapes;
     std::vector<int>                                 m_output_shapes;
     CUDA::CUStream                                   m_stream = nullptr;
-    //    CUDATools::AffineMatrix                          m_affin_matrix;
-    //    std::shared_ptr<CUDA::Tensor>                    m_affin_matrix_tensor;
     YoloType                                         m_type;
     bool                                             m_dynamic     = false;
     bool                                             m_has_segmegt = false;

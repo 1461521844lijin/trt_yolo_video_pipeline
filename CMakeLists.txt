@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-std=c++17 -lpthread)
 
 OPTION(ENABLE_CUDA "使用CUDA,TensorRT" ON)
-OPTION(ENABLE_TENSORRT "使用TensorRT" OFF)
+OPTION(ENABLE_TENSORRT "使用TensorRT" ON)
 option(ENABLE_TEST "编译测试代码" ON)
-option(ENABLE_TRITON "使用Triton" ON)
+option(ENABLE_TRITON "使用Triton" OFF)
 
 
 

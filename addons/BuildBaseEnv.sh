@@ -5,6 +5,8 @@ unzip opencv_contrib-4.8.0.zip
 unzip opencv-4.8.0.zip
 tar -zxvf x264-master.tar.gz
 tar -zxvf ffmpeg-5.1.2.tar.gz
+tar -xzvf oatpp-swagger.tar.gz
+tar -xzvf oatpp.tar.gz
 
 
 # 安装opencv
@@ -13,30 +15,48 @@ cd ./opencv-4.8.0 \
   && cd build \
   && cmake  -D CMAKE_BUILD_TYPE=Release  \
             -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.8.0/modules .. \
-  && make -j10 \
+  && make -j \
   && make install \
   && cd ../../
 
 # 安装x264
-sudo apt-get install nasm
+apt install nasm
 cd ./x264-master \
   && ./configure --enable-shared \
-  && make -j10 \
+  && make -j \
   && make install \
   && cd ../
 
 # 安装ffmpeg
-sudo apt-get install yasm -y
-sudo apt install libx264-dev libx265-dev  \
+apt install yasm -y
+apt install libx264-dev libx265-dev  \
          libfdk-aac-dev libmp3lame-dev libvorbis-dev 
 cd ./ffmpeg-5.1.2 \
   && export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
   && ./configure --enable-gpl --enable-libx264 \
                  --enable-nonfree --enable-shared \
                  --disable-static \
-  && make -j10 \
+  && make -j \
   && make install \
   && cd ../
+
+# 安装oatpp
+cd ./oatpp \
+  && mkdir -p build \
+  && cd build \
+  && cmake -D BUILD_SHARED_LIBS=ON .. \
+  && make -j \
+  && make install \
+  && cd ../../
+
+# 安装oatpp-swagger
+cd ./oatpp-swagger \
+  && mkdir -p build \
+  && cd build \
+  && cmake -D BUILD_SHARED_LIBS=ON .. \
+  && make -j \
+  && make install \
+  && cd ../../
 
 
 # 安装ffmpeg支持nvidia硬件加速
@@ -65,23 +85,10 @@ cd ./ffmpeg-5.1.2 \
 #   && make install \
 #   && cd ../
 
-# 安装oatpp
-# git clone https://github.com/oatpp/oatpp.git
-# cd oatpp/
-# mkdir build && cd build
-# cmake ..
-# sudo make && sudo make install
 
-# 安装json cpp
-# cd jsoncpp-1.9.5
-# mkdir build && cd build
-# cmake .. -DCMAKE_BUILD_TYPE=debug -DJSONCPP_LIB_BUILD_STATIC=ON
-# make
-# sudo make install
 
-# 安装curl
-# sudo apt install curl
-# sudo apt-get install  libcurl4-openssl-dev
+
+
 rm -rf ./opencv-4.8.0
 rm -rf ./opencv_contrib-4.8.0
 rm -rf ./x264-master

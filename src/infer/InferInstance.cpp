@@ -26,8 +26,6 @@ InferInstance::InferInstance(std::string infer_name,
             pre_process(batch_data);
             infer_process(batch_data);
             post_process(batch_data);
-            batch_data->BATCH_INPUT_TENSOR->release();
-            batch_data->BATCH_OUTPUT_TENSOR->release();
             return batch_data;
         });
     auto queue = std::make_shared<GraphCore::ThreadSaveQueue>();

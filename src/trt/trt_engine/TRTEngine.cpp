@@ -107,11 +107,11 @@ bool TRTEngine::is_input(int ibinding) {
     return this->m_context->m_engine->bindingIsInput(ibinding);
 }
 
-bool TRTEngine::set_run_dims(const std::string &name, const std::vector<int> &dims) {
+bool TRTEngine::set_run_dims(const std::string &name, const std::vector<int64_t> &dims) {
     return this->set_run_dims(index(name), dims);
 }
 
-bool TRTEngine::set_run_dims(int ibinding, const std::vector<int> &dims) {
+bool TRTEngine::set_run_dims(int ibinding, const std::vector<int64_t> &dims) {
     nvinfer1::Dims d;
     memcpy(d.d, dims.data(), sizeof(int) * dims.size());
     d.nbDims = dims.size();

@@ -14,8 +14,11 @@
 #include <unordered_map>
 
 #include "DataNameDefine.h"
+#include "cuda_kernels/cuda_tools/monopoly_allocator.hpp"
 
 namespace Data {
+// 数据表存放定义
+#define DataDefine(name, type) type name;
 
 enum DataType {
     DATATYPE_UNKNOWN = 0,
@@ -48,26 +51,42 @@ public:
     std::string                           data_name;    // 数据名称/数据来源
 
 public:
-    // 通过name插入任意类型的数据
-    template <typename T>
-    void Insert(const std::string &name, const T &value) {
-        data_map[name] = value;
-    }
+    // 数据存储格式
+    DataDefine(MAT_IMAGE, cv::Mat);
+    DataDefine(AV_PACKET, std::shared_ptr<AVPacket>);
+    DataDefine(AV_FRAME, std::shared_ptr<AVFrame>);
 
-    // 通过name获取任意类型的数据, 返回该类型数据的引用
-    template <typename T>
-    T &Get(const std::string &name) {
-        try {
-            return std::any_cast<T &>(data_map[name]);
-        } catch (const std::bad_any_cast &e) {
-            throw std::runtime_error("类型转换错误，请检查数据类型: " + std::string(e.what()) +
-                                     " for key: " + name);
-        }
-    }
+    DataDefine(CUDA_AFFINMATRIX_TENSOR, std::shared_ptr<CUDA::Tensor>);
+    DataDefine(CUDA_AFFINMATRIX, CUDATools::AffineMatrix);
 
-private:
-    std::unordered_map<std::string, std::any> data_map;
+    // 数据来源
+
+    // 数据处理结果
+    DataDefine(DETECTBOX_FUTURE, std::shared_future<DetectBoxArray>);
+    DataDefine(DETECTBOX_PROMISE, std::shared_ptr<std::promise<DetectBoxArray>>);
+
+    // 数据信息
+    DataDefine(FRAME_INDEX, int);   // 帧序号，int
+    DataDefine(FRAME_WIDTH, int);   // 帧宽度，int
+    DataDefine(FRAME_HEIGHT, int);  // 帧高度，int
 };
+
+
+class BatchData : public BaseData {
+public:
+    using ptr = std::shared_ptr<BatchData>;
+
+    BatchData() = delete;
+
+    explicit BatchData(DataType data_type) : BaseData(data_type) {}
+
+
+    std::vector<BaseData::ptr> batch_data;
+
+    DataDefine(BATCH_INPUT_TENSOR, MonopolyAllocator<CUDA::Tensor>::MonopolyDataPointer);
+    DataDefine(BATCH_OUTPUT_TENSOR, MonopolyAllocator<CUDA::Tensor>::MonopolyDataPointer);
+};
+
 
 }  // namespace Data
 

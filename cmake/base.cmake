@@ -1,10 +1,14 @@
 find_package(OpenCV REQUIRED)
 find_package(Threads REQUIRED)
+find_package(oatpp 1.3.0 REQUIRED)
+find_package(oatpp-swagger 1.3.0 REQUIRED)
 
-
-include_directories(/usr/local/include)
 include_directories(/usr/local/include/opencv4)
+include_directories(/usr/local/include/oatpp-1.3.0/oatpp)
+include_directories(/usr/local/include/oatpp-1.3.0/oatpp-swagger)
 
+# oatpp-swagger res path
+add_definitions(-DOATPP_SWAGGER_RES_PATH="/usr/local/include/oatpp-1.3.0/bin/oatpp-swagger/res")
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
@@ -15,11 +19,14 @@ file(GLOB_RECURSE FFmpeg_LIBS
         /usr/local/lib/libsw*.so
         /usr/local/lib/libpostproc.so)
 
+link_directories(/usr/local/lib)
 
 set(local_libs
         pthread
-        ${FFmpeg_LIBS}
         ${OpenCV_LIBS}
+        ${FFmpeg_LIBS}
+        oatpp::oatpp
+        oatpp::oatpp-swagger
         )
 
 file(GLOB_RECURSE CPP_SRC

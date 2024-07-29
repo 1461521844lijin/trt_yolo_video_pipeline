@@ -37,13 +37,13 @@ bool YoloDetectionInfer::init() {
         return false;
     }
     m_trt_engine->print();
-    m_dynamic             = m_trt_engine->has_dynamic_dim();
-    m_input_shapes        = m_trt_engine->static_dims(0);
-    m_output_shapes       = m_trt_engine->static_dims(1);
-    m_output_tensor       = std::make_shared<CUDA::Tensor>();
+    m_dynamic       = m_trt_engine->has_dynamic_dim();
+    m_input_shapes  = m_trt_engine->static_dims(0);
+    m_output_shapes = m_trt_engine->static_dims(1);
+    m_output_tensor = std::make_shared<CUDA::Tensor>();
     //    m_affin_matrix_tensor = std::make_shared<CUDA::Tensor>();
-    m_input_tensor        = std::make_shared<CUDA::Tensor>();
-    m_segment_tensor      = std::make_shared<CUDA::Tensor>();
+    m_input_tensor   = std::make_shared<CUDA::Tensor>();
+    m_segment_tensor = std::make_shared<CUDA::Tensor>();
     m_input_tensor->set_workspace(std::make_shared<CUDA::MixMemory>());
     m_has_segmegt = m_type == YoloType::V8Seg;
     if (m_has_segmegt) {
@@ -72,31 +72,31 @@ bool YoloDetectionInfer::init() {
     return true;
 }
 
-void YoloDetectionInfer::pre_process(std::vector<Data::BaseData::ptr> &batch_data) {
-    int batch_size = batch_data.size();
+void YoloDetectionInfer::pre_process(Data::BatchData::ptr &data) {
+    int batch_size = data->batch_data.size();
     DebugL << "batch_size: " << batch_size;
     m_input_tensor->resize(batch_size, m_input_shapes[1], m_input_shapes[2], m_input_shapes[3]);
     m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
     for (int i = 0; i < batch_size; ++i) {
-        image_to_tensor(batch_data[i], m_input_tensor, i);
+        image_to_tensor(data->batch_data[i], m_input_tensor, i);
     }
 }
 
-void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_data) {
-    int infer_batch_size = batch_data.size();
+void YoloDetectionInfer::infer_process(Data::BatchData::ptr &data) {
+    int infer_batch_size = data->batch_data.size();
     int model_batch_size = m_output_shapes[0];
     if (infer_batch_size !=
         model_batch_size) {  // 当模型单次推理batch_size不等于infer_batch时，需要重新设置模型的batch_size
         if (m_dynamic) {
             if (!m_trt_engine->set_run_dims(0, m_input_tensor->dims())) {
                 ErrorL << "设置推理batch失败！";
-                batch_data.clear();
+                data->batch_data.clear();
                 return;
             }
         } else {
             if (infer_batch_size > model_batch_size) {
                 ErrorL << "静态模型的单次推理batch大小不能超过模型配置本身！";
-                batch_data.clear();
+                data->batch_data.clear();
                 return;
             }
         }
@@ -112,21 +112,19 @@ void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_d
     }
     if (!m_trt_engine->forward(bindings, nullptr, nullptr)) {
         std::cout << "forward failed" << std::endl;
-        batch_data.clear();
+        data->batch_data.clear();
         return;
     }
 }
 
-void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_data) {
-    int          batch_size = batch_data.size();
-    CUDA::Tensor output_array_device(CUDA::DataType::Float);
+void YoloDetectionInfer::post_process(Data::BatchData::ptr &data) {
+    int          batch_size = data->batch_data.size();
+    CUDA::Tensor output_array_device(CUDA::DataType::FP32);
     output_array_device.resize(batch_size, 32 + MAX_IMAGE_BBOX * NUM_BOX_ELEMENT).to_gpu();
     for (int ibatch = 0; ibatch < batch_size; ++ibatch) {
         float *image_based_output = m_output_tensor->gpu<float>(ibatch);
         float *output_array_ptr   = output_array_device.gpu<float>(ibatch);
-        auto   affine_matrix      = batch_data[ibatch]
-                                 ->Get<CUDA_AFFINMATRIX_TENSOR_TYPE>(CUDA_AFFINMATRIX_TENSOR)
-                                 ->gpu<float>();
+        auto   affine_matrix      = data->batch_data[ibatch]->CUDA_AFFINMATRIX_TENSOR->gpu<float>();
         checkCudaRuntime(cudaMemsetAsync(output_array_ptr, 0, sizeof(int), m_stream));
         if (m_type == YoloType::V8 || m_type == YoloType::V8Seg) {
             CUDA::decode_detect_yolov8_kernel_invoker(image_based_output, m_output_shapes[1],
@@ -175,8 +173,7 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
 
                     // 此时的pbox是相对原图的坐标，而mask是相对与模型160x160的坐标，需要转换
                     float left, top, right, bottom;
-                    auto  affin_matrix =
-                        batch_data[ibatch]->Get<CUDA_AFFINMATRIX_TYPE>(CUDA_AFFINMATRIX);
+                    auto  affin_matrix = data->batch_data[ibatch]->CUDA_AFFINMATRIX;
                     affine_project(affin_matrix.i2d, pbox[0], pbox[1], &left, &top);
                     affine_project(affin_matrix.i2d, pbox[2], pbox[3], &right, &bottom);
 
@@ -196,7 +193,7 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
                             // 第一次进入初始化缓存
                             // box_mask的内存申请
                             m_segment_tensor_cache =
-                                std::make_shared<CUDA::Tensor>(CUDA::DataType::UInt8);
+                                std::make_shared<CUDA::Tensor>(CUDA::DataType::UINT8);
                         }
                         int bytes_of_mask_out = mask_out_width * mask_out_height;
                         // cpu的申请内存
@@ -226,14 +223,14 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
                 boxArray.emplace_back(box);
             }
         }
-        batch_data[ibatch]->Get<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE)->set_value(boxArray);
+        data->batch_data[ibatch]->DETECTBOX_PROMISE->set_value(boxArray);
     }
 }
 
 void YoloDetectionInfer::image_to_tensor(Data::BaseData::ptr           &data,
                                          std::shared_ptr<CUDA::Tensor> &tensor,
                                          int                            ibatch) {
-    auto &image = data->Get<MAT_IMAGE_TYPE>(MAT_IMAGE);
+    auto &image = data->MAT_IMAGE;
     cudaSetDevice(m_device_id);
     cv::Size                input_size(tensor->size(3), tensor->size(2));
     CUDATools::AffineMatrix affin_matrix;
@@ -241,8 +238,8 @@ void YoloDetectionInfer::image_to_tensor(Data::BaseData::ptr           &data,
     // 存放affin_matrix的tensor
     auto affin_matrix_tensor = std::make_shared<CUDA::Tensor>();
     affin_matrix_tensor->resize(sizeof(affin_matrix.d2i) * 2);
-    data->Insert<CUDA_AFFINMATRIX_TENSOR_TYPE>(CUDA_AFFINMATRIX_TENSOR, affin_matrix_tensor);
-    data->Insert<CUDA_AFFINMATRIX_TYPE>(CUDA_AFFINMATRIX, affin_matrix);
+    data->CUDA_AFFINMATRIX_TENSOR = affin_matrix_tensor;
+    data->CUDA_AFFINMATRIX        = affin_matrix;
 
     // workspace地址空间有问题 需要修复
     size_t   size_image    = image.cols * image.rows * 3;
@@ -280,12 +277,12 @@ void YoloDetectionInfer::image_to_tensor(Data::BaseData::ptr           &data,
 Data::BaseData::ptr YoloDetectionInfer::commit(const Data::BaseData::ptr &data) {
     // 如果数据添加成功，返回一个promise，否则返回nullptr
     bool res = m_infer_node->add_data_back(data);
-    if(res){
+    if (res) {
         std::shared_ptr<std::promise<DetectBoxArray>> box_array_promise =
             std::make_shared<std::promise<DetectBoxArray>>();
         std::shared_future<DetectBoxArray> box_array_future = box_array_promise->get_future();
-        data->Insert<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE, box_array_future);
-        data->Insert<DETECTBOX_PROMISE_TYPE>(DETECTBOX_PROMISE, box_array_promise);
+        data->DETECTBOX_FUTURE                              = box_array_future;
+        data->DETECTBOX_PROMISE                             = box_array_promise;
         return data;
     }
     return nullptr;

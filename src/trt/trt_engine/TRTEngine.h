@@ -79,9 +79,9 @@ public:
 
     virtual bool is_input(int ibinding);
 
-    virtual bool set_run_dims(const std::string &name, const std::vector<int> &dims);
+    virtual bool set_run_dims(const std::string &name, const std::vector<int64_t> &dims);
 
-    virtual bool set_run_dims(int ibinding, const std::vector<int> &dims);
+    virtual bool set_run_dims(int ibinding, const std::vector<int64_t> &dims);
 
     virtual int numel(const std::string &name);
 

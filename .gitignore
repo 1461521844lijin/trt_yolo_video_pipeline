@@ -34,3 +34,4 @@
 cmake-build-*/
 .idea/
 workspace/
+resource/
