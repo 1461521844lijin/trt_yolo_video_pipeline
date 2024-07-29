@@ -11,9 +11,8 @@
 
 namespace GraphCore {
 
-typedef std::function<Data::BaseData::ptr(Data::BaseData::ptr)> DataHookerFunc;
-typedef std::function<std::vector<Data::BaseData::ptr>(std::vector<Data::BaseData::ptr> &)>
-    BatchDataHookerFunc;
+typedef std::function<Data::BaseData::ptr(Data::BaseData::ptr)>     DataHookerFunc;
+typedef std::function<Data::BatchData::ptr(Data::BatchData::ptr &)> BatchDataHookerFunc;
 
 class IDataHooker {
 protected:

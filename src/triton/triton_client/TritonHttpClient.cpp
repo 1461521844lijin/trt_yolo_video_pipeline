@@ -38,13 +38,12 @@ std::string TritonHttpClient::get_model_metadata(const std::string &model_name) 
 
 bool TritonHttpClient::Infer(TritonModelInfer::ptr model_infer) {
     std::unique_lock<std::mutex> lock(m_mutex);
-    tc::Error                    err;
-    err = m_client->Infer(&model_infer->m_result, model_infer->m_infer_options, model_infer->m_inputs,
-                          model_infer->m_outputs, m_http_headers);
-    if (!err.IsOk()) {
-        ErrorL << "error: " << err << std::endl;
-        return false;
-    }
+    tc::InferResult                              *m_result;   // 推理结果
+    RETURN_FALSE_CHECK(m_client->Infer(&m_result, model_infer->m_infer_options,
+                                       model_infer->m_inputs, model_infer->m_outputs,
+                                       m_http_headers),
+                       "推理失败")
+    model_infer->m_result.reset(m_result);
     return true;
 }
 TritonModelInfer::ptr TritonHttpClient::CreateModelInfer(const std::string          &model_name,

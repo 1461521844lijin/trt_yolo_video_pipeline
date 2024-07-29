@@ -59,7 +59,7 @@ std::tuple<uint8_t, uint8_t, uint8_t> random_color(int id) {
 }
 
 Data::BaseData::ptr ImageDrawNode::handle_data(Data::BaseData::ptr data) {
-//    TimeTicker();
+    TimeTicker();
     auto image = data->MAT_IMAGE;
     //    auto box_array = data->Get<DETECTBOX_FUTURE_TYPE>(DETECTBOX_FUTURE).get();
 

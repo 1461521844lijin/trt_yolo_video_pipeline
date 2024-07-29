@@ -31,9 +31,6 @@ public:
 
     bool infer();
 
-    /** 获取推理对象
-     * @return
-     */
     TritonModelInfer::ptr get_model_infer() const;
 
     bool init_model_infer(const std::string &model_name, DateTransMode mode);

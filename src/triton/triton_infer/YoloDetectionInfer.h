@@ -17,7 +17,7 @@
 
 namespace infer {
 
-enum YoloType { V5, X, V3, V7, V8, V8Seg };
+enum YoloType { V5, X, V3, V7, V8};
 
 class YoloDetectionInfer : public InferInstance, public IDetectInfo {
 public:
@@ -43,9 +43,9 @@ public:
     Data::BaseData::ptr commit(const Data::BaseData::ptr &data) override;
 
 private:
-    void pre_process(std::vector<Data::BaseData::ptr> &batch_data) override;
-    void post_process(std::vector<Data::BaseData::ptr> &batch_data) override;
-    void infer_process(std::vector<Data::BaseData::ptr> &batch_data) override;
+    void pre_process(Data::BatchData::ptr &data) override;
+    void post_process(Data::BatchData::ptr &batch_data) override;
+    void infer_process(Data::BatchData::ptr &batch_data) override;
 
 private:
     void image_to_tensor(Data::BaseData::ptr           &data,
@@ -54,20 +54,11 @@ private:
 
 private:
     triton_client::TritonGrpcClient::ptr             m_triton_client;
-    std::shared_ptr<MonopolyAllocator<CUDA::Tensor>> m_tensor_allocator;  // 输入显存分配器
-    std::shared_ptr<CUDA::Tensor>                    m_input_tensor;
-    std::shared_ptr<CUDA::Tensor>                    m_output_tensor;
-    std::shared_ptr<CUDA::Tensor>                    m_segment_tensor;
-    std::shared_ptr<CUDA::Tensor>                    m_segment_tensor_cache;
+    std::shared_ptr<MonopolyAllocator<CUDA::Tensor>> m_tensor_allocator = std::make_shared<MonopolyAllocator<CUDA::Tensor>>(20);
     std::vector<int64_t>                             m_input_shapes;
     std::vector<int64_t>                             m_output_shapes;
-    CUDA::CUStream                                   m_stream = nullptr;
-    //    CUDATools::AffineMatrix                          m_affin_matrix;
-    //    std::shared_ptr<CUDA::Tensor>                    m_affin_matrix_tensor;
+
     YoloType         m_type;
-    bool             m_dynamic     = false;
-    bool             m_has_segmegt = false;
-    std::vector<int> m_segment_shapes;
     CUDA::Norm       m_normalize;
 
     const int MAX_IMAGE_BBOX  = 1024;

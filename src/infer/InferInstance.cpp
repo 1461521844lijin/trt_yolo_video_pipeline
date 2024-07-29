@@ -21,11 +21,13 @@ InferInstance::InferInstance(std::string infer_name,
                                                      GraphCore::NODE_TYPE::DES_NODE);
     m_infer_node->set_get_data_max_num(m_max_batch_size);
     m_infer_node->set_batch_data_handler_hooker(
-        [this](std::vector<Data::BaseData::ptr> &batch_data) -> std::vector<Data::BaseData::ptr> {
+        [this](Data::BatchData::ptr &batch_data) -> Data::BatchData::ptr {
             TimeTicker();
             pre_process(batch_data);
             infer_process(batch_data);
             post_process(batch_data);
+            batch_data->BATCH_INPUT_TENSOR->release();
+            batch_data->BATCH_OUTPUT_TENSOR->release();
             return batch_data;
         });
     auto queue = std::make_shared<GraphCore::ThreadSaveQueue>();

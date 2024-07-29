@@ -71,12 +71,14 @@ TritonModelInfer::ptr TritonGrpcClient::CreateModelInfer(const std::string &mode
 }
 
 bool TritonGrpcClient::Infer(TritonModelInfer::ptr model_infer) {
-//    TimeTicker();
+    //    TimeTicker();
     std::unique_lock<std::mutex> lock(m_mutex);
-    RETURN_FALSE_CHECK(m_client->Infer(&model_infer->m_result, model_infer->m_infer_options,
+    tc::InferResult             *m_result;  // 推理结果
+    RETURN_FALSE_CHECK(m_client->Infer(&m_result, model_infer->m_infer_options,
                                        model_infer->m_inputs, model_infer->m_outputs,
                                        m_http_headers),
                        "推理失败")
+    model_infer->m_result.reset(m_result);
     return true;
 }
 

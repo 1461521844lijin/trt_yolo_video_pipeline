@@ -22,7 +22,7 @@ public:
                                 const infer::Infer::ptr &trt_instance,
                                 int                      output_width   = 1920,
                                 int                      output_height  = 1080,
-                                int                      output_fps     = 30,
+                                int                      output_fps     = 25,
                                 int                      output_bitrate = 1024 * 1024 * 2);
 
 public:

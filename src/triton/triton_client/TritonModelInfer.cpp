@@ -173,6 +173,7 @@ bool TritonModelInfer::GetOutput(const std::string &output_name, CUDA::Tensor::p
             DebugL << "输出bytes大小: " << output_byte_size << std::endl;
             // 拷贝数据到tensor
             memcpy(tensor->cpu(), data_ptr, output_byte_size);
+            data_ptr = nullptr;
             break;
         }
         case DateTransMode::SHM: {
@@ -188,7 +189,6 @@ bool TritonModelInfer::GetOutput(const std::string &output_name, CUDA::Tensor::p
         }
 
     }
-
 
     return true;
 }

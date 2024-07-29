@@ -45,26 +45,14 @@ bool YoloDetectionInfer::init() {
 
     m_input_shapes  = m_triton_client->get_model_infer()->m_input_shape["images"];
     m_output_shapes = m_triton_client->get_model_infer()->m_output_shape["output0"];
-    m_output_tensor = std::make_shared<CUDA::Tensor>();
-    //    m_affin_matrix_tensor = std::make_shared<CUDA::Tensor>();
-    m_input_tensor   = std::make_shared<CUDA::Tensor>();
-    m_segment_tensor = std::make_shared<CUDA::Tensor>();
-    m_input_tensor->set_workspace(std::make_shared<CUDA::MixMemory>());
-    m_has_segmegt = m_type == YoloType::V8Seg;
-    if (m_has_segmegt) {
-        //        m_segment_shapes = m_trt_engine->static_dims(1);
-        //        m_output_shapes  = m_trt_engine->static_dims(2);
-    }
+
     if (m_type == YoloType::V5 || m_type == YoloType::V3 || m_type == YoloType::V7) {
         m_normalize  = CUDA::Norm::alpha_beta(1 / 255.0f, 0.0f, CUDA::ChannelType::Invert);
         m_class_nums = m_output_shapes[2] - 5;
     } else if (m_type == YoloType::V8) {
         m_normalize  = CUDA::Norm::alpha_beta(1 / 255.0f, 0.0f, CUDA::ChannelType::Invert);
         m_class_nums = m_output_shapes[2] - 4;
-    } else if (m_type == YoloType::V8Seg) {
-        m_normalize  = CUDA::Norm::alpha_beta(1 / 255.0f, 0.0f, CUDA::ChannelType::Invert);
-        m_class_nums = m_output_shapes[2] - 4 - m_segment_shapes[1];
-    } else if (m_type == YoloType::X) {
+    }  else if (m_type == YoloType::X) {
         float mean[] = {0.485, 0.456, 0.406};
         float std[]  = {0.229, 0.224, 0.225};
         m_normalize  = CUDA::Norm::mean_std(mean, std, 1 / 255.0f, CUDA::ChannelType::Invert);
@@ -77,48 +65,63 @@ bool YoloDetectionInfer::init() {
     return true;
 }
 
-void YoloDetectionInfer::pre_process(std::vector<Data::BaseData::ptr> &batch_data) {
+void YoloDetectionInfer::pre_process(Data::BatchData::ptr &data) {
 //    TimeTicker();
-    int batch_size = batch_data.size();
+    int batch_size = data->batch_data.size();
     DebugL << "batch_size: " << batch_size;
-    m_input_tensor->resize(batch_size, m_input_shapes[1], m_input_shapes[2], m_input_shapes[3]);
-    m_output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
+    data->BATCH_INPUT_TENSOR = m_tensor_allocator->query();
+    data->BATCH_OUTPUT_TENSOR = m_tensor_allocator->query();
+    auto &input_tensor = data->BATCH_INPUT_TENSOR->data();
+    auto &output_tensor = data->BATCH_OUTPUT_TENSOR->data();
+    if(!input_tensor){
+        input_tensor = std::make_shared<CUDA::Tensor>();
+        input_tensor->set_workspace(std::make_shared<CUDA::MixMemory>());
+        CUDA::CUStream stream;
+        checkCudaRuntime(cudaStreamCreate(&stream));
+        input_tensor->set_stream(stream, true);
+    }
+    if(!output_tensor){
+        output_tensor = std::make_shared<CUDA::Tensor>();
+    }
+    input_tensor->resize(batch_size, m_input_shapes[1], m_input_shapes[2], m_input_shapes[3]);
+    output_tensor->resize(batch_size, m_output_shapes[1], m_output_shapes[2]);
     for (int i = 0; i < batch_size; ++i) {
-        image_to_tensor(batch_data[i], m_input_tensor, i);
+        image_to_tensor(data->batch_data[i], input_tensor, i);
     }
 }
 
-void YoloDetectionInfer::infer_process(std::vector<Data::BaseData::ptr> &batch_data) {
+void YoloDetectionInfer::infer_process(Data::BatchData::ptr &batch_data) {
     TimeTicker();
-    m_triton_client->AddInput("images", m_input_tensor);
+    m_triton_client->AddInput("images", batch_data->BATCH_INPUT_TENSOR->data());
     m_triton_client->infer();
-    m_triton_client->GetOutput("output0", m_output_tensor);
+    m_triton_client->GetOutput("output0", batch_data->BATCH_OUTPUT_TENSOR->data());
 }
 
-void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_data) {
+void YoloDetectionInfer::post_process(Data::BatchData::ptr &batch_data) {
 //    TimeTicker();
-    int          batch_size = batch_data.size();
+    int          batch_size = batch_data->batch_data.size();
+    CUDA::CUStream stream = batch_data->BATCH_INPUT_TENSOR->data()->get_stream();
     CUDA::Tensor output_array_device(CUDA::DataType::FP32);
     output_array_device.resize(batch_size, 32 + MAX_IMAGE_BBOX * NUM_BOX_ELEMENT).to_gpu();
     for (int ibatch = 0; ibatch < batch_size; ++ibatch) {
-        float *image_based_output = m_output_tensor->gpu<float>(ibatch);
+        float *image_based_output = batch_data->BATCH_OUTPUT_TENSOR->data()->gpu<float>(ibatch);
         float *output_array_ptr   = output_array_device.gpu<float>(ibatch);
-        auto   affine_matrix      = batch_data[ibatch]
+        auto   affine_matrix      = batch_data->batch_data[ibatch]
                                  ->CUDA_AFFINMATRIX_TENSOR
                                  ->gpu<float>();
-        checkCudaRuntime(cudaMemsetAsync(output_array_ptr, 0, sizeof(int), m_stream));
-        if (m_type == YoloType::V8 || m_type == YoloType::V8Seg) {
+        checkCudaRuntime(cudaMemsetAsync(output_array_ptr, 0, sizeof(int), stream));
+        if (m_type == YoloType::V8 ) {
             CUDA::decode_detect_yolov8_kernel_invoker(image_based_output, m_output_shapes[1],
                                                       m_class_nums, m_output_shapes[2],
                                                       m_confidence_threshold, affine_matrix,
-                                                      output_array_ptr, MAX_IMAGE_BBOX, m_stream);
+                                                      output_array_ptr, MAX_IMAGE_BBOX, stream);
         } else {
             CUDA::decode_kernel_common_invoker(image_based_output, m_output_shapes[1], m_class_nums,
                                                m_output_shapes[2], m_confidence_threshold,
                                                affine_matrix, output_array_ptr, MAX_IMAGE_BBOX,
-                                               m_stream);
+                                               stream);
         }
-        CUDA::nms_kernel_invoker(output_array_ptr, m_nms_threshold, MAX_IMAGE_BBOX, m_stream);
+        CUDA::nms_kernel_invoker(output_array_ptr, m_nms_threshold, MAX_IMAGE_BBOX, stream);
     }
     // 同步
     output_array_device.to_cpu();
@@ -135,77 +138,10 @@ void YoloDetectionInfer::post_process(std::vector<Data::BaseData::ptr> &batch_da
                 // x y w h conf label
                 DetectBox box  = {pbox[0], pbox[1], pbox[2], pbox[3], pbox[4], label};
                 box.class_name = m_class_names[label];
-
-                if (m_has_segmegt) {
-                    int row_index = pbox[7];
-
-                    // 获取选中框对于的最后32个mask权重
-                    float *mask_weights =
-                        m_output_tensor->gpu<float>(ibatch, row_index) + m_class_nums + 4;
-
-                    float *mask_weights2 =
-                        m_output_tensor->gpu<float>() +
-                        (ibatch * m_output_shapes[1] + row_index) * m_output_shapes[2] +
-                        m_class_nums + 4;
-
-                    if (mask_weights != mask_weights2) {
-                        std::cout << "mask_weights != mask_weights2" << std::endl;
-                    }
-
-                    // 此时的pbox是相对原图的坐标，而mask是相对与模型160x160的坐标，需要转换
-                    float left, top, right, bottom;
-                    auto  affin_matrix =
-                        batch_data[ibatch]->CUDA_AFFINMATRIX;
-                    affine_project(affin_matrix.i2d, pbox[0], pbox[1], &left, &top);
-                    affine_project(affin_matrix.i2d, pbox[2], pbox[3], &right, &bottom);
-
-                    float scale_to_predict_x = m_segment_shapes[3] / (float)m_input_shapes[3];
-                    float scale_to_predict_y = m_segment_shapes[2] / (float)m_input_shapes[2];
-
-                    // 此时box_width和box_height是相对于640 × 640的
-                    float box_width  = right - left;
-                    float box_height = bottom - top;
-
-                    // 此时的mask_out是当前框相对于160×160的mask宽高
-                    int mask_out_width  = box_width * scale_to_predict_x + 0.5f;
-                    int mask_out_height = box_height * scale_to_predict_y + 0.5f;
-
-                    if (mask_out_width > 0 && mask_out_height > 0) {
-                        if (!m_segment_tensor_cache) {
-                            // 第一次进入初始化缓存
-                            // box_mask的内存申请
-                            m_segment_tensor_cache =
-                                std::make_shared<CUDA::Tensor>(CUDA::DataType::UINT8);
-                        }
-                        int bytes_of_mask_out = mask_out_width * mask_out_height;
-                        // cpu的申请内存
-                        box.mask = cv::Mat(mask_out_height, mask_out_width, CV_8UC1);
-                        m_segment_tensor_cache->resize(bytes_of_mask_out);
-                        m_segment_tensor_cache->to_gpu();
-
-                        // 解码mask
-                        CUDA::decode_single_mask(
-                            left * scale_to_predict_x, top * scale_to_predict_y,
-                            mask_weights,                                  // 1x32
-                            m_segment_tensor->gpu<float>(ibatch),          // 32x160x160
-                            m_segment_shapes[3],                           // 160
-                            m_segment_shapes[2],                           // 160
-                            m_segment_tensor_cache->gpu<unsigned char>(),  // 实际目标的掩码大小
-                            m_segment_shapes[1], mask_out_width, mask_out_height, m_stream);
-
-                        // 将mask拷贝到cpu
-                        checkCudaKernel(cudaMemcpyAsync(
-                            box.mask.data, m_segment_tensor_cache->gpu<unsigned char>(),
-                            m_segment_tensor_cache->bytes(), cudaMemcpyDeviceToHost, m_stream));
-                        // 同步
-                        checkCudaRuntime(cudaStreamSynchronize(m_stream));
-                    }
-                }
-
                 boxArray.emplace_back(box);
             }
         }
-        batch_data[ibatch]->DETECTBOX_PROMISE->set_value(boxArray);
+        batch_data->batch_data[ibatch]->DETECTBOX_PROMISE->set_value(boxArray);
     }
 }
 

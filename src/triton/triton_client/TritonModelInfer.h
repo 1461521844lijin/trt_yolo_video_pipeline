@@ -107,7 +107,7 @@ public:
 
     std::vector<tc::InferInput *>                 m_inputs;   // 输出指针存放列表
     std::vector<const tc::InferRequestedOutput *> m_outputs;  // 输出指针存放列表
-    tc::InferResult                              *m_result;   // 推理结果
+    std::shared_ptr<tc::InferResult>              m_result;   // 推理结果
 };
 
 }  // namespace triton_client

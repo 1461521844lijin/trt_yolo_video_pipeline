@@ -84,16 +84,16 @@ void Node::del_output(const std::string &tag) {
 }
 
 void Node::worker() {
-    std::vector<Data::BaseData::ptr> datas;
     while (m_run) {
-        get_input_datas(datas);
-        if (!datas.empty()) {
+        auto datas = get_input_datas();
+        if (!datas->batch_data.empty()) {
             if (batch_data_handler_hooker) {
                 auto res = batch_data_handler_hooker(datas);
                 send_output_datas(res);
                 continue;
             }
-            for (auto &data : datas) {
+            auto &batch_data = datas->batch_data;
+            for (auto &data : batch_data) {
                 if (data_handler_hooker) {
                     data = data_handler_hooker(data);
                 } else {
@@ -109,11 +109,12 @@ void Node::worker() {
     }
 }
 
-void Node::get_input_datas(std::vector<Data::BaseData::ptr> &datas) {
-    datas.clear();
+Data::BatchData::ptr Node::get_input_datas() {
+    Data::BatchData::ptr datas = std::make_shared<Data::BatchData>(Data::DataType::FRAME);
     for (auto &item : m_input_buffers) {
-        item.second->PopList(datas, m_get_data_max_num);
+        item.second->PopList(datas->batch_data, m_get_data_max_num);
     }
+    return datas;
 }
 
 void Node::send_output_data(const Data::BaseData::ptr &data) {
@@ -126,10 +127,12 @@ void Node::send_output_data(const Data::BaseData::ptr &data) {
                 buffer_over_cb(getName(), StatusCode::NodeBufferOver, item.first + "缓冲队列已满");
             }
         }
+//        ErrorL << getName() + "送入：" << data->FRAME_INDEX;
     }
 }
-void Node::send_output_datas(const std::vector<Data::BaseData::ptr> &datas) {
-    for (auto &data : datas) {
+void Node::send_output_datas(const Data::BatchData::ptr &datas) {
+    auto &batch_data = datas->batch_data;
+    for (auto &data : batch_data) {
         send_output_data(data);
     }
 }

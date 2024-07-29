@@ -26,9 +26,9 @@ public:
 
 public:
 protected:
-    virtual void pre_process(std::vector<Data::BaseData::ptr> &batch_data) {}
-    virtual void post_process(std::vector<Data::BaseData::ptr> &batch_data) {}
-    virtual void infer_process(std::vector<Data::BaseData::ptr> &batch_data) {}
+    virtual void pre_process(Data::BatchData::ptr &batch_data) {}
+    virtual void post_process(Data::BatchData::ptr &batch_data) {}
+    virtual void infer_process(Data::BatchData::ptr &batch_data) {}
 
 protected:
     GraphCore::Node::ptr m_infer_node;

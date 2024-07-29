@@ -96,11 +96,11 @@ protected:
      * @brief 从输入队列中获取数据，如果队列为空则阻塞等待
      * @param datas
      */
-    virtual void get_input_datas(std::vector<Data::BaseData::ptr> &datas);
+    virtual Data::BatchData::ptr get_input_datas();
 
     virtual void send_output_data(const Data::BaseData::ptr &data);
 
-    void send_output_datas(const std::vector<Data::BaseData::ptr> &datas);
+    void send_output_datas(const Data::BatchData::ptr &datas);
 
     /**
      * @brief 处理数据业务接口
@@ -136,7 +136,7 @@ protected:
 static inline void LinkNode(const Node::ptr   &front,
                             const Node::ptr   &back,
                             int                max_cache = 25,
-                            BufferOverStrategy strategy  = BufferOverStrategy::DROP_EARLY) {
+                            BufferOverStrategy strategy  = BufferOverStrategy::DROP_LATE) {
     auto queue = std::make_shared<ThreadSaveQueue>();
     queue->set_max_size(max_cache);
     queue->set_buffer_strategy(strategy);
