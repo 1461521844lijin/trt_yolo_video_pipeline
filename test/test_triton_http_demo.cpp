@@ -7,8 +7,11 @@
 
 
 int main() {
+
+    std::string url = "";
+
     triton_client::TritonHttpClient::ptr client = std::make_shared<triton_client::TritonHttpClient>();
-    client->init_client("192.168.161.152:11000", false);
+    client->init_client(url, false);
     std::string repository_index = client->get_repository_index();
     std::cout << repository_index << std::endl;
 

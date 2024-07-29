@@ -40,15 +40,17 @@ int main() {
     record_config.record_type = record::RecordType::VIDEO_RECORD;  // 录制类型 mp4视频
     record_config.file_name   = "test.record.mp4";                 // 录制文件名
     record_config.save_path   = "./";                              // 录制文件保存路径
-    record_config.duration    = 60;                                // 录制时长 60s
+    record_config.duration    = 2;                                // 录制时长 60s
     //这里的高度和宽度是源视频的高度和宽度，需要保持一致
-    record_config.src_height = 1080;  // 源视频高度
-    record_config.src_width  = 1920;  // 源视频宽度
-    record_config.dst_height = 1080;  // 目标视频高度
-    record_config.dst_width  = 1920;  // 目标视频宽度
+    record_config.src_height = 720;  // 源视频高度
+    record_config.src_width  = 1280;  // 源视频宽度
+    record_config.dst_height = 720;  // 目标视频高度
+    record_config.dst_width  = 1280;  // 目标视频宽度
 
     // 向流水线中添加录制任务
     pipeline->add_record_task(std::make_shared<Data::Mp4RecordControlData>(record_config));
+
+//    sleep(10);
 
     getchar();
 }

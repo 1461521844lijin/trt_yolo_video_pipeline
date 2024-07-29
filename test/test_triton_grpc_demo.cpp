@@ -6,9 +6,10 @@
 
 int main() {
     // 1、初始化客户端链接
+    std::string url = "";
     triton_client::TritonGrpcClient::ptr client =
         std::make_shared<triton_client::TritonGrpcClient>();
-    client->init_client("192.168.161.152:11001", false);
+    client->init_client("url", false);
 
     // 2、初始化推理输出输出对象
     client->init_model_infer("yolov8_fp16_trt", triton_client::DateTransMode::CUDASHM);

@@ -18,11 +18,11 @@ int main() {
     // 流水线数量，即视频流数量
     // ps：这里只是示例，实际应用中可以根据实际情况修改，输入的视频都是同一个视频流
     int         stream_num        = 1;
-    std::string input_stream_url  = "/tmp/tmp.53aUseSQ8s/resource/test_video/car_test.mp4";
-    std::string output_stream_url = "rtmp://192.168.161.150/test/yolov8n";
+    std::string input_stream_url  = "rtmp://";
+    std::string output_stream_url = "rtmp://";
     std::string model_path        = "yolov8_trt";
-    std::string label_path        = "/tmp/tmp.53aUseSQ8s/resource/labels/coco.labels";
-    std::string triton_client_uri = "192.168.161.152:11001"; // triton grpc uri
+    std::string label_path        = "../../resource/labels/coco.labels";
+    std::string triton_client_uri = ""; // triton grpc uri
     int         max_batch_size    = 4;    // 最大batch数
     float       config_threshold  = 0.25;  // 检测阈值
     float       nms_threshold     = 0.5;   // nms阈值
