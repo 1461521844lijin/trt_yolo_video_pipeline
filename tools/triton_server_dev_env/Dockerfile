@@ -1,6 +1,5 @@
-FROM nvcr.io/nvidia/tritonserver:24.06-py3-sdk
+FROM nvcr.io/nvidia/tritonserver:22.07-py3
 
-WORKDIR /temp
 
 # 安装nasm
 RUN  wget -c "https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/nasm-2.16.01.tar.gz" \
@@ -11,11 +10,10 @@ RUN  wget -c "https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/nasm-2.16.01.ta
         && make install \
         && nasm -v
 
-RUN rm -rf /temp
 
-RUN apt update -y && apt upgrade -y
+RUN apt update -y
 #安装ssh
-RUN apt install -y openssh-server gdb cmake zip
+RUN apt install -y openssh-server gdb cmake zip libssl-dev
 
 RUN mkdir /run/sshd
 RUN sed -ri 's/^#PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config

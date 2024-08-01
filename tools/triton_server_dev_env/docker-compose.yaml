@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  lijin_triton_dev:
+    image: triton-server-dev:1.0
+    container_name: lijin_triton_dev_container
+    ports:
+      - "21022:22"                # ssh端口
+      - "11000:8000"              # triton http端口
+      - "11001:8001"              # triton grpc端口
+      - "11002:8002"              # triton metrics端口
+      - "21100-21200:21100-21200"
+    volumes:
+      - ~/docker:/root/host
+      - ./models:/models
+    cap_add:
+      - ALL
+    tty: true
+    privileged: true
+    ipc: host
+    pid: host
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: "nvidia"
+              count: "all"
+              capabilities: ["gpu","video","display","graphics","utility"]

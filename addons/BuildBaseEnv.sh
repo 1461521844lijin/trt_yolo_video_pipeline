@@ -3,7 +3,6 @@
 
 unzip opencv_contrib-4.8.0.zip
 unzip opencv-4.8.0.zip
-tar -zxvf x264-master.tar.gz
 tar -zxvf ffmpeg-5.1.2.tar.gz
 tar -xzvf oatpp-swagger.tar.gz
 tar -xzvf oatpp.tar.gz
@@ -19,25 +18,19 @@ cd ./opencv-4.8.0 \
   && make install \
   && cd ../../
 
-# 安装x264
-apt install nasm
-cd ./x264-master \
-  && ./configure --enable-shared \
-  && make -j \
-  && make install \
-  && cd ../
 
 # 安装ffmpeg
 apt install yasm -y
 apt install libx264-dev libx265-dev  \
-         libfdk-aac-dev libmp3lame-dev libvorbis-dev 
+         libfdk-aac-dev libmp3lame-dev libvorbis-dev -y
 cd ./ffmpeg-5.1.2 \
   && export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
-  && ./configure --enable-gpl --enable-libx264 \
+  && ./configure --enable-gpl --enable-libx264 --enable-libx265\
                  --enable-nonfree --enable-shared \
                  --disable-static \
   && make -j \
   && make install \
+  && ldconfig \
   && cd ../
 
 # 安装oatpp
@@ -91,7 +84,8 @@ cd ./oatpp-swagger \
 
 rm -rf ./opencv-4.8.0
 rm -rf ./opencv_contrib-4.8.0
-rm -rf ./x264-master
 rm -rf ./ffmpeg-5.1.2
+rm -rf ./oatpp
+rm -rf ./oatpp-swagger
 
 
